@@ -4,6 +4,6 @@ jobs:
   GenerateActionCat:
     name: Generate Action Cat
     steps:
-      uses: ruairidhwm/action-cats@master
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ruairidhwm/action-cats@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
