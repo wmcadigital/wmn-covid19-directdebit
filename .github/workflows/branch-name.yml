@@ -4,6 +4,8 @@ on: [push, pull_request]
 
 jobs:
   check-branch-names:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Run branch name checker
         uses: deepakputhraya/action-branch-name@master
