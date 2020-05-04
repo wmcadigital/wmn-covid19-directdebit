@@ -15,9 +15,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Use this service to:</h2>
         <ul>
           <li>
-            Apply for a refund of your Swift card, paper ticket or Swift on
-            Mobile ticket if you have been unable to travel due to the
-            Coronavirus outbreak
+            This is goin to b a speling mestake Apply for a refund of your Swift card, paper ticket or Swift on Mobile ticket if you have been unable to travel due to the Coronavirus outbreak
           </li>
           <li>
             Let us know that you would like to exchange your Class pass or
@@ -25,7 +23,7 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
-        <h2>Before you start</h2>
+        <h2 class="abc">Before you start</h2>
         <ul>
           <li>
             You will need your Swift card, paper ticket or your Swift on Mobile
