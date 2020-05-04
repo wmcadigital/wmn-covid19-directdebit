@@ -2,7 +2,7 @@ name: reviewdog
 on: [pull_request]
 jobs:
   misspell:
-    name: runner / misspell
+    name: misspell check
     runs-on: ubuntu-latest
     steps:
       - name: Check out code.
@@ -15,7 +15,7 @@ jobs:
           locale: 'UK'
 
   eslint:
-    name: runner / eslint
+    name: eslint check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
