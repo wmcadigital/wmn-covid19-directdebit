@@ -22,9 +22,9 @@ const ErrorPage = () => {
             href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/"
             title="Customer Services Team Contact Details"
             target="_self"
-            className="wmnds-link"
+            class="wmnds-link"
           >
-            Customer Services team
+            Customer Services team, this is going to be a really long line to try and upset prettier via eslint, hopefully it is long enough. I'm also going to miss tpye samething nework is this spelling corect?
           </a>{' '}
           if you continue to have problems.
         </p>
