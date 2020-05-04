@@ -12,7 +12,8 @@ const LastUsed = () => {
 
     // DirectDebit reference should start with 6
     if (formState.Application.LastUsedDate < '2020-03-16') {
-      error = 'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.';
+      error =
+        'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.';
     }
 
     return error;
@@ -24,7 +25,10 @@ const LastUsed = () => {
         <h3 className="wmnds-fe-question">
           When did you last use your ticket to travel?
         </h3>
-        <p>We can only issue refunds from the 16 March 2020. For example, 16 03 2020</p>
+        <p>
+          We can only issue refunds from the 16 March 2020. For example, 16 03
+          2020
+        </p>
       </legend>
       <Date
         name="LastUsedDate"
