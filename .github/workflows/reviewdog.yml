@@ -13,10 +13,12 @@ jobs:
           reporter: github-pr-check
           eslint_flags: 'src/'
 
-  GenerateActionCat:
-    name: Generate Action Cat
+  pRStatusGiphy:
+    name: PR Status Giphy
     runs-on: ubuntu-latest
     steps:
-      - uses: ruairidhwm/action-cats@master
-        with:
+      - name: PR Status Giphy
+        uses: jzweifel/pr-status-giphy-action@master
+        env:
+          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
