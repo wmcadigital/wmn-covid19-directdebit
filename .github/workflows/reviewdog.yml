@@ -15,6 +15,7 @@ jobs:
 
   GenerateActionCat:
     name: Generate Action Cat
+    runs-on: ubuntu-latest
     steps:
       - uses: ruairidhwm/action-cats@master
         with:
