@@ -1,0 +1,14 @@
+.fileUpload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileUploadLabelFocused {
+  outline: 0;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #9d5baf;
+  background-color: #2a0b3a;
+}
