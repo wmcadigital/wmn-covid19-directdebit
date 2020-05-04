@@ -20,8 +20,6 @@ jobs:
       - name: Install Node.js dependencies
         uses: bahmutov/npm-install@v1
 
-      - run: npm t
-
       - name: Run linters
         uses: samuelmeuli/lint-action@v1
         with:
