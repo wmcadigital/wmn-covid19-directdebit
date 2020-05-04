@@ -22,9 +22,9 @@ const ErrorPage = () => {
             href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/"
             title="Customer Services Team Contact Details"
             target="_self"
-            className="wmnds-link"
+            class="wmnds-link"
           >
-            Customer Services team
+            Customer Services team this will be a really long line to force prettier into splitting it into another line, it's way too long
           </a>{' '}
           if you continue to have problems.
         </p>
