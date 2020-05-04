@@ -34,6 +34,7 @@
     "prettier": "^2.0.5"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -58,8 +59,10 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
+    "**/*.+(js|md|ts|css|sass|less|graphql|yml|yaml|scss|json|vue)": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
     ]
   }
 }
