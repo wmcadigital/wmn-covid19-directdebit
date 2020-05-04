@@ -1,6 +1,6 @@
 name: ESLint
 
-on: push
+on: [push, pull_request]
 
 jobs:
   run-linters:
@@ -19,7 +19,8 @@ jobs:
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         uses: bahmutov/npm-install@v1
-        run: npm t
+
+      - run: npm t
 
       - name: Run linters
         uses: samuelmeuli/lint-action@v1

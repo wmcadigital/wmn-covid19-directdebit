@@ -1,3 +1,7 @@
+name: BranchNames
+
+on: [push, pull_request]
+
 steps:
   - uses: deepakputhraya/action-branch-name@master
     with:
