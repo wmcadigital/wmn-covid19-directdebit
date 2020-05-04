@@ -12,3 +12,10 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
           eslint_flags: 'src/'
+
+  GenerateActionCat:
+    name: Generate Action Cat
+    steps:
+      - uses: ruairidhwm/action-cats@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
