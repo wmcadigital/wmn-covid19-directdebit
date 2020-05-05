@@ -8,7 +8,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
 import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
 import Step3SwiftCard from 'components/Form/Step3SwiftCard/Step3SwiftCard';
-import Step4 from 'components/Form/Step4/Step4';
+import Step4TravelAgain from 'components/Form/Step4TravelAgain/Step4TravelAgain';
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
 import useLogRocketTracking from './useLogRocketTracking';
@@ -20,13 +20,15 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(4);
   const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
-  const [isFetching, setIsFetching] = useState(false);
+  const [hasTravelAgain, setHasTravelAgain] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
+
+  const [, setIsFetching] = useState(false);
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
 
-  useLogRocketTracking(formState, isTicketHolder); // Used to track javascript errors etc. in Log Rocket
+  useLogRocketTracking(formState, isTicketHolder, hasTravelAgain); // Used to track javascript errors etc. in Log Rocket
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
@@ -119,10 +121,10 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               />
             )}
             {currentStep === 4 && (
-              <Step4
+              <Step4TravelAgain
+                formRef={formRef}
                 setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                isFetching={isFetching}
+                setHasTravelAgain={setHasTravelAgain}
               />
             )}
           </form>
