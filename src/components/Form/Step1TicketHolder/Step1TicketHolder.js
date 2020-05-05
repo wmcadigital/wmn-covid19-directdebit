@@ -35,7 +35,6 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
   };
   return (
     <>
-      <h2>Are you the ticket holder?</h2>
       {errorState.errors.length > 0 && errorState.continuePressed && (
         <GenericError />
       )}

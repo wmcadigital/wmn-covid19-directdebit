@@ -7,7 +7,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
 import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
-import Step3 from 'components/Form/Step3/Step3';
+import Step3SwiftCard from 'components/Form/Step3SwiftCard/Step3SwiftCard';
 import Step4 from 'components/Form/Step4/Step4';
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
@@ -20,7 +20,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(3);
   const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isFetching, setIsFetching] = useState(false);
 
@@ -110,17 +110,12 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               />
             )}
             {currentStep === 2 && (
-              <Step2DDRef
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-              />
+              <Step2DDRef formRef={formRef} setCurrentStep={setCurrentStep} />
             )}
             {currentStep === 3 && (
-              <Step3
+              <Step3SwiftCard
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
               />
             )}
             {currentStep === 4 && (

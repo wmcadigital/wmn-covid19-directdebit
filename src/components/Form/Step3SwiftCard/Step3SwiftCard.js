@@ -7,26 +7,35 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step2DDRef = ({ currentStep, setCurrentStep, formRef }) => {
+const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  const label = 'Direct Debit reference'; // Used on input and for validation
+  const label = 'Swift card number';
 
   const customValidation = () => {
     let error;
-    const ddNum = formState.Application.DirectDebitNumber;
+    const swiftNum = formState.Application.SwiftCardNumber; // get swiftcard number from state
+    const firstTen = swiftNum.substr(0, 10); // Get first ten chars of input
 
-    // DirectDebit reference should start with 6
-    if (ddNum.charAt(0) !== '6') {
-      error = `${label} is a number that begins with '6'`;
+    // If card number starts with 6335970112 then user has NX card and needs to go to NX for refund
+    if (firstTen === '6335970112') {
+      error = `${label} is managed by National Express West Midlands and there is a
+            <a
+              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+              title="National Express West Midlands ticket refund process"
+              target="_blank"
+              className="wmnds-link"
+            >
+              separate refund process
+            </a>`;
     }
-    // Must be 8 digits long
-    else if (ddNum.length !== 6) {
-      error = `${label} must be 6 digits`;
+    // If swift card doesn't start with the below numbers then it's not valid
+    else if (firstTen !== '6335970107' && firstTen !== '6335970319') {
+      error = `Your ${label} is the long number on the front of the card`;
     }
-    // Not valid ref if not between these numbers
-    else if (+ddNum < 600000 || ddNum > 699999) {
-      error = `Enter a valid ${label}`;
+    // Must be 18 digits long
+    else if (swiftNum.length !== 18) {
+      error = `Your ${label} is 18 digits long and begins with 633597`;
     }
 
     return error;
@@ -40,7 +49,7 @@ const Step2DDRef = ({ currentStep, setCurrentStep, formRef }) => {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep(currentStep + 1); // Set to next step in form
+      setCurrentStep((c) => c + 1); // Set to next step in form
       window.scrollTo(0, 0); // Scroll to top of page
     }
   };
@@ -50,27 +59,22 @@ const Step2DDRef = ({ currentStep, setCurrentStep, formRef }) => {
       <p>
         Section 1 of 3 <h4>About your ticket</h4>
       </p>
-      <h2>What is your Direct Debit reference?</h2>
       {errorState.errors.length > 0 && errorState.continuePressed && (
         <GenericError />
       )}
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
+          <h2>What is your Swift card number?</h2>
           <p>
-            This can be found in the email we sent you asking you to reinstate
-            your Direct Debit and begins with a <strong>6</strong>.
+            This is the long number on the front of the card and begins with{' '}
+            <strong>633597</strong>
           </p>
-          <p>
-            This can be found in the email we sent you asking you to reinstate
-            your Direct Debit and begins with a 6 If you didn’t receive this
-            email, it is shown next to every payment to WMCA for your Direct
-            Debit on your bank statement.
-          </p>
+          <p>Enter the number without spaces</p>
         </legend>
         <Input
-          className="wmnds-col-1-2 wmnds-col-sm-1-5"
-          name="DirectDebitNumber"
-          label="Direct Debit reference"
+          className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"
+          name="SwiftCardNumber"
+          label={label}
           inputmode="numeric"
           customValidation={customValidation}
         />
@@ -86,8 +90,7 @@ const Step2DDRef = ({ currentStep, setCurrentStep, formRef }) => {
   );
 };
 
-Step2DDRef.propTypes = {
-  currentStep: PropTypes.number.isRequired,
+Step3SwiftCard.propTypes = {
   setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
@@ -97,4 +100,4 @@ Step2DDRef.propTypes = {
   ]).isRequired,
 };
 
-export default Step2DDRef;
+export default Step3SwiftCard;
