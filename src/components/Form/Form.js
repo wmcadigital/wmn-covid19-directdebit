@@ -6,7 +6,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 
 // Import components
 import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
-import Step2 from 'components/Form/Step2/Step2';
+import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
 import Step3 from 'components/Form/Step3/Step3';
 import Step4 from 'components/Form/Step4/Step4';
 // Import custom hooks
@@ -110,7 +110,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               />
             )}
             {currentStep === 2 && (
-              <Step2
+              <Step2DDRef
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
