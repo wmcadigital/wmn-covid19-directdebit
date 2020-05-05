@@ -141,8 +141,8 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           </form>
         </div>
       </div>
-      {/* If not built for Umbraco based on envs then show debugging */}
-      {process.env.REACT_APP_UMBRACO === 'false' && (
+      {/* If in development based on envs then show form debugging */}
+      {process.env.NODE_ENV !== 'production' && (
         <pre
           className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
           style={{
