@@ -5,11 +5,17 @@ import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 // Import components
-import Step1 from 'components/Form/Step1/Step1';
-import Step2 from 'components/Form/Step2/Step2';
-import Step3 from 'components/Form/Step3/Step3';
-import Step4 from 'components/Form/Step4/Step4';
-import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
+import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
+import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
+import Step3SwiftCard from 'components/Form/Step3SwiftCard/Step3SwiftCard';
+import Step4TravelAgain from 'components/Form/Step4TravelAgain/Step4TravelAgain';
+import Step5TravelDate from 'components/Form/Step5TravelDate/Step5TravelDate';
+import Step6Name from 'components/Form/Step6Name/Step6Name';
+import Step7DOB from './Step7DOB/Step7DOB';
+import Step8Contact from './Step8Contact/Step8Contact';
+import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
+import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
+
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
 import useLogRocketTracking from './useLogRocketTracking';
@@ -22,13 +28,14 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   const [currentStep, setCurrentStep] = useState(1);
-  const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
-  const [isSwiftOnMobile, setIsSwiftOnMobile] = useState(false); // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
-  const [isFetching, setIsFetching] = useState(false);
+  const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
+  const [hasTravelAgain, setHasTravelAgain] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
+
+  const [, setIsFetching] = useState(false);
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
 
-  useLogRocketTracking(formState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
+  useLogRocketTracking(formState, isTicketHolder, hasTravelAgain); // Used to track javascript errors etc. in Log Rocket
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
@@ -101,58 +108,77 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   return (
     <>
       <div className="wmnds-col-1 wmnds-col-md-3-4 ">
-        <ProgressIndicator currentStep={currentStep} />
         <div className={`wmnds-p-lg ${s.formWrapper}`}>
           {/* Start of form */}
           <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
             {currentStep === 1 && (
-              <Step1
+              <Step1TicketHolder
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                setIsPaperTicket={setIsPaperTicket}
-                setIsSwiftOnMobile={setIsSwiftOnMobile}
+                setIsTicketHolder={setIsTicketHolder}
               />
             )}
+            {/* Section 1 - About your ticket */}
             {currentStep === 2 && (
-              <Step2
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                isPaperTicket={isPaperTicket}
-              />
+              <Step2DDRef formRef={formRef} setCurrentStep={setCurrentStep} />
             )}
             {currentStep === 3 && (
-              <Step3
+              <Step3SwiftCard
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                isPaperTicket={isPaperTicket}
-                isSwiftOnMobile={isSwiftOnMobile}
               />
             )}
             {currentStep === 4 && (
-              <Step4
+              <Step4TravelAgain
+                formRef={formRef}
                 setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                isFetching={isFetching}
+                setHasTravelAgain={setHasTravelAgain}
+              />
+            )}
+            {currentStep === 5 && (
+              <Step5TravelDate
+                formRef={formRef}
+                setCurrentStep={setCurrentStep}
+              />
+            )}
+            {/* Section 2 - About you */}
+            {currentStep === 6 && (
+              <Step6Name formRef={formRef} setCurrentStep={setCurrentStep} />
+            )}
+            {currentStep === 7 && (
+              <Step7DOB formRef={formRef} setCurrentStep={setCurrentStep} />
+            )}
+            {currentStep === 8 && (
+              <Step8Contact formRef={formRef} setCurrentStep={setCurrentStep} />
+            )}
+            {/* Section 3 - Direct Debit */}
+            {currentStep === 9 && (
+              <Step9DDPayMessage setCurrentStep={setCurrentStep} />
+            )}
+            {currentStep === 10 && (
+              <Step10DDBankDetails
+                formRef={formRef}
+                setCurrentStep={setCurrentStep}
               />
             )}
           </form>
         </div>
       </div>
-      {/* If not built for Umbraco based on envs then show debugging */}
-      {process.env.REACT_APP_UMBRACO === 'false' && (
-        <pre
-          className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
-          style={{
-            overflowX: 'auto',
-            position: 'fixed',
-            right: 0,
-          }}
-        >
-          {JSON.stringify(formState, null, 2)}
-        </pre>
+      {/* If in development based on envs then show form debugging */}
+      {process.env.NODE_ENV !== 'production' && (
+        <>
+          <pre
+            className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+            style={{
+              overflowX: 'auto',
+              position: 'fixed',
+              right: 0,
+            }}
+          >
+            {JSON.stringify(formState, null, 2)}
+          </pre>
+          <br />
+        </>
       )}
     </>
   );

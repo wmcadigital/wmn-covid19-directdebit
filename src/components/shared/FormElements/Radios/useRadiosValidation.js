@@ -12,12 +12,7 @@ const useRadiosValidation = (name, label) => {
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
 
-  // THE REASON FOR CUSTOMERTYPESTEP2 AND SWIFTCARD/PAPERTICKET LOGIC IS BECAUSE STEP1 SHARES THE SAME FIELDS AS STEP2 SO TO SPLIT THE VALIDATION OUT THERE IS EXPLICIT
-
-  const value =
-    name === 'CustomerType' || name === 'CustomerTypeStep2'
-      ? formState.CustomerType
-      : formState.Application[name] || ''; // Get value from state
+  const value = formState.Application[name] || ''; // Get value from state
 
   // set up event handler for onBlur
   function handleBlur() {
@@ -30,11 +25,7 @@ const useRadiosValidation = (name, label) => {
     // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button
     if (isTouched || errorState.continuePressed) {
       // If there is no length
-      if (
-        !value.length ||
-        (name === 'CustomerTypeStep2' && value === 'SwiftCard') ||
-        (name === 'CustomerTypeStep2' && value === 'PaperTicket')
-      ) {
+      if (!value.length) {
         setError(`Select ${label.toLowerCase().replace(/\?/, '')}`);
       }
       // Else all is good, so reset error
@@ -47,12 +38,7 @@ const useRadiosValidation = (name, label) => {
   // UseEffect to control global error state (this is used to halt the continue/submit button)
   useEffect(() => {
     // If there is an error or there is no value in the input
-    if (
-      error ||
-      !value.length ||
-      (name === 'CustomerTypeStep2' && value === 'SwiftCard') ||
-      (name === 'CustomerTypeStep2' && value === 'PaperTicket')
-    ) {
+    if (error || !value.length) {
       errorDispatch({ type: 'ADD_ERROR', payload: name }); // Then add this error to global error state
     } else {
       errorDispatch({ type: 'REMOVE_ERROR', payload: name }); // Else remove from global error state

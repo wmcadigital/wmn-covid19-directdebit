@@ -15,54 +15,50 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Use this service to:</h2>
         <ul>
           <li>
-            Apply for a refund of your Swift card, paper ticket or Swift on
-            Mobile ticket if you have been unable to travel due to the
-            Coronavirus outbreak
+            Let us know you are about to start using, or have already started to
+            use your Swift card
           </li>
           <li>
-            Let us know that you would like to exchange your Class pass or
-            Scratchcards
+            Reinstate your Direct Debit for your Swift card This process takes
+            around 5 to 10 minutes.
           </li>
         </ul>
-        <p>This process takes around 5 minutes.</p>
+        <p>This process takes around 5 to 10 minutes.</p>
+
         <h2>Before you start</h2>
         <ul>
           <li>
-            You will need your Swift card, paper ticket or your Swift on Mobile
-            device
+            You may have received your Direct Debit reference number in an email
+            telling you about this process
           </li>
           <li>
-            If the long number on your Swift card begins with{' '}
-            <strong>633597 0112</strong>, it is managed by National Express West
-            Midlands and there is a{' '}
+            If you did not receive this email, you can find this reference on
+            your bank statement shown next to payments made to WMCA
+          </li>
+          <li>
+            You will need your Swift card number which begins with
+            <strong>633597</strong>
+          </li>
+          <li>
+            If your Swift card number begins with <strong>633597 0112</strong>,
+            it is managed by National Express West Midlands and there is a
+            separate process
+          </li>
+          <li>You will need the bank details to set up a new Direct Debit</li>
+          <li>
+            You must have been a customer before lockdown measures began,
+            otherwise you will need to{' '}
             <a
-              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund process"
+              href="//www.wmnetwork.co.uk/tickets/#/"
+              title="link title"
               target="_self"
               className="wmnds-link"
             >
-              separate refund process
+              apply for a new ticket
             </a>
-          </li>
-          <li>
-            If you pay by Direct Debit, you will need your Direct Debit
-            reference number. This begins with <strong>6</strong> and is shown
-            next to every payment to WMCA on your bank statement
+            .
           </li>
         </ul>
-        <br />
-        <p>
-          There is guidance available to show{' '}
-          <a
-            href="https://wmnetwork.co.uk/coronavirus/"
-            title="How we will work out your refund"
-            target="_self"
-            className="wmnds-link"
-          >
-            how we will work out your refund
-          </a>
-          .
-        </p>
         <br />
         <br />
         <button
