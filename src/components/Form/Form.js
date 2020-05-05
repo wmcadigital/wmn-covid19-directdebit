@@ -5,7 +5,7 @@ import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 // Import components
-import Step1 from 'components/Form/Step1/Step1';
+import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
 import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
 import Step4 from 'components/Form/Step4/Step4';
@@ -21,13 +21,12 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   const [currentStep, setCurrentStep] = useState(1);
-  const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
-  const [isSwiftOnMobile, setIsSwiftOnMobile] = useState(false); // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
+  const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isFetching, setIsFetching] = useState(false);
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
 
-  useLogRocketTracking(formState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
+  useLogRocketTracking(formState, isTicketHolder); // Used to track javascript errors etc. in Log Rocket
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
@@ -104,12 +103,10 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           {/* Start of form */}
           <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
             {currentStep === 1 && (
-              <Step1
+              <Step1TicketHolder
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                setIsPaperTicket={setIsPaperTicket}
-                setIsSwiftOnMobile={setIsSwiftOnMobile}
+                setIsTicketHolder={setIsTicketHolder}
               />
             )}
             {currentStep === 2 && (
@@ -117,7 +114,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
-                isPaperTicket={isPaperTicket}
               />
             )}
             {currentStep === 3 && (
@@ -125,8 +121,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
-                isPaperTicket={isPaperTicket}
-                isSwiftOnMobile={isSwiftOnMobile}
               />
             )}
             {currentStep === 4 && (
@@ -141,16 +135,19 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
       </div>
       {/* If in development based on envs then show form debugging */}
       {process.env.NODE_ENV !== 'production' && (
-        <pre
-          className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
-          style={{
-            overflowX: 'auto',
-            position: 'fixed',
-            right: 0,
-          }}
-        >
-          {JSON.stringify(formState, null, 2)}
-        </pre>
+        <>
+          <pre
+            className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+            style={{
+              overflowX: 'auto',
+              position: 'fixed',
+              right: 0,
+            }}
+          >
+            {JSON.stringify(formState, null, 2)}
+          </pre>
+          <br />
+        </>
       )}
     </>
   );
