@@ -25,7 +25,7 @@ const Step7DOB = ({ setCurrentStep, formRef }) => {
   return (
     <>
       <p>
-        Section 1 of 3 <h4>About your ticket</h4>
+        Section 2 of 3 <h4>About you</h4>
       </p>
       {errorState.errors.length > 0 && errorState.continuePressed && (
         <GenericError />
