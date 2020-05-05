@@ -47,7 +47,16 @@ const Introduction = ({ setIsFormStarted }) => {
           <li>You will need the bank details to set up a new Direct Debit</li>
           <li>
             You must have been a customer before lockdown measures began,
-            otherwise you will need to apply for a new ticket.
+            otherwise you will need to
+            <a
+              href="//www.wmnetwork.co.uk/tickets/#/"
+              title="link title"
+              target="_self"
+              className="wmnds-link"
+            >
+              apply for a new ticket
+            </a>
+            .
           </li>
         </ul>
         <br />
