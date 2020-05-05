@@ -13,6 +13,7 @@ import Step5TravelDate from 'components/Form/Step5TravelDate/Step5TravelDate';
 import Step6Name from 'components/Form/Step6Name/Step6Name';
 import Step7DOB from './Step7DOB/Step7DOB';
 import Step8Contact from './Step8Contact/Step8Contact';
+import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
 
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
@@ -25,7 +26,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(8);
+  const [currentStep, setCurrentStep] = useState(9);
   const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [hasTravelAgain, setHasTravelAgain] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
 
@@ -148,6 +149,10 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             )}
             {currentStep === 8 && (
               <Step8Contact formRef={formRef} setCurrentStep={setCurrentStep} />
+            )}
+            {/* Section 3 - Direct Debit */}
+            {currentStep === 9 && (
+              <Step9DDPayMessage setCurrentStep={setCurrentStep} />
             )}
           </form>
         </div>
