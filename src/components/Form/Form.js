@@ -9,7 +9,6 @@ import Step1 from 'components/Form/Step1/Step1';
 import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
 import Step4 from 'components/Form/Step4/Step4';
-import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
 import useLogRocketTracking from './useLogRocketTracking';
@@ -101,7 +100,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   return (
     <>
       <div className="wmnds-col-1 wmnds-col-md-3-4 ">
-        <ProgressIndicator currentStep={currentStep} />
         <div className={`wmnds-p-lg ${s.formWrapper}`}>
           {/* Start of form */}
           <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
