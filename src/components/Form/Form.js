@@ -27,7 +27,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(10);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [hasTravelAgain, setHasTravelAgain] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
 
