@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
-
+// Import contexts
 import { useFormContext } from 'react-hook-form';
-
+// Import components
 import Radio from './Radio/Radio';
 
 const { sanitize } = dompurify;
@@ -23,7 +23,9 @@ const Radios = ({ name, label, radios, onChange, fieldRef }) => {
             <span
               className="wmnds-fe-error-message"
               dangerouslySetInnerHTML={{
-                __html: sanitize(errors[name].message),
+                __html: sanitize(
+                  `Select ${label.toLowerCase().replace(/\?/, '')}`
+                ),
               }}
             />
           )}
@@ -46,6 +48,7 @@ const Radios = ({ name, label, radios, onChange, fieldRef }) => {
   );
 };
 
+// PropTypes
 Radios.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,

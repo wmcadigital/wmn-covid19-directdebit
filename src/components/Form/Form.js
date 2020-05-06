@@ -20,7 +20,7 @@ import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const methods = useForm();
+  const methods = useForm({ mode: 'onBlur' });
   const { getValues } = methods;
 
   const onSubmit = (data) => console.log(data);

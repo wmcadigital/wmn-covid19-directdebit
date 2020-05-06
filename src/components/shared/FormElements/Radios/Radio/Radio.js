@@ -25,6 +25,7 @@ const Radio = ({ name, onChange, onBlur, fieldRef, text, value }) => {
   );
 };
 
+// PropTypes
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,

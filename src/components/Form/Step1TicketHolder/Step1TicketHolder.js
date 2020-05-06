@@ -1,54 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
-// import { FormErrorContext } from 'globalState/FormErrorContext';
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
-// import GenericError from 'components/shared/Errors/GenericError';
-import { useFormContext } from 'react-hook-form';
+import GenericError from 'components/shared/Errors/GenericError';
 
 const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
-  const { register, formState, triggerValidation } = useFormContext();
-  // console.log(errors);
-  // const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+  const { register, errors, triggerValidation } = useFormContext();
+  const [isContinuePressed, setIsContinuePressed] = useState(false);
+
+  console.log(errors);
+
   // Update customerType on radio button change
-  // const handleRadioChange = (e) => {
-  //   if (e.target.value) {
-  //     errorDispatch({ type: 'REMOVE_ERROR', payload: 'TicketHolder' }); // Else remove from global error state
-  //   }
-  //   // If paper ticket chosen
-  //   if (e.target.value === 'yes') {
-  //     setIsTicketHolder(true); // Then set paper ticket to true (value used in step 3)
-  //   } else {
-  //     setIsTicketHolder(false); // Else set to false
-  //   }
-  // };
+  const handleRadioChange = (e) => {
+    // If paper ticket chosen
+    if (e.target.value === 'yes') {
+      setIsTicketHolder(true); // Then set paper ticket to true (value used in step 3)
+    } else {
+      setIsTicketHolder(false); // Else set to false
+    }
+  };
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
     const validate = async () => {
       const result = await triggerValidation('TicketHolder');
+      setIsContinuePressed(true);
+
+      // if no errors
       if (result) {
         setCurrentStep((i) => i + 1);
       }
+      // else, errors are true...
+      else {
+        window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
+      }
     };
     validate();
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    // if (errorState.errors.length) {
-    //   window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-    //   errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    // } else {
-    //   errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-    //   setCurrentStep((i) => i + 1);
-    //   window.scrollTo(0, 0); // Scroll to top of page
-    // }
   };
   return (
     <>
-      {/* {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )} */}
-      {JSON.stringify(formState, null, 2)}
+      {errors !== {} && isContinuePressed && <GenericError />}
 
       <Radios
         name="TicketHolder"
@@ -57,7 +50,8 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
           { text: 'Yes', value: 'yes' },
           { text: 'No', value: 'no' },
         ]}
-        fieldRef={register({ required: true })}
+        fieldRef={register({ required: 'this is required' })}
+        onChange={handleRadioChange}
       />
       <button
         type="button"
