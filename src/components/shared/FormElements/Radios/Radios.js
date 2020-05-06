@@ -1,27 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import dompurify from 'dompurify';
+// import dompurify from 'dompurify';
 
 import Radio from './Radio/Radio';
-import useRadioValidation from './useRadiosValidation';
 
-const { sanitize } = dompurify;
+// const { sanitize } = dompurify;
 
 const Radios = ({ name, label, radios, onChange }) => {
-  const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
+  // const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
 
   return (
-    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+    // <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+    <div className="wmnds-fe-group">
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2>{label}</h2>
           {/* If there is an error, show here */}
-          {error && (
+          {/* {error && (
             <span
               className="wmnds-fe-error-message"
               dangerouslySetInnerHTML={{ __html: sanitize(error) }}
             />
-          )}
+          )} */}
         </legend>
         <div className="wmnds-fe-radios">
           {/* Loop through radios and display each radio button */}
@@ -31,7 +31,7 @@ const Radios = ({ name, label, radios, onChange }) => {
               name={name}
               text={radio.text}
               value={radio.value}
-              onBlur={handleBlur}
+              // onBlur={handleBlur}
               onChange={onChange}
             />
           ))}
