@@ -70,10 +70,32 @@ const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
 
         <Input
           className="wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
-          name="Firstname"
-          label="First name"
+          name="BankAccountName"
+          label="Name on the account"
           autocomplete="given-name"
         />
+        <Input
+          className="wmnds-col-1-2 wmnds-col-md-1-4"
+          name="BankAccountSortCode"
+          label="Sort code"
+          inputmode="numeric"
+        />
+        <Input
+          className="wmnds-col-1-2 wmnds-col-md-1-4"
+          name="BankAccountNumber"
+          label="Account number"
+          inputmode="numeric"
+        />
+        <p>
+          Please pay West Midlands Combined Authority Direct Debits from the
+          account detailed in this Instruction subjected to the safeguards
+          assured by the Direct Debit Guarantee.
+        </p>
+        <p>
+          I understand that this Instruction may remain with West Midlands
+          Combined Authority and, if so, details will be passed electronically
+          to my bank/building society.
+        </p>
       </fieldset>
       <button
         type="button"
