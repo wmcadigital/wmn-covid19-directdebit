@@ -8,8 +8,8 @@ import Radios from 'components/shared/FormElements/Radios/Radios';
 import { useFormContext } from 'react-hook-form';
 
 const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
-  const { formState, triggerValidation, errors } = useFormContext();
-  console.log(errors);
+  const { register, formState, triggerValidation } = useFormContext();
+  // console.log(errors);
   // const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   // Update customerType on radio button change
   // const handleRadioChange = (e) => {
@@ -26,13 +26,13 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
-    const h = async () => {
-      const result = await triggerValidation('lastName');
+    const validate = async () => {
+      const result = await triggerValidation('TicketHolder');
       if (result) {
-        console.log('valid input');
+        setCurrentStep((i) => i + 1);
       }
     };
-    h();
+    validate();
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     // if (errorState.errors.length) {
     //   window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
@@ -57,6 +57,7 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
           { text: 'Yes', value: 'yes' },
           { text: 'No', value: 'no' },
         ]}
+        fieldRef={register({ required: true })}
       />
       <button
         type="button"

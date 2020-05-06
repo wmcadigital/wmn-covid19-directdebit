@@ -21,6 +21,7 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const methods = useForm();
+  const { getValues } = methods;
 
   const onSubmit = (data) => console.log(data);
 
@@ -109,7 +110,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 right: 0,
               }}
             >
-              {JSON.stringify(null, null, 2)}
+              {JSON.stringify(getValues(), null, 2)}
             </pre>
             <br />
           </>

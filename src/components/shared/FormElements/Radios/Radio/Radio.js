@@ -2,18 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
-import { useFormContext } from 'react-hook-form';
 
 const { sanitize } = dompurify;
 
-const Radio = ({ name, onChange, onBlur, text, value }) => {
-  const { register, errors, formState } = useFormContext();
-
+const Radio = ({ name, onChange, onBlur, fieldRef, text, value }) => {
   return (
     <>
       <label className="wmnds-fe-radios__container">
-        {JSON.stringify(errors, null, 2)}
-        {errors[name]}
         <div dangerouslySetInnerHTML={{ __html: sanitize(text) }} />
         <input
           className="wmnds-fe-radios__input"
@@ -22,7 +17,7 @@ const Radio = ({ name, onChange, onBlur, text, value }) => {
           type="radio"
           onChange={onChange}
           onBlur={onBlur}
-          ref={register({ required: true })}
+          ref={fieldRef}
         />
         <span className="wmnds-fe-radios__checkmark" />
       </label>
@@ -34,6 +29,7 @@ Radio.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
+  fieldRef: PropTypes.func,
   text: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 };
@@ -41,6 +37,7 @@ Radio.propTypes = {
 Radio.defaultProps = {
   onChange: null,
   onBlur: null,
+  fieldRef: null,
 };
 
 export default Radio;
