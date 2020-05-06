@@ -14,7 +14,7 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
 
   const customValidation = () => {
     let error;
-    const ddNum = formState.Application.DirectDebitNumber;
+    const ddNum = formState.form.DirectDebitNumber;
 
     // DirectDebit reference should start with 6
     if (ddNum.charAt(0) !== '6') {

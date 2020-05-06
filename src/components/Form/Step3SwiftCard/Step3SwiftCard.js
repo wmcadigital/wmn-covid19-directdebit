@@ -14,7 +14,7 @@ const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
 
   const customValidation = () => {
     let error;
-    const swiftNum = formState.Application.SwiftCardNumber; // get swiftcard number from state
+    const swiftNum = formState.form.SwiftCardNumber; // get swiftcard number from state
     const firstTen = swiftNum.substr(0, 10); // Get first ten chars of input
 
     // If card number starts with 6335970112 then user has NX card and needs to go to NX for refund

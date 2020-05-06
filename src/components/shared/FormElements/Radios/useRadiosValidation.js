@@ -12,7 +12,7 @@ const useRadiosValidation = (name, label) => {
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
 
-  const value = formState.Application[name] || ''; // Get value from state
+  const value = formState.form[name] || ''; // Get value from state
 
   // set up event handler for onBlur
   function handleBlur() {
