@@ -9,7 +9,6 @@ const { sanitize } = dompurify;
 const Input = ({
   autocomplete,
   className,
-  customValidation,
   fieldRef,
   inputmode,
   label,
@@ -18,11 +17,6 @@ const Input = ({
   type,
 }) => {
   const { errors } = useFormContext();
-
-  console.log({ errors });
-
-  // Use custom hook for validating inputs (this controls ALL inputs validation)
-
   // Set input to render below
   const input = (
     <>
@@ -35,8 +29,6 @@ const Input = ({
         type={type}
         inputMode={inputmode}
         spellCheck={spellcheck}
-        // onChange={handleChange}
-        // onBlur={handleBlur}
         autoComplete={autocomplete}
         ref={fieldRef}
       />
@@ -72,7 +64,6 @@ const Input = ({
 Input.propTypes = {
   autocomplete: PropTypes.string,
   className: PropTypes.string,
-  customValidation: PropTypes.func,
   fieldRef: PropTypes.func,
   inputmode: PropTypes.string,
   label: PropTypes.string.isRequired,
@@ -84,7 +75,6 @@ Input.propTypes = {
 Input.defaultProps = {
   autocomplete: null,
   className: '',
-  customValidation: null,
   fieldRef: null,
   inputmode: 'text',
   spellcheck: false,

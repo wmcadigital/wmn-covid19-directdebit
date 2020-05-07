@@ -19,13 +19,11 @@ const Radios = ({ name, label, radios, onChange, fieldRef }) => {
         <legend className="wmnds-fe-fieldset__legend">
           <h2>{label}</h2>
           {/* If there is an error, show here */}
-          {errors[name]?.type === 'required' && (
+          {errors[name] && (
             <span
               className="wmnds-fe-error-message"
               dangerouslySetInnerHTML={{
-                __html: sanitize(
-                  `Select ${label.toLowerCase().replace(/\?/, '')}`
-                ),
+                __html: sanitize(errors[name].message),
               }}
             />
           )}

@@ -21,25 +21,22 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
   };
 
   // Update the current step to the correct one depending on users selection
-  const handleContinue = () => {
-    const validate = async () => {
-      const result = await triggerValidation();
-      setIsContinuePressed(true);
+  const handleContinue = async () => {
+    const result = await triggerValidation();
+    setIsContinuePressed(true);
 
-      // if no errors
-      if (result) {
-        setCurrentStep((i) => i + 1);
-      }
-      // else, errors are true...
-      else {
-        window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      }
-    };
-    validate();
+    // if no errors
+    if (result) {
+      setCurrentStep((i) => i + 1);
+    }
+    // else, errors are true...
+    else {
+      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
+    }
   };
   return (
     <>
-      {errors !== {} && isContinuePressed && <GenericError />}
+      {Object.keys(errors).length > 0 && isContinuePressed && <GenericError />}
 
       <Radios
         name="TicketHolder"
@@ -48,7 +45,7 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
           { text: 'Yes', value: 'yes' },
           { text: 'No', value: 'no' },
         ]}
-        fieldRef={register({ required: true })}
+        fieldRef={register({ required: 'Select are you the ticket holder' })}
         onChange={handleRadioChange}
       />
       <button
