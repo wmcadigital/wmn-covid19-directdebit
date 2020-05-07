@@ -12,7 +12,18 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
     formRef
   );
 
-  const ddLabel = 'Direct Debit reference'; // Used on input and for validation
+  const ddLabel = 'Direct Debit reference'; // Label used on input and for validation
+  // Logic used to validate the field
+  const fieldRef = register({
+    required: `${ddLabel} is required`,
+    validate: {
+      shouldStartWith6: (val) =>
+        val.charAt(0) === '6' || `${ddLabel} is a number that begins with '6'`,
+      mustBe8Digits: (val) => val.length === 8 || `${ddLabel} must be 8 digits`,
+      shouldBeValidRef: (val) =>
+        (+val > 60000000 && +val < 70000000) || `Enter a valid ${ddLabel}`,
+    },
+  });
 
   return (
     <>
@@ -44,19 +55,7 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
           name="DirectDebitNumber"
           label={ddLabel}
           inputmode="numeric"
-          fieldRef={register({
-            required: `${ddLabel} is required`,
-            validate: {
-              shouldStartWith6: (val) =>
-                val.charAt(0) === '6' ||
-                `${ddLabel} is a number that begins with '6'`,
-              mustBe8Digits: (val) =>
-                val.length === 8 || `${ddLabel} must be 8 digits`,
-              shouldBeValidRef: (val) =>
-                (+val > 60000000 && +val < 70000000) ||
-                `Enter a valid ${ddLabel}`,
-            },
-          })}
+          fieldRef={fieldRef}
         />
       </fieldset>
 

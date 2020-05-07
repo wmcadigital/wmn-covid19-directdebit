@@ -12,7 +12,30 @@ const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
     formRef
   );
 
-  const swiftLabel = 'Swift card number';
+  const swiftLabel = 'Swift card number'; // Label used on input and for validation
+  // Logic used to validate the field
+  const fieldRef = register({
+    required: `${swiftLabel} is required`,
+    validate: {
+      notNX: (val) =>
+        val.substr(0, 10) !== '6335970112' ||
+        `${swiftLabel} is managed by National Express West Midlands and there is a <a
+              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+              title="National Express West Midlands ticket refund process"
+              target="_blank"
+              className="wmnds-link"
+            >
+              separate refund process
+            </a>`,
+      validSwiftNo: (val) =>
+        val.substr(0, 10) === '6335970107' ||
+        val.substr(0, 10) === '6335970319' ||
+        `Your ${swiftLabel} is the long number on the front of the card`,
+      shouldBe18Digits: (val) =>
+        val.length === 18 ||
+        `Your ${swiftLabel} is 18 digits long and begins with 633597`,
+    },
+  });
 
   return (
     <>
@@ -38,28 +61,7 @@ const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
           name="SwiftCardNumber"
           label={swiftLabel}
           inputmode="numeric"
-          fieldRef={register({
-            required: `${swiftLabel} is required`,
-            validate: {
-              notNX: (val) =>
-                val.substr(0, 10) !== '6335970112' ||
-                `${swiftLabel} is managed by National Express West Midlands and there is a <a
-              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund process"
-              target="_blank"
-              className="wmnds-link"
-            >
-              separate refund process
-            </a>`,
-              validSwiftNo: (val) =>
-                val.substr(0, 10) === '6335970107' ||
-                val.substr(0, 10) === '6335970319' ||
-                `Your ${swiftLabel} is the long number on the front of the card`,
-              shouldBe18Digits: (val) =>
-                val.length === 18 ||
-                `Your ${swiftLabel} is 18 digits long and begins with 633597`,
-            },
-          })}
+          fieldRef={fieldRef}
         />
       </fieldset>
 
