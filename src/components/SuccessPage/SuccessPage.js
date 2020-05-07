@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 
 // Import components
 import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
 
 const SuccessPage = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
 
   return (
     <>

@@ -1,25 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
-
+// Import contexts
+import { useFormContext } from 'react-hook-form';
+// Import components
 import Radio from './Radio/Radio';
-import useRadioValidation from './useRadiosValidation';
 
 const { sanitize } = dompurify;
 
-const Radios = ({ name, label, radios, onChange }) => {
-  const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
+const Radios = ({ name, label, radios, fieldValidation }) => {
+  const { errors } = useFormContext();
 
   return (
-    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+    <div
+      className={`wmnds-fe-group ${errors[name] && 'wmnds-fe-group--error'}`}
+    >
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2>{label}</h2>
           {/* If there is an error, show here */}
-          {error && (
+          {errors[name] && (
             <span
               className="wmnds-fe-error-message"
-              dangerouslySetInnerHTML={{ __html: sanitize(error) }}
+              dangerouslySetInnerHTML={{
+                __html: sanitize(errors[name].message),
+              }}
             />
           )}
         </legend>
@@ -31,8 +36,7 @@ const Radios = ({ name, label, radios, onChange }) => {
               name={name}
               text={radio.text}
               value={radio.value}
-              onBlur={handleBlur}
-              onChange={onChange}
+              fieldValidation={fieldValidation}
             />
           ))}
         </div>
@@ -41,17 +45,18 @@ const Radios = ({ name, label, radios, onChange }) => {
   );
 };
 
+// PropTypes
 Radios.propTypes = {
+  fieldValidation: PropTypes.func,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   radios: PropTypes.arrayOf(
     PropTypes.objectOf(PropTypes.string, PropTypes.string)
   ).isRequired,
-  onChange: PropTypes.func,
 };
 
 Radios.defaultProps = {
-  onChange: null,
+  fieldValidation: null,
 };
 
 export default Radios;

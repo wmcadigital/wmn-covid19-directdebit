@@ -1,43 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { FormErrorContext } from 'globalState/FormErrorContext';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
-import GenericError from 'components/shared/Errors/GenericError';
 
-const Step4TravelAgain = ({ setCurrentStep, setHasTravelAgain, formRef }) => {
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  // Update customerType on radio button change
-  const handleRadioChange = (e) => {
-    if (e.target.value) {
-      errorDispatch({ type: 'REMOVE_ERROR', payload: 'TravelAgain' }); // Else remove from global error state
-    }
-    // If paper ticket chosen
-    if (e.target.value === 'yes') {
-      setHasTravelAgain(true); // Then set paper ticket to true (value used in step 3)
-    } else {
-      setHasTravelAgain(false); // Else set to false
-    }
-  };
+const Step4TravelAgain = ({ formRef }) => {
+  // Custom hook for handling continue button (validation, errors etc)
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
-  // Update the current step to the correct one depending on users selection
-  const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep((i) => i + 1);
-      window.scrollTo(0, 0); // Scroll to top of page
-    }
-  };
   return (
     <>
-      {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )}
+      {/* Show generic error message */}
+      {showGenericError}
+
       <Radios
         name="TravelAgain"
         label="Have you started to travel again?"
@@ -45,12 +21,14 @@ const Step4TravelAgain = ({ setCurrentStep, setHasTravelAgain, formRef }) => {
           { text: 'Yes', value: 'yes' },
           { text: 'No', value: 'no' },
         ]}
-        onChange={handleRadioChange}
+        fieldValidation={register({
+          required: 'Select have you started to travel again',
+        })}
       />
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>
@@ -59,8 +37,6 @@ const Step4TravelAgain = ({ setCurrentStep, setHasTravelAgain, formRef }) => {
 };
 
 Step4TravelAgain.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
-  setHasTravelAgain: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

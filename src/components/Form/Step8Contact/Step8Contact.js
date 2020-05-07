@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormErrorContext } from 'globalState/FormErrorContext';
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step8Contact = ({ setCurrentStep, formRef }) => {
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormContext
 
   const customEmailValidation = () => {
     let error;
@@ -17,7 +17,7 @@ const Step8Contact = ({ setCurrentStep, formRef }) => {
     const emailRegex = /^[\w!#$%&amp;'*+\-/=?^_`{|}~]+(\.[\w!#$%&amp;'*+\-/=?^_`{|}~]+)*@((([-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$/; // Matches email regex on server
 
     // If not a valid email address
-    if (!emailRegex.test(formState.Application.Email)) {
+    if (!emailRegex.test(formState.form.Email)) {
       error = 'Enter an email address in the correct format';
     }
 
@@ -29,7 +29,7 @@ const Step8Contact = ({ setCurrentStep, formRef }) => {
     let error;
 
     // Phone number should match UK specific phone number(s)
-    if (!phoneRegex.test(formState.Application.PhoneNumber)) {
+    if (!phoneRegex.test(formState.form.PhoneNumber)) {
       error =
         'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192';
     }

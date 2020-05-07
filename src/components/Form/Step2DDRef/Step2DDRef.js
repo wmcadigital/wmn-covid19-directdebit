@@ -1,59 +1,39 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { FormContext } from 'globalState/FormContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step2DDRef = ({ setCurrentStep, formRef }) => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  const label = 'Direct Debit reference'; // Used on input and for validation
+const Step2DDRef = ({ formRef }) => {
+  // Custom hook for handling continue button (validation, errors etc)
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
-  const customValidation = () => {
-    let error;
-    const ddNum = formState.Application.DirectDebitNumber;
-
-    // DirectDebit reference should start with 6
-    if (ddNum.charAt(0) !== '6') {
-      error = `${label} is a number that begins with '6'`;
-    }
-    // Must be 8 digits long
-    else if (ddNum.length !== 6) {
-      error = `${label} must be 6 digits`;
-    }
-    // Not valid ref if not between these numbers
-    else if (+ddNum < 600000 || ddNum > 699999) {
-      error = `Enter a valid ${label}`;
-    }
-
-    return error;
-  };
-
-  // Goto next step on continue
-  const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep((c) => c + 1); // Set to next step in form
-      window.scrollTo(0, 0); // Scroll to top of page
-    }
-  };
+  const ddLabel = 'Direct Debit reference'; // Label used on input and for validation
+  // Logic used to validate the field
+  const fieldValidation = register({
+    required: `${ddLabel} is required`,
+    validate: {
+      shouldStartWith6: (val) =>
+        val.charAt(0) === '6' || `${ddLabel} is a number that begins with '6'`,
+      mustBe8Digits: (val) => val.length === 8 || `${ddLabel} must be 8 digits`,
+      shouldBeValidRef: (val) =>
+        (+val > 60000000 && +val < 70000000) || `Enter a valid ${ddLabel}`,
+    },
+  });
 
   return (
     <>
-      <p>
+      {/* Subsection */}
+      <div>
         Section 1 of 3 <h4>About your ticket</h4>
-      </p>
+      </div>
+
       <h2>What is your Direct Debit reference?</h2>
-      {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )}
+
+      {/* Show generic error message */}
+      {showGenericError}
+
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <p>
@@ -70,15 +50,17 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
         <Input
           className="wmnds-col-1-2 wmnds-col-sm-1-5"
           name="DirectDebitNumber"
-          label="Direct Debit reference"
+          label={ddLabel}
           inputmode="numeric"
-          customValidation={customValidation}
+          fieldValidation={fieldValidation}
         />
       </fieldset>
+
+      {/* Continue button */}
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>
@@ -87,7 +69,6 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
 };
 
 Step2DDRef.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

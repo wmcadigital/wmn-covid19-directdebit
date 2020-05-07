@@ -1,9 +1,8 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useForm, FormContext } from 'react-hook-form'; // https://react-hook-form.com/
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
-
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
 import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
@@ -16,158 +15,69 @@ import Step8Contact from './Step8Contact/Step8Contact';
 import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
 import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
 
-// Import custom hooks
-import useTrackFormAbandonment from './useTrackFormAbandonment';
-import useLogRocketTracking from './useLogRocketTracking';
 // Import styling
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+  const methods = useForm({ mode: 'onBlur' });
+  const [formDataState, formDataDispatch] = useContext(FormDataContext);
+
+  console.log({ formDataState });
+
+  const onSubmit = (data) => console.log(data);
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isTicketHolder, setIsTicketHolder] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
-  const [hasTravelAgain, setHasTravelAgain] = useState(null); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
-
-  const [, setIsFetching] = useState(false);
-
-  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
-
-  useLogRocketTracking(formState, isTicketHolder, hasTravelAgain); // Used to track javascript errors etc. in Log Rocket
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission method
-
-    // If error
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-
-      setIsFetching(true); // Set this so we can put loading state on button
-
-      // Go hit the API with the data
-      fetch(process.env.REACT_APP_API_HOST, {
-        method: 'post',
-        body: JSON.stringify(formState),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => {
-          // If the response is successful(200: OK)
-          if (response.status === 200) {
-            return response.text(); // Return response (reference number)
-          }
-          throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
-        })
-        .then((payload) => {
-          // If formsubmission is successful
-          formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
-          // Log event to analytics/tag manager
-          window.dataLayer.push({
-            event: 'formAbandonment',
-            eventCategory: 'Refund form submission: success',
-            eventAction: `CustomerType:${formState.CustomerType}`,
-          });
-          setIsFetching(false); // set to false as we are done fetching now
-          setFormSubmitStatus(true); // Set form status to success
-          window.scrollTo(0, 0); // Scroll to top of page
-        })
-        .catch((error) => {
-          // If formsubmission errors
-          // eslint-disable-next-line no-console
-          console.error({ error });
-          let errMsg;
-
-          if (error.text) {
-            error.text().then((errorMessage) => {
-              errMsg = errorMessage;
-            });
-          } else {
-            errMsg = error;
-          }
-
-          // Log event to analytics/tag manager
-          window.dataLayer.push({
-            event: 'formAbandonment',
-            eventCategory: 'Refund form submission: error',
-            eventAction: errMsg,
-          });
-          setIsFetching(false); // set to false as we are done fetching now
-          setFormSubmitStatus(false); // Set form status to error
-          window.scrollTo(0, 0); // Scroll to top of page
-        });
-    }
-  };
 
   return (
     <>
-      <div className="wmnds-col-1 wmnds-col-md-3-4 ">
-        <div className={`wmnds-p-lg ${s.formWrapper}`}>
-          {/* Start of form */}
-          <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
-            {currentStep === 1 && (
-              <Step1TicketHolder
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-                setIsTicketHolder={setIsTicketHolder}
-              />
-            )}
-            {/* Section 1 - About your ticket */}
-            {currentStep === 2 && (
-              <Step2DDRef formRef={formRef} setCurrentStep={setCurrentStep} />
-            )}
-            {currentStep === 3 && (
-              <Step3SwiftCard
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-              />
-            )}
-            {currentStep === 4 && (
-              <Step4TravelAgain
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-                setHasTravelAgain={setHasTravelAgain}
-              />
-            )}
-            {currentStep === 5 && (
-              <Step5TravelDate
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-              />
-            )}
-            {/* Section 2 - About you */}
-            {currentStep === 6 && (
-              <Step6Name formRef={formRef} setCurrentStep={setCurrentStep} />
-            )}
-            {currentStep === 7 && (
-              <Step7DOB formRef={formRef} setCurrentStep={setCurrentStep} />
-            )}
-            {currentStep === 8 && (
-              <Step8Contact formRef={formRef} setCurrentStep={setCurrentStep} />
-            )}
-            {/* Section 3 - Direct Debit */}
-            {currentStep === 9 && (
-              <Step9DDPayMessage setCurrentStep={setCurrentStep} />
-            )}
-            {currentStep === 10 && (
-              <Step10DDBankDetails
-                formRef={formRef}
-                setCurrentStep={setCurrentStep}
-              />
-            )}
-          </form>
+      {/* pass all methods into the context */}
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <FormContext {...methods}>
+        <div className="wmnds-col-1 wmnds-col-md-3-4 ">
+          <div className={`wmnds-p-lg ${s.formWrapper}`}>
+            {/* Start of form */}
+            <form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              autoComplete="on"
+              ref={formRef}
+            >
+              {formDataState.currentStep === 1 && (
+                <Step1TicketHolder formRef={formRef} />
+              )}
+              {/* Section 1 - About your ticket */}
+              {formDataState.currentStep === 2 && (
+                <Step2DDRef formRef={formRef} />
+              )}
+              {formDataState.currentStep === 3 && (
+                <Step3SwiftCard formRef={formRef} />
+              )}
+              {formDataState.currentStep === 4 && (
+                <Step4TravelAgain formRef={formRef} />
+              )}
+              {formDataState.currentStep === 5 && (
+                <Step5TravelDate formRef={formRef} />
+              )}
+              {/* Section 2 - About you */}
+              {formDataState.currentStep === 6 && (
+                <Step6Name formRef={formRef} />
+              )}
+              {formDataState.currentStep === 7 && (
+                <Step7DOB formRef={formRef} />
+              )}
+              {formDataState.currentStep === 8 && (
+                <Step8Contact formRef={formRef} />
+              )}
+              {/* Section 3 - Direct Debit */}
+              {formDataState.currentStep === 9 && <Step9DDPayMessage />}
+              {formDataState.currentStep === 10 && (
+                <Step10DDBankDetails formRef={formRef} />
+              )}
+            </form>
+          </div>
         </div>
-      </div>
-      {/* If in development based on envs then show form debugging */}
-      {process.env.NODE_ENV !== 'production' && (
-        <>
-          <pre
+        {/* If in development based on envs then show form debugging */}
+        {process.env.NODE_ENV !== 'production' && (
+          <div
             className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
             style={{
               overflowX: 'auto',
@@ -175,11 +85,39 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               right: 0,
             }}
           >
-            {JSON.stringify(formState, null, 2)}
-          </pre>
-          <br />
-        </>
-      )}
+            <pre>{JSON.stringify(formDataState, null, 2)}</pre>
+            <br />
+            <div className="wmnds-col-1">
+              Select step:{' '}
+              <select
+                onChange={(e) =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: +e.target.value,
+                  })
+                }
+                onBlur={(e) =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: +e.target.value,
+                  })
+                }
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
+        )}
+      </FormContext>
     </>
   );
 };

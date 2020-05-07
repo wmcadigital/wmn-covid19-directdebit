@@ -1,40 +1,33 @@
 import React, { useReducer, createContext } from 'react';
 
-export const FormContext = createContext(); // Create when context
+export const FormDataContext = createContext(); // Create when context
 
-export const FormProvider = (props) => {
+export const FormDataProvider = (props) => {
   const { children } = props || {};
 
   // Set intial state of when
   const initialState = {
-    CustomerType: '',
-    Application: {},
+    currentStep: 1,
+    formData: {},
   };
 
   // Set up a reducer so we can change state based on centralised logic here
   const reducer = (state, action) => {
     // Update the point to chosen
     switch (action.type) {
-      case 'UPDATE_CUSTOMER_TYPE': {
-        return {
-          ...state,
-          CustomerType: action.payload,
-        };
-      }
-
       // Remove the waypoint by the id
       case 'UPDATE_FORM_DATA': {
         return {
           ...state,
-          Application: { ...state.Application, ...action.payload },
+          formData: { ...state.form, ...action.payload },
         };
       }
 
       // Remove the waypoint by the id
-      case 'ADD_FORM_REF': {
+      case 'UPDATE_STEP': {
         return {
           ...state,
-          FormRef: action.payload,
+          currentStep: action.payload,
         };
       }
 
@@ -45,12 +38,12 @@ export const FormProvider = (props) => {
   };
 
   // Set up reducer using reducer logic and initialState by default
-  const [formState, formDispatch] = useReducer(reducer, initialState);
+  const [formDataState, formDataDispatch] = useReducer(reducer, initialState);
 
   // Pass state and dispatch in context and make accessible to children it wraps
   return (
-    <FormContext.Provider value={[formState, formDispatch]}>
+    <FormDataContext.Provider value={[formDataState, formDataDispatch]}>
       {children}
-    </FormContext.Provider>
+    </FormDataContext.Provider>
   );
 };
