@@ -6,10 +6,11 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
+  // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, handleContinue } = useStepLogic(
     setCurrentStep,
     formRef
-  ); // Custom hook for handling continue button (validation, errors etc)
+  );
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -36,6 +37,8 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
         fieldRef={register({ required: 'Select are you the ticket holder' })}
         onChange={handleRadioChange}
       />
+
+      {/* Continue button */}
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"

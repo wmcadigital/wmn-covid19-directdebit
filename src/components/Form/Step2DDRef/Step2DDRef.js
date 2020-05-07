@@ -1,40 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { useFormContext } from 'react-hook-form';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step2DDRef = ({ setCurrentStep, formRef }) => {
-  const { register, errors, triggerValidation } = useFormContext(); // Get useForm methods
+  // Custom hook for handling continue button (validation, errors etc)
+  const { register, showGenericError, handleContinue } = useStepLogic(
+    setCurrentStep,
+    formRef
+  );
+
   const ddLabel = 'Direct Debit reference'; // Used on input and for validation
-
-  // Update the current step to the correct one depending on users selection
-  const handleContinue = () => {
-    const validate = async () => {
-      const result = await triggerValidation();
-      // setIsContinuePressed(true);
-
-      // if no errors
-      if (result) {
-        setCurrentStep((i) => i + 1);
-      }
-      // else, errors are true...
-      else {
-        window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      }
-    };
-    validate();
-  };
 
   return (
     <>
+      {/* Subsection */}
       <div>
         Section 1 of 3 <h4>About your ticket</h4>
       </div>
+
       <h2>What is your Direct Debit reference?</h2>
-      {Object.keys(errors).length > 0 && <GenericError />}
+
+      {/* Show generic error message */}
+      {showGenericError}
+
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <p>
@@ -68,10 +59,12 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
           })}
         />
       </fieldset>
+
+      {/* Continue button */}
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>
