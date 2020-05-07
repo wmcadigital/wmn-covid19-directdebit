@@ -23,7 +23,7 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
     const validate = async () => {
-      const result = await triggerValidation('TicketHolder');
+      const result = await triggerValidation();
       setIsContinuePressed(true);
 
       // if no errors

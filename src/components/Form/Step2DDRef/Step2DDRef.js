@@ -1,59 +1,41 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
+import { useFormContext } from 'react-hook-form';
 // Import components
 import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step2DDRef = ({ setCurrentStep, formRef }) => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  const label = 'Direct Debit reference'; // Used on input and for validation
+  const { register, errors, triggerValidation } = useFormContext();
 
-  const customValidation = () => {
-    let error;
-    const ddNum = formState.form.DirectDebitNumber;
+  // const label = 'Direct Debit reference'; // Used on input and for validation
 
-    // DirectDebit reference should start with 6
-    if (ddNum.charAt(0) !== '6') {
-      error = `${label} is a number that begins with '6'`;
-    }
-    // Must be 8 digits long
-    else if (ddNum.length !== 6) {
-      error = `${label} must be 6 digits`;
-    }
-    // Not valid ref if not between these numbers
-    else if (+ddNum < 600000 || ddNum > 699999) {
-      error = `Enter a valid ${label}`;
-    }
-
-    return error;
-  };
-
-  // Goto next step on continue
+  // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep((c) => c + 1); // Set to next step in form
-      window.scrollTo(0, 0); // Scroll to top of page
-    }
+    const validate = async () => {
+      const result = await triggerValidation();
+      // setIsContinuePressed(true);
+
+      // if no errors
+      if (result) {
+        setCurrentStep((i) => i + 1);
+      }
+      // else, errors are true...
+      else {
+        window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
+      }
+    };
+    validate();
   };
 
   return (
     <>
-      <p>
+      <div>
         Section 1 of 3 <h4>About your ticket</h4>
-      </p>
+      </div>
       <h2>What is your Direct Debit reference?</h2>
-      {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )}
+      {errors && <GenericError />}
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <p>
@@ -72,7 +54,20 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
           name="DirectDebitNumber"
           label="Direct Debit reference"
           inputmode="numeric"
-          customValidation={customValidation}
+          // customValidation={customValidation}
+          fieldRef={register({
+            required: true,
+            validate: {
+              shouldStartWith6: (val) =>
+                val.charAt(0) === '6' ||
+                `Direct Debit reference is a number that begins with '6'`,
+              mustBe8DigitsLong: (val) =>
+                val.length === 8 || 'Direct Debit reference must be 8 digits',
+              shouldBeValidRef: (val) =>
+                (+val > 60000000 && +val < 70000000) ||
+                'Enter a valid Direct Debit reference',
+            },
+          })}
         />
       </fieldset>
       <button
