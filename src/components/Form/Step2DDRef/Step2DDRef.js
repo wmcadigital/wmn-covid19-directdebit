@@ -7,9 +7,7 @@ import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step2DDRef = ({ setCurrentStep, formRef }) => {
-  const { register, errors, triggerValidation } = useFormContext();
-
-  console.log(Object.keys(errors).length);
+  const { register, errors, triggerValidation } = useFormContext(); // Get useForm methods
   const ddLabel = 'Direct Debit reference'; // Used on input and for validation
 
   // Update the current step to the correct one depending on users selection

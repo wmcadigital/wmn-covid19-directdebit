@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { useFormContext } from 'react-hook-form';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
-import GenericError from 'components/shared/Errors/GenericError';
 
 const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
-  const { register, errors, triggerValidation } = useFormContext();
-  const [isContinuePressed, setIsContinuePressed] = useState(false);
+  const { register, showGenericError, handleContinue } = useStepLogic(
+    setCurrentStep,
+    formRef
+  ); // Custom hook for handling continue button (validation, errors etc)
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -20,23 +21,10 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
     }
   };
 
-  // Update the current step to the correct one depending on users selection
-  const handleContinue = async () => {
-    const result = await triggerValidation();
-    setIsContinuePressed(true);
-
-    // if no errors
-    if (result) {
-      setCurrentStep((i) => i + 1);
-    }
-    // else, errors are true...
-    else {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-    }
-  };
   return (
     <>
-      {Object.keys(errors).length > 0 && isContinuePressed && <GenericError />}
+      {/* Show generic error message */}
+      {showGenericError}
 
       <Radios
         name="TicketHolder"
@@ -51,7 +39,7 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>
