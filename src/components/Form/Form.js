@@ -76,47 +76,47 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           </div>
         </div>
         {/* If in development based on envs then show form debugging */}
-        {process.env.NODE_ENV !== 'production' && (
-          <div
-            className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
-            style={{
-              overflowX: 'auto',
-              position: 'fixed',
-              right: 0,
-            }}
-          >
-            <pre>{JSON.stringify(formDataState, null, 2)}</pre>
-            <br />
-            <div className="wmnds-col-1">
-              Select step:{' '}
-              <select
-                onChange={(e) =>
-                  formDataDispatch({
-                    type: 'UPDATE_STEP',
-                    payload: +e.target.value,
-                  })
-                }
-                onBlur={(e) =>
-                  formDataDispatch({
-                    type: 'UPDATE_STEP',
-                    payload: +e.target.value,
-                  })
-                }
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-            </div>
+        {/* {process.env.NODE_ENV !== 'production' && ( */}
+        <div
+          className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+          style={{
+            overflowX: 'auto',
+            position: 'fixed',
+            right: 0,
+          }}
+        >
+          <pre>{JSON.stringify(formDataState, null, 2)}</pre>
+          <br />
+          <div className="wmnds-col-1">
+            Select step:{' '}
+            <select
+              onChange={(e) =>
+                formDataDispatch({
+                  type: 'UPDATE_STEP',
+                  payload: +e.target.value,
+                })
+              }
+              onBlur={(e) =>
+                formDataDispatch({
+                  type: 'UPDATE_STEP',
+                  payload: +e.target.value,
+                })
+              }
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
           </div>
-        )}
+        </div>
+        {/* )} */}
       </FormContext>
     </>
   );
