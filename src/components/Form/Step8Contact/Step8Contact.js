@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormErrorContext } from 'globalState/FormErrorContext';
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step8Contact = ({ setCurrentStep, formRef }) => {
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormContext
 
   const customEmailValidation = () => {
     let error;

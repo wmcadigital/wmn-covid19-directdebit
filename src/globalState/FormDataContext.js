@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from 'react';
 
-export const FormContext = createContext(); // Create when context
+export const FormDataContext = createContext(); // Create when context
 
 export const FormProvider = (props) => {
   const { children } = props || {};
@@ -41,8 +41,8 @@ export const FormProvider = (props) => {
 
   // Pass state and dispatch in context and make accessible to children it wraps
   return (
-    <FormContext.Provider value={[formState, formDispatch]}>
+    <FormDataContext.Provider value={[formState, formDispatch]}>
       {children}
-    </FormContext.Provider>
+    </FormDataContext.Provider>
   );
 };

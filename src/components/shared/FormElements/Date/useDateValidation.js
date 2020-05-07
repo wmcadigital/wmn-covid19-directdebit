@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useInputValidation = (name, label, customValidation) => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [, formDispatch] = useContext(FormData); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
 
   // set up state for the inputs error prop

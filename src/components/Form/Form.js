@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, FormContext } from 'react-hook-form'; // https://react-hook-form.com/
-
 // Import contexts
-
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
 import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
@@ -21,7 +20,7 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const methods = useForm({ mode: 'onBlur' });
-  const { getValues } = methods;
+  const [formState, formDispatch] = useContext(FormDataContext);
 
   const onSubmit = (data) => console.log(data);
 
@@ -110,7 +109,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 right: 0,
               }}
             >
-              {JSON.stringify(getValues(), null, 2)}
+              {JSON.stringify(formState, null, 2)}
             </pre>
             <br />
           </>
