@@ -20,7 +20,7 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const methods = useForm({ mode: 'onBlur' });
-  const [formState, formDispatch] = useContext(FormDataContext);
+  const [formState] = useContext(FormDataContext);
 
   const onSubmit = (data) => console.log(data);
 
@@ -44,7 +44,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 <Step1TicketHolder
                   formRef={formRef}
                   setCurrentStep={setCurrentStep}
-                  setIsTicketHolder={setIsTicketHolder}
                 />
               )}
               {/* Section 1 - About your ticket */}
@@ -61,7 +60,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 <Step4TravelAgain
                   formRef={formRef}
                   setCurrentStep={setCurrentStep}
-                  setHasTravelAgain={setHasTravelAgain}
                 />
               )}
               {currentStep === 5 && (
