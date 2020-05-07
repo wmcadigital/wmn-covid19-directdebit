@@ -5,12 +5,9 @@ import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const Step1TicketHolder = ({ setCurrentStep, formRef }) => {
+const Step1TicketHolder = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(
-    setCurrentStep,
-    formRef
-  );
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
   return (
     <>
@@ -40,7 +37,6 @@ const Step1TicketHolder = ({ setCurrentStep, formRef }) => {
 };
 
 Step1TicketHolder.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

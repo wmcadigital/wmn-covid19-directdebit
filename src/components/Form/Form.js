@@ -20,12 +20,11 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const methods = useForm({ mode: 'onBlur' });
-  const [formState] = useContext(FormDataContext);
+  const [formDataState] = useContext(FormDataContext);
 
   const onSubmit = (data) => console.log(data);
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(1);
 
   return (
     <>
@@ -40,56 +39,36 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               autoComplete="on"
               ref={formRef}
             >
-              {currentStep === 1 && (
-                <Step1TicketHolder
-                  formRef={formRef}
-                  setCurrentStep={setCurrentStep}
-                />
+              {formDataState.currentStep === 1 && (
+                <Step1TicketHolder formRef={formRef} />
               )}
               {/* Section 1 - About your ticket */}
-              {currentStep === 2 && (
-                <Step2DDRef formRef={formRef} setCurrentStep={setCurrentStep} />
+              {formDataState.currentStep === 2 && (
+                <Step2DDRef formRef={formRef} />
               )}
-              {currentStep === 3 && (
-                <Step3SwiftCard
-                  formRef={formRef}
-                  setCurrentStep={setCurrentStep}
-                />
+              {formDataState.currentStep === 3 && (
+                <Step3SwiftCard formRef={formRef} />
               )}
-              {currentStep === 4 && (
-                <Step4TravelAgain
-                  formRef={formRef}
-                  setCurrentStep={setCurrentStep}
-                />
+              {formDataState.currentStep === 4 && (
+                <Step4TravelAgain formRef={formRef} />
               )}
-              {currentStep === 5 && (
-                <Step5TravelDate
-                  formRef={formRef}
-                  setCurrentStep={setCurrentStep}
-                />
+              {formDataState.currentStep === 5 && (
+                <Step5TravelDate formRef={formRef} />
               )}
               {/* Section 2 - About you */}
-              {currentStep === 6 && (
-                <Step6Name formRef={formRef} setCurrentStep={setCurrentStep} />
+              {formDataState.currentStep === 6 && (
+                <Step6Name formRef={formRef} />
               )}
-              {currentStep === 7 && (
-                <Step7DOB formRef={formRef} setCurrentStep={setCurrentStep} />
+              {formDataState.currentStep === 7 && (
+                <Step7DOB formRef={formRef} />
               )}
-              {currentStep === 8 && (
-                <Step8Contact
-                  formRef={formRef}
-                  setCurrentStep={setCurrentStep}
-                />
+              {formDataState.currentStep === 8 && (
+                <Step8Contact formRef={formRef} />
               )}
               {/* Section 3 - Direct Debit */}
-              {currentStep === 9 && (
-                <Step9DDPayMessage setCurrentStep={setCurrentStep} />
-              )}
-              {currentStep === 10 && (
-                <Step10DDBankDetails
-                  formRef={formRef}
-                  setCurrentStep={setCurrentStep}
-                />
+              {formDataState.currentStep === 9 && <Step9DDPayMessage />}
+              {formDataState.currentStep === 10 && (
+                <Step10DDBankDetails formRef={formRef} />
               )}
             </form>
           </div>
@@ -105,7 +84,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 right: 0,
               }}
             >
-              {JSON.stringify(formState, null, 2)}
+              {JSON.stringify(formDataState, null, 2)}
             </pre>
             <br />
           </>

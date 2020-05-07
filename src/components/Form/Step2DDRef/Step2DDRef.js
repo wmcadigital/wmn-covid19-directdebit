@@ -5,12 +5,9 @@ import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step2DDRef = ({ setCurrentStep, formRef }) => {
+const Step2DDRef = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(
-    setCurrentStep,
-    formRef
-  );
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
   const ddLabel = 'Direct Debit reference'; // Label used on input and for validation
   // Logic used to validate the field
@@ -72,7 +69,6 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
 };
 
 Step2DDRef.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

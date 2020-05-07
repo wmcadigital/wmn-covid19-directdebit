@@ -7,8 +7,8 @@ export const FormProvider = (props) => {
 
   // Set intial state of when
   const initialState = {
-    formRef: {},
-    form: {},
+    currentStep: 1,
+    formData: {},
   };
 
   // Set up a reducer so we can change state based on centralised logic here
@@ -19,15 +19,15 @@ export const FormProvider = (props) => {
       case 'UPDATE_FORM_DATA': {
         return {
           ...state,
-          form: { ...state.form, ...action.payload },
+          formData: { ...state.form, ...action.payload },
         };
       }
 
       // Remove the waypoint by the id
-      case 'ADD_FORM_REF': {
+      case 'UPDATE_STEP': {
         return {
           ...state,
-          formRef: action.payload,
+          currentStep: action.payload,
         };
       }
 
