@@ -5,22 +5,12 @@ import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
+const Step1TicketHolder = ({ setCurrentStep, formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, handleContinue } = useStepLogic(
     setCurrentStep,
     formRef
   );
-
-  // Update customerType on radio button change
-  const handleRadioChange = (e) => {
-    // If paper ticket chosen
-    if (e.target.value === 'yes') {
-      setIsTicketHolder(true); // Then set paper ticket to true (value used in step 3)
-    } else {
-      setIsTicketHolder(false); // Else set to false
-    }
-  };
 
   return (
     <>
@@ -35,7 +25,6 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
           { text: 'No', value: 'no' },
         ]}
         fieldRef={register({ required: 'Select are you the ticket holder' })}
-        onChange={handleRadioChange}
       />
 
       {/* Continue button */}
@@ -52,7 +41,6 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
 
 Step1TicketHolder.propTypes = {
   setCurrentStep: PropTypes.func.isRequired,
-  setIsTicketHolder: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

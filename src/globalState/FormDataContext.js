@@ -7,6 +7,7 @@ export const FormProvider = (props) => {
 
   // Set intial state of when
   const initialState = {
+    formRef: {},
     form: {},
   };
 
@@ -26,7 +27,7 @@ export const FormProvider = (props) => {
       case 'ADD_FORM_REF': {
         return {
           ...state,
-          FormRef: action.payload,
+          formRef: action.payload,
         };
       }
 
