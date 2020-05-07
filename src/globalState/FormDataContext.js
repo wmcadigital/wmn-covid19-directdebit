@@ -7,7 +7,7 @@ export const FormProvider = (props) => {
 
   // Set intial state of when
   const initialState = {
-    currentStep: 1,
+    currentStep: 4,
     formData: {},
   };
 
