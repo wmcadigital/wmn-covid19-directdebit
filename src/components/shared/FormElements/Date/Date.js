@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 
 import DateInput from './DateInput.js/DateInput';
 
-const Date = ({ name, label, autoCompletPrefix }) => {
+const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   const { errors } = useFormContext();
 
   return (
@@ -27,6 +27,7 @@ const Date = ({ name, label, autoCompletPrefix }) => {
             dateType="Day"
             error={errors[name]}
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}day` : null}
+            fieldValidation={fieldValidation}
           />
         </div>
         <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
@@ -38,6 +39,7 @@ const Date = ({ name, label, autoCompletPrefix }) => {
             autoComplete={
               autoCompletPrefix ? `${autoCompletPrefix}month` : null
             }
+            fieldValidation={fieldValidation}
           />
         </div>
         <div className="wmnds-col-1-2 wmnds-col-sm-1-8">
@@ -47,6 +49,7 @@ const Date = ({ name, label, autoCompletPrefix }) => {
             dateType="Year"
             error={errors[name]}
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}year` : null}
+            fieldValidation={fieldValidation}
           />
         </div>
       </div>
@@ -56,14 +59,14 @@ const Date = ({ name, label, autoCompletPrefix }) => {
 
 Date.propTypes = {
   autoCompletPrefix: PropTypes.string,
-  label: PropTypes.string.isRequired,
+  fieldValidation: PropTypes.func,
   name: PropTypes.string.isRequired,
-  customValidation: PropTypes.func,
+  label: PropTypes.string.isRequired,
 };
 
 Date.defaultProps = {
   autoCompletPrefix: null,
-  customValidation: null,
+  fieldValidation: null,
 };
 
 export default Date;

@@ -8,7 +8,7 @@ import Radio from './Radio/Radio';
 
 const { sanitize } = dompurify;
 
-const Radios = ({ name, label, radios, onChange, fieldValidation }) => {
+const Radios = ({ name, label, radios, fieldValidation }) => {
   const { errors } = useFormContext();
 
   return (
@@ -36,7 +36,6 @@ const Radios = ({ name, label, radios, onChange, fieldValidation }) => {
               name={name}
               text={radio.text}
               value={radio.value}
-              onChange={onChange}
               fieldValidation={fieldValidation}
             />
           ))}
@@ -48,17 +47,15 @@ const Radios = ({ name, label, radios, onChange, fieldValidation }) => {
 
 // PropTypes
 Radios.propTypes = {
+  fieldValidation: PropTypes.func,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   radios: PropTypes.arrayOf(
     PropTypes.objectOf(PropTypes.string, PropTypes.string)
   ).isRequired,
-  fieldValidation: PropTypes.func,
-  onChange: PropTypes.func,
 };
 
 Radios.defaultProps = {
-  onChange: null,
   fieldValidation: null,
 };
 

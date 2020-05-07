@@ -24,7 +24,11 @@ const Step5TravelDate = ({ formRef }) => {
           <h2>When will you start to use your ticket to travel again?</h2>
           <p>For example, 2 5 2020</p>
         </legend>
-        <Date name="TravelResumptionDate" label="Travel date" />
+        <Date
+          name="TravelResumptionDate"
+          label="Travel date"
+          fieldValidation={register({ required: 'this is required' })}
+        />
       </fieldset>
 
       {/* Continue button */}
