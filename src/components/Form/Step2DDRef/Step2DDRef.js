@@ -50,7 +50,7 @@ const Step2DDRef = ({ setCurrentStep, formRef }) => {
               shouldStartWith6: (val) =>
                 val.charAt(0) === '6' ||
                 `${ddLabel} is a number that begins with '6'`,
-              mustBe8DigitsLong: (val) =>
+              mustBe8Digits: (val) =>
                 val.length === 8 || `${ddLabel} must be 8 digits`,
               shouldBeValidRef: (val) =>
                 (+val > 60000000 && +val < 70000000) ||
