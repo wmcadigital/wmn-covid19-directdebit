@@ -2,12 +2,12 @@ import React, { useReducer, createContext } from 'react';
 
 export const FormDataContext = createContext(); // Create when context
 
-export const FormProvider = (props) => {
+export const FormDataProvider = (props) => {
   const { children } = props || {};
 
   // Set intial state of when
   const initialState = {
-    currentStep: 5,
+    currentStep: 1,
     formData: {},
   };
 
@@ -38,11 +38,11 @@ export const FormProvider = (props) => {
   };
 
   // Set up reducer using reducer logic and initialState by default
-  const [formState, formDispatch] = useReducer(reducer, initialState);
+  const [formDataState, formDataDispatch] = useReducer(reducer, initialState);
 
   // Pass state and dispatch in context and make accessible to children it wraps
   return (
-    <FormDataContext.Provider value={[formState, formDispatch]}>
+    <FormDataContext.Provider value={[formDataState, formDataDispatch]}>
       {children}
     </FormDataContext.Provider>
   );

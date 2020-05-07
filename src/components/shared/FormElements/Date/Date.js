@@ -13,8 +13,6 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   const [year, setYear] = useState();
   const [date, setDate] = useState();
 
-  console.log({ errors });
-
   const handleChange = (e) => {
     const { value } = e.target;
 
