@@ -11,7 +11,7 @@ const Step2DDRef = ({ formRef }) => {
 
   const ddLabel = 'Direct Debit reference'; // Label used on input and for validation
   // Logic used to validate the field
-  const fieldRef = register({
+  const fieldValidation = register({
     required: `${ddLabel} is required`,
     validate: {
       shouldStartWith6: (val) =>
@@ -52,7 +52,7 @@ const Step2DDRef = ({ formRef }) => {
           name="DirectDebitNumber"
           label={ddLabel}
           inputmode="numeric"
-          fieldRef={fieldRef}
+          fieldValidation={fieldValidation}
         />
       </fieldset>
 

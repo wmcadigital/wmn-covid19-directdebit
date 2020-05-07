@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, FormContext } from 'react-hook-form'; // https://react-hook-form.com/
 // Import contexts

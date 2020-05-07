@@ -5,16 +5,13 @@ import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
+const Step3SwiftCard = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(
-    setCurrentStep,
-    formRef
-  );
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
   const swiftLabel = 'Swift card number'; // Label used on input and for validation
   // Logic used to validate the field
-  const fieldRef = register({
+  const fieldValidation = register({
     required: `${swiftLabel} is required`,
     validate: {
       notNX: (val) =>
@@ -61,7 +58,7 @@ const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
           name="SwiftCardNumber"
           label={swiftLabel}
           inputmode="numeric"
-          fieldRef={fieldRef}
+          fieldValidation={fieldValidation}
         />
       </fieldset>
 
@@ -78,7 +75,6 @@ const Step3SwiftCard = ({ setCurrentStep, formRef }) => {
 };
 
 Step3SwiftCard.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

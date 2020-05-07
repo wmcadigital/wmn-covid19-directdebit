@@ -21,7 +21,9 @@ const Step1TicketHolder = ({ formRef }) => {
           { text: 'Yes', value: 'yes' },
           { text: 'No', value: 'no' },
         ]}
-        fieldRef={register({ required: 'Select are you the ticket holder' })}
+        fieldValidation={register({
+          required: 'Select are you the ticket holder',
+        })}
       />
 
       {/* Continue button */}

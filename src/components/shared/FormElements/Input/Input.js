@@ -9,7 +9,7 @@ const { sanitize } = dompurify;
 const Input = ({
   autocomplete,
   className,
-  fieldRef,
+  fieldValidation,
   inputmode,
   label,
   name,
@@ -30,7 +30,7 @@ const Input = ({
         inputMode={inputmode}
         spellCheck={spellcheck}
         autoComplete={autocomplete}
-        ref={fieldRef}
+        ref={fieldValidation}
       />
     </>
   );
@@ -64,7 +64,7 @@ const Input = ({
 Input.propTypes = {
   autocomplete: PropTypes.string,
   className: PropTypes.string,
-  fieldRef: PropTypes.func,
+  fieldValidation: PropTypes.func,
   inputmode: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -75,7 +75,7 @@ Input.propTypes = {
 Input.defaultProps = {
   autocomplete: null,
   className: '',
-  fieldRef: null,
+  fieldValidation: null,
   inputmode: 'text',
   spellcheck: false,
   type: 'text',
