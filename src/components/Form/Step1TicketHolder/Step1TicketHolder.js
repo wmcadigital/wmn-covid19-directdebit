@@ -10,8 +10,6 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
   const { register, errors, triggerValidation } = useFormContext();
   const [isContinuePressed, setIsContinuePressed] = useState(false);
 
-  console.log(errors);
-
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     // If paper ticket chosen
@@ -50,7 +48,7 @@ const Step1TicketHolder = ({ setCurrentStep, setIsTicketHolder, formRef }) => {
           { text: 'Yes', value: 'yes' },
           { text: 'No', value: 'no' },
         ]}
-        fieldRef={register({ required: 'this is required' })}
+        fieldRef={register({ required: true })}
         onChange={handleRadioChange}
       />
       <button

@@ -19,7 +19,7 @@ const Radios = ({ name, label, radios, onChange, fieldRef }) => {
         <legend className="wmnds-fe-fieldset__legend">
           <h2>{label}</h2>
           {/* If there is an error, show here */}
-          {errors[name] && (
+          {errors[name]?.type === 'required' && (
             <span
               className="wmnds-fe-error-message"
               dangerouslySetInnerHTML={{
