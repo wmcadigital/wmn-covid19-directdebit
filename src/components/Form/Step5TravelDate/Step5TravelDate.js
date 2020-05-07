@@ -9,6 +9,8 @@ const Step5TravelDate = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
+  const fieldValidation = register({ required: 'this is required' });
+
   return (
     <>
       {/* Subsection */}
@@ -27,7 +29,7 @@ const Step5TravelDate = ({ formRef }) => {
         <Date
           name="TravelResumptionDate"
           label="Travel date"
-          fieldValidation={register({ required: 'this is required' })}
+          fieldValidation={fieldValidation}
         />
       </fieldset>
 

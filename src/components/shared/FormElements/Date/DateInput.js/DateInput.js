@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// Import contexts
+import { useFormContext } from 'react-hook-form';
 
 const DateInput = ({
   autoComplete,
-  fieldValidation,
-  name,
   dateType,
-  error,
+  fieldValidation,
+  onChange,
+  name,
 }) => {
+  const { errors } = useFormContext();
   const inputName = name + dateType;
 
   return (
@@ -16,13 +19,16 @@ const DateInput = ({
         {dateType}
       </label>
       <input
-        className={`wmnds-fe-input ${error ? 'wmnds-fe-input--error' : ''}`}
+        className={`wmnds-fe-input ${
+          errors[name] ? 'wmnds-fe-input--error' : ''
+        }`}
         id={inputName}
         name={inputName}
         ref={fieldValidation}
         type="text"
         inputMode="numeric"
         autoComplete={autoComplete}
+        onChange={onChange}
       />
     </>
   );
@@ -30,16 +36,15 @@ const DateInput = ({
 
 DateInput.propTypes = {
   autoComplete: PropTypes.string,
-  fieldValidation: PropTypes.func,
-  name: PropTypes.string.isRequired,
   dateType: PropTypes.string.isRequired,
-  error: PropTypes.string,
+  fieldValidation: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 DateInput.defaultProps = {
   autoComplete: null,
   fieldValidation: null,
-  error: null,
 };
 
 export default DateInput;
