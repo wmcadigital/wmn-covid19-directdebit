@@ -1,31 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// Import contexts
+import { useFormContext } from 'react-hook-form';
 
-import useDateValidation from './useDateValidation';
 import DateInput from './DateInput.js/DateInput';
 
-const Date = ({ name, label, customValidation, autoCompletPrefix }) => {
-  // Use custom hook for validating inputs (this controls ALL inputs validation)
-  const { error, handleChange, handleBlur } = useDateValidation(
-    name,
-    label,
-    customValidation
-  );
+const Date = ({ name, label, autoCompletPrefix }) => {
+  const { errors } = useFormContext();
 
   return (
     <>
       {/* If there is an error, show here */}
-      {error && <span className="wmnds-fe-error-message">{error}</span>}
+      {errors[name] && (
+        <span className="wmnds-fe-error-message">{errors[name]}</span>
+      )}
 
-      <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+      <div
+        className={`wmnds-fe-group ${
+          errors[name] ? 'wmnds-fe-group--error' : ''
+        }`}
+      >
         <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
           <DateInput
             name={name}
             label={label}
             dateType="Day"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            error={error}
+            error={errors[name]}
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}day` : null}
           />
         </div>
@@ -34,9 +34,7 @@ const Date = ({ name, label, customValidation, autoCompletPrefix }) => {
             name={name}
             label={label}
             dateType="Month"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            error={error}
+            error={errors[name]}
             autoComplete={
               autoCompletPrefix ? `${autoCompletPrefix}month` : null
             }
@@ -47,9 +45,7 @@ const Date = ({ name, label, customValidation, autoCompletPrefix }) => {
             name={name}
             label={label}
             dateType="Year"
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            error={error}
+            error={errors[name]}
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}year` : null}
           />
         </div>

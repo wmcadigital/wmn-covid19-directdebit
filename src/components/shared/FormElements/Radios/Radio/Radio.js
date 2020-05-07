@@ -5,7 +5,7 @@ import dompurify from 'dompurify';
 
 const { sanitize } = dompurify;
 
-const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
+const Radio = ({ name, fieldValidation, text, value }) => {
   return (
     <>
       <label className="wmnds-fe-radios__container">
@@ -15,8 +15,6 @@ const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
           value={value}
           name={name}
           type="radio"
-          onChange={onChange}
-          onBlur={onBlur}
           ref={fieldValidation}
         />
         <span className="wmnds-fe-radios__checkmark" />
@@ -28,16 +26,12 @@ const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
 // PropTypes
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
   fieldValidation: PropTypes.func,
   text: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 };
 
 Radio.defaultProps = {
-  onChange: null,
-  onBlur: null,
   fieldValidation: null,
 };
 

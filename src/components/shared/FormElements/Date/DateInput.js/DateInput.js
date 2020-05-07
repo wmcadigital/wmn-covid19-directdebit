@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 
 const DateInput = ({
   autoComplete,
+  fieldValidation,
   name,
   dateType,
   error,
-  handleChange,
-  handleBlur,
 }) => {
   const inputName = name + dateType;
 
@@ -20,11 +19,10 @@ const DateInput = ({
         className={`wmnds-fe-input ${error ? 'wmnds-fe-input--error' : ''}`}
         id={inputName}
         name={inputName}
+        ref={fieldValidation}
         type="text"
         inputMode="numeric"
         autoComplete={autoComplete}
-        onChange={handleChange}
-        onBlur={handleBlur}
       />
     </>
   );
@@ -32,15 +30,15 @@ const DateInput = ({
 
 DateInput.propTypes = {
   autoComplete: PropTypes.string,
+  fieldValidation: PropTypes.func,
   name: PropTypes.string.isRequired,
   dateType: PropTypes.string.isRequired,
   error: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
 };
 
 DateInput.defaultProps = {
   autoComplete: null,
+  fieldValidation: null,
   error: null,
 };
 
