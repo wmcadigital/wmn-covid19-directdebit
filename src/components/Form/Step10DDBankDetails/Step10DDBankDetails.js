@@ -1,33 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { FormErrorContext } from 'globalState/FormErrorContext';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext  // Goto next step on continue
-  const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep((c) => c + 1); // Set to next step in form
-      window.scrollTo(0, 0); // Scroll to top of page
-    }
-  };
+const Step10DDBankDetails = ({ formRef }) => {
+  // Custom hook for handling continue button (validation, errors etc)
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
   return (
     <>
-      <p>
+      {/* Subsection */}
+      <div>
         Section 3 of 3 <h4>Direct Debit</h4>
-      </p>
-      {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )}
+      </div>
+
+      {/* Show generic error message */}
+      {showGenericError}
+
       <h2>
         Instruction to your bank or building society to pay by Direct Debit
       </h2>
@@ -97,6 +88,8 @@ const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
           to my bank/building society.
         </p>
       </fieldset>
+
+      {/* Continue button */}
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
@@ -109,7 +102,6 @@ const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
 };
 
 Step10DDBankDetails.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,
