@@ -44,6 +44,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {formDataState.currentStep === 1 && (
                 <Step1TicketHolder formRef={formRef} />
               )}
+
               {/* Section 1 - About your ticket */}
               {formDataState.currentStep === 2 && (
                 <Step2DDRef formRef={formRef} />
@@ -57,6 +58,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {formDataState.currentStep === 5 && (
                 <Step5TravelDate formRef={formRef} />
               )}
+
               {/* Section 2 - About you */}
               {formDataState.currentStep === 6 && (
                 <Step6Name formRef={formRef} />
@@ -67,8 +69,11 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {formDataState.currentStep === 8 && (
                 <Step8Contact formRef={formRef} />
               )}
+
               {/* Section 3 - Direct Debit */}
-              {formDataState.currentStep === 9 && <Step9DDPayMessage />}
+              {formDataState.currentStep === 9 && (
+                <Step9DDPayMessage formRef={formRef} />
+              )}
               {formDataState.currentStep === 10 && (
                 <Step10DDBankDetails formRef={formRef} />
               )}
