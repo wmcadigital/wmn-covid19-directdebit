@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 // Import contexts
-import { useFormContext } from 'react-hook-form';
+import {useFormContext} from 'react-hook-form';
 
 const DateInput = ({
   autoComplete,

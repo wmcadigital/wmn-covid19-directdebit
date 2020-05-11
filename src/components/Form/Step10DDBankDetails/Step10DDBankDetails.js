@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Step10DDBankDetails = ({ formRef }) => {
+const Step10DDBankDetails = ({formRef}) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 

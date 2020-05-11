@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react';
+import React, {createContext, useReducer} from 'react';
 
 export const FormDataContext = createContext(); // Create when context
 

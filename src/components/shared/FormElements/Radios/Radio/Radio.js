@@ -1,19 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
 // Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
+import {FormDataContext} from 'globalState/FormDataContext';
+import PropTypes from 'prop-types';
+import React, {useContext} from 'react';
 
-const { sanitize } = dompurify;
+const {sanitize} = dompurify;
 
-const Radio = ({ name, fieldValidation, text, value }) => {
+const Radio = ({name, fieldValidation, text, value}) => {
   const [formDataState] = useContext(FormDataContext);
 
   return (
-    <>
-      <label className="wmnds-fe-radios__container">
-        <div dangerouslySetInnerHTML={{ __html: sanitize(text) }} />
+      <><label className = "wmnds-fe-radios__container">
+      <div dangerouslySetInnerHTML =
+       {
+         { __html: sanitize(text) }
+       } />
         <input
           className="wmnds-fe-radios__input"
           name={name}
@@ -22,22 +24,20 @@ const Radio = ({ name, fieldValidation, text, value }) => {
           value={value}
           defaultChecked={formDataState.formData[name] === value}
         />
-        <span className="wmnds-fe-radios__checkmark" />
-      </label>
-    </>
-  );
+      <span className = "wmnds-fe-radios__checkmark" /></label>
+    </>);
 };
 
 // PropTypes
 Radio.propTypes = {
-  name: PropTypes.string.isRequired,
-  fieldValidation: PropTypes.func,
-  text: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  name : PropTypes.string.isRequired,
+  fieldValidation : PropTypes.func,
+  text : PropTypes.string.isRequired,
+  value : PropTypes.string.isRequired,
 };
 
 Radio.defaultProps = {
-  fieldValidation: null,
+  fieldValidation : null,
 };
 
 export default Radio;
