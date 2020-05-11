@@ -12,7 +12,27 @@ const Step10DDBankDetails = ({ formRef }) => {
   // Labels used on inputs and for validation
   const ddNameLabel = 'Name on the account';
   const ddSortCodeLabel = 'Sort code';
-  const ddAccountLabbel = 'Account number';
+  const ddAccountLabel = 'Account number';
+
+  // Logic used to validate the account name field
+  const ddNameValidation = register({
+    required: `${ddNameLabel} is required`,
+  });
+
+  // Logic used to validate the sort code field
+  const sortCodeRegex = /^(?!(?:0{6}|00-00-00))(?:\d{6}|\d\d-\d\d-\d\d)$/; // Got from https://stackoverflow.com/questions/11341957/uk-bank-sort-code-javascript-regular-expression#answer-11342244
+  const ddSortCodeValidation = register({
+    required: `${ddSortCodeLabel} is required`,
+    pattern: {
+      value: sortCodeRegex,
+      message: `Enter a valid ${ddSortCodeLabel.toLowerCase()} like 309430`,
+    },
+  });
+
+  // Logic used to validate the account number field
+  const ddAccountValidation = register({
+    required: `${ddAccountLabel} is required`,
+  });
 
   return (
     <>
@@ -69,18 +89,21 @@ const Step10DDBankDetails = ({ formRef }) => {
           name="BankAccountName"
           label={ddNameLabel}
           autocomplete="given-name"
+          fieldValidation={ddNameValidation}
         />
         <Input
           className="wmnds-col-1-2 wmnds-col-md-1-4"
           name="BankAccountSortCode"
           label={`${ddSortCodeLabel}<br/>Must be 6 digits long`}
           inputmode="numeric"
+          fieldValidation={ddSortCodeValidation}
         />
         <Input
           className="wmnds-col-1-2 wmnds-col-md-1-4"
           name="BankAccountNumber"
-          label={`${ddAccountLabbel}<br/>Must be between 6 and 8 digits long`}
+          label={`${ddAccountLabel}<br/>Must be between 6 and 8 digits long`}
           inputmode="numeric"
+          fieldValidation={ddAccountValidation}
         />
         <p>
           Please pay West Midlands Combined Authority Direct Debits from the
@@ -98,7 +121,7 @@ const Step10DDBankDetails = ({ formRef }) => {
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>

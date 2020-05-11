@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
-
+import { FormDataContext } from 'globalState/FormDataContext';
+// Import components
 import DateInput from './DateInput.js/DateInput';
 
 const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
+  const [formDataState] = useContext(FormDataContext);
   const { errors, triggerValidation } = useFormContext();
+
+  const [stateYear, stateMonth, stateDay] = formDataState.formData[name]
+    ? formDataState.formData[name].split('-')
+    : [null, null, null];
+
   // State used for capturing date fields onChange below (we use these to validate against below)
-  const [day, setDay] = useState();
-  const [month, setMonth] = useState();
-  const [year, setYear] = useState();
-  const [date, setDate] = useState();
+  const [day, setDay] = useState(stateDay);
+  const [month, setMonth] = useState(stateMonth);
+  const [year, setYear] = useState(stateYear);
+  const [date, setDate] = useState(formDataState.formData[name]);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -66,6 +73,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
           <DateInput
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}day` : null}
             dateType="Day"
+            defaultValue={day}
             name={name}
             label={label}
             onChange={handleChange}
@@ -77,6 +85,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
               autoCompletPrefix ? `${autoCompletPrefix}month` : null
             }
             dateType="Month"
+            defaultValue={month}
             name={name}
             label={label}
             onChange={handleChange}
@@ -86,6 +95,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
           <DateInput
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}year` : null}
             dateType="Year"
+            defaultValue={year}
             name={name}
             label={label}
             onChange={handleChange}
