@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import DateInput from './DateInput.js/DateInput';
 
 const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
-  const { errors } = useFormContext();
+  const { errors, triggerValidation } = useFormContext();
   // State used for capturing date fields onChange below (we use these to validate against below)
   const [day, setDay] = useState();
   const [month, setMonth] = useState();
@@ -40,8 +40,15 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   };
 
   useEffect(() => {
-    if (year && month && day) setDate(`${year}-${month}-${day}`); // Set date state to current yyyy-mm-dd set by user (would do it in handleChange event but it falls out of sync)
-  }, [day, month, year]);
+    if (year && month && day) {
+      setDate(`${year}-${month}-${day}`);
+    } // Set date state to current yyyy-mm-dd set by user (would do it in handleChange event but it falls out of sync)
+  }, [day, month, year, setDate]);
+
+  // Trigger validation every time date has been updated
+  useEffect(() => {
+    if (date) triggerValidation();
+  }, [date, triggerValidation]);
 
   return (
     <>
@@ -85,13 +92,11 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
           />
         </div>
       </div>
-      {date}
       <input
         name={name}
         type="hidden"
         ref={fieldValidation}
         value={date || ''}
-        readOnly
       />
     </>
   );
