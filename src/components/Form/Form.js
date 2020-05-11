@@ -109,12 +109,10 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                   payload: +e.target.value,
                 })
               }
+              value={formDataState.currentStep}
             >
               {debugStepOptions.map((option) => (
-                <option
-                  value={option}
-                  selected={formDataState.currentStep === option}
-                >
+                <option key={option} value={option}>
                   {option}
                 </option>
               ))}
