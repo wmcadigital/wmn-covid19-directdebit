@@ -42,9 +42,12 @@ const Input = ({
       }`}
     >
       {label && (
-        <label className="wmnds-fe-label" htmlFor={name}>
-          {label}
-        </label>
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
+        <label
+          className="wmnds-fe-label"
+          htmlFor={name}
+          dangerouslySetInnerHTML={{ __html: sanitize(label) }}
+        />
       )}
 
       {/* If there is an error, show here */}

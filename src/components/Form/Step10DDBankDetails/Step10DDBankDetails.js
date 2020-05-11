@@ -9,6 +9,11 @@ const Step10DDBankDetails = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
+  // Labels used on inputs and for validation
+  const ddNameLabel = 'Name on the account';
+  const ddSortCodeLabel = 'Sort code';
+  const ddAccountLabbel = 'Account number';
+
   return (
     <>
       {/* Subsection */}
@@ -62,19 +67,19 @@ const Step10DDBankDetails = ({ formRef }) => {
         <Input
           className="wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
           name="BankAccountName"
-          label="Name on the account"
+          label={ddNameLabel}
           autocomplete="given-name"
         />
         <Input
           className="wmnds-col-1-2 wmnds-col-md-1-4"
           name="BankAccountSortCode"
-          label="Sort code"
+          label={`${ddSortCodeLabel}<br/>Must be 6 digits long`}
           inputmode="numeric"
         />
         <Input
           className="wmnds-col-1-2 wmnds-col-md-1-4"
           name="BankAccountNumber"
-          label="Account number"
+          label={`${ddAccountLabbel}<br/>Must be between 6 and 8 digits long`}
           inputmode="numeric"
         />
         <p>
