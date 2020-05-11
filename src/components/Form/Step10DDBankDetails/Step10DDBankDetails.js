@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UkModulusChecking from 'uk-modulus-checking';
+// Import context
+import { useFormContext } from 'react-hook-form';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step10DDBankDetails = ({ formRef }) => {
+  const { getValues } = useFormContext(); // Get useForm methods
+
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
@@ -32,6 +37,19 @@ const Step10DDBankDetails = ({ formRef }) => {
   // Logic used to validate the account number field
   const ddAccountValidation = register({
     required: `${ddAccountLabel} is required`,
+    validate: {
+      isCorrectLength: (val) => {
+        return (
+          (val.length >= 6 && val.length <= 8) ||
+          `${ddAccountLabel} must be between 6 and 8 digits`
+        );
+      },
+      isSortCode: (accountNumber) =>
+        new UkModulusChecking({
+          sortCode: getValues('BankAccountSortCode'),
+          accountNumber,
+        }).isValid() || 'Enter a valid sort code and account number',
+    },
   });
 
   return (
