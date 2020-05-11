@@ -5,7 +5,7 @@ import Input from 'components/shared/FormElements/Input/Input';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Step6Name = ({formRef}) => {
+const Step6Name = ({ formRef }) => {
   const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
   // Labels used on inputs and for validation

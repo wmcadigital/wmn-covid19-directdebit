@@ -1,13 +1,13 @@
-import {FormDataContext} from 'globalState/FormDataContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import PropTypes from 'prop-types';
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // Import contexts
-import {useFormContext} from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 // Import components
 import DateInput from './DateInput.js/DateInput';
 
-const Date = ({autoCompletPrefix, fieldValidation, name, label}) => {
+const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   const [formDataState] = useContext(FormDataContext);
   const { errors, triggerValidation } = useFormContext();
 

@@ -3,7 +3,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Step9DDPayMessage = ({formRef}) => {
+const Step9DDPayMessage = ({ formRef }) => {
   const { handleContinue } = useStepLogic(formRef);
 
   return (
