@@ -8,9 +8,10 @@ import Input from 'components/shared/FormElements/Input/Input';
 const Step6Name = ({ formRef }) => {
   const { register, showGenericError, handleContinue } = useStepLogic(formRef);
 
-  // Labels used on input and for validation
+  // Labels used on inputs and for validation
   const fNameLabel = 'First name';
   const lNameLabel = 'Last name';
+
   // Logic used to validate fields
   const fieldValidation = (name) => {
     return register({ required: `${name} is required` });
