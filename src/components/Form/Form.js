@@ -19,10 +19,12 @@ import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const methods = useForm({ mode: 'onBlur' });
   const [formDataState, formDataDispatch] = useContext(FormDataContext);
+  const methods = useForm({
+    mode: 'onBlur',
+  });
 
-  console.log({ formDataState });
+  const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const onSubmit = (data) => console.log(data);
 
@@ -93,7 +95,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           <pre>{JSON.stringify(formDataState, null, 2)}</pre>
           <br />
           <div className="wmnds-col-1">
-            Select step:{' '}
+            Select step: {}
             <select
               onChange={(e) =>
                 formDataDispatch({
@@ -108,16 +110,14 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 })
               }
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
+              {debugStepOptions.map((option) => (
+                <option
+                  value={option}
+                  selected={formDataState.currentStep === option}
+                >
+                  {option}
+                </option>
+              ))}
             </select>
           </div>
         </div>
