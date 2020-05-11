@@ -1,20 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// Import components
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 
-const Step9DDPayMessage = ({ setCurrentStep }) => {
-  // Goto next step on continue
-  const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    setCurrentStep((c) => c + 1); // Set to next step in form
-    window.scrollTo(0, 0); // Scroll to top of page
-  };
+const Step9DDPayMessage = ({ formRef }) => {
+  const { handleContinue } = useStepLogic(formRef);
 
   return (
     <>
-      <p>
+      <div>
         Section 3 of 3 <h4>Direct Debit</h4>
-      </p>
+      </div>
       <div className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-lg-2-3">
         <h2>
           Paying for travel until your next usual Direct Debit payment date
@@ -36,7 +32,7 @@ const Step9DDPayMessage = ({ setCurrentStep }) => {
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>
@@ -45,7 +41,12 @@ const Step9DDPayMessage = ({ setCurrentStep }) => {
 };
 
 Step9DDPayMessage.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
+  formRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
 };
 
 export default Step9DDPayMessage;

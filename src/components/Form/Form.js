@@ -19,10 +19,12 @@ import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const methods = useForm({ mode: 'onBlur' });
   const [formDataState, formDataDispatch] = useContext(FormDataContext);
+  const methods = useForm({
+    mode: 'onBlur',
+  });
 
-  console.log({ formDataState });
+  const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const onSubmit = (data) => console.log(data);
 
@@ -44,6 +46,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {formDataState.currentStep === 1 && (
                 <Step1TicketHolder formRef={formRef} />
               )}
+
               {/* Section 1 - About your ticket */}
               {formDataState.currentStep === 2 && (
                 <Step2DDRef formRef={formRef} />
@@ -57,6 +60,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {formDataState.currentStep === 5 && (
                 <Step5TravelDate formRef={formRef} />
               )}
+
               {/* Section 2 - About you */}
               {formDataState.currentStep === 6 && (
                 <Step6Name formRef={formRef} />
@@ -67,8 +71,11 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {formDataState.currentStep === 8 && (
                 <Step8Contact formRef={formRef} />
               )}
+
               {/* Section 3 - Direct Debit */}
-              {formDataState.currentStep === 9 && <Step9DDPayMessage />}
+              {formDataState.currentStep === 9 && (
+                <Step9DDPayMessage formRef={formRef} />
+              )}
               {formDataState.currentStep === 10 && (
                 <Step10DDBankDetails formRef={formRef} />
               )}
@@ -88,7 +95,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           <pre>{JSON.stringify(formDataState, null, 2)}</pre>
           <br />
           <div className="wmnds-col-1">
-            Select step:{' '}
+            Select step: {}
             <select
               onChange={(e) =>
                 formDataDispatch({
@@ -102,17 +109,13 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                   payload: +e.target.value,
                 })
               }
+              value={formDataState.currentStep}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
+              {debugStepOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
           </div>
         </div>

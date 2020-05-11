@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
-import useStepLogic from 'components/Form/useStepLogic'; // Import components
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Date from 'components/shared/FormElements/Date/Date';
 

@@ -19,7 +19,7 @@ export const FormDataProvider = (props) => {
       case 'UPDATE_FORM_DATA': {
         return {
           ...state,
-          formData: { ...state.form, ...action.payload },
+          formData: { ...state.formData, ...action.payload },
         };
       }
 

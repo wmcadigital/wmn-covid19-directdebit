@@ -6,6 +6,7 @@ import { useFormContext } from 'react-hook-form';
 const DateInput = ({
   autoComplete,
   dateType,
+  defaultValue,
   fieldValidation,
   onChange,
   name,
@@ -19,16 +20,17 @@ const DateInput = ({
         {dateType}
       </label>
       <input
+        autoComplete={autoComplete}
         className={`wmnds-fe-input ${
           errors[name] ? 'wmnds-fe-input--error' : ''
         }`}
+        defaultValue={defaultValue}
         id={inputName}
+        inputMode="numeric"
+        onChange={onChange}
         name={inputName}
         ref={fieldValidation}
         type="text"
-        inputMode="numeric"
-        autoComplete={autoComplete}
-        onChange={onChange}
       />
     </>
   );
@@ -37,6 +39,7 @@ const DateInput = ({
 DateInput.propTypes = {
   autoComplete: PropTypes.string,
   dateType: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
   fieldValidation: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,

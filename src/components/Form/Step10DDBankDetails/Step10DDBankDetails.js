@@ -1,33 +1,49 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { FormErrorContext } from 'globalState/FormErrorContext';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext  // Goto next step on continue
-  const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep((c) => c + 1); // Set to next step in form
-      window.scrollTo(0, 0); // Scroll to top of page
-    }
-  };
+const Step10DDBankDetails = ({ formRef }) => {
+  // Custom hook for handling continue button (validation, errors etc)
+  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+
+  // Labels used on inputs and for validation
+  const ddNameLabel = 'Name on the account';
+  const ddSortCodeLabel = 'Sort code';
+  const ddAccountLabel = 'Account number';
+
+  // Logic used to validate the account name field
+  const ddNameValidation = register({
+    required: `${ddNameLabel} is required`,
+  });
+
+  // Logic used to validate the sort code field
+  const sortCodeRegex = /^(?!(?:0{6}|00-00-00))(?:\d{6}|\d\d-\d\d-\d\d)$/; // Got from https://stackoverflow.com/questions/11341957/uk-bank-sort-code-javascript-regular-expression#answer-11342244
+  const ddSortCodeValidation = register({
+    required: `${ddSortCodeLabel} is required`,
+    pattern: {
+      value: sortCodeRegex,
+      message: `Enter a valid ${ddSortCodeLabel.toLowerCase()} like 309430`,
+    },
+  });
+
+  // Logic used to validate the account number field
+  const ddAccountValidation = register({
+    required: `${ddAccountLabel} is required`,
+  });
 
   return (
     <>
-      <p>
+      {/* Subsection */}
+      <div>
         Section 3 of 3 <h4>Direct Debit</h4>
-      </p>
-      {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )}
+      </div>
+
+      {/* Show generic error message */}
+      {showGenericError}
+
       <h2>
         Instruction to your bank or building society to pay by Direct Debit
       </h2>
@@ -71,20 +87,23 @@ const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
         <Input
           className="wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
           name="BankAccountName"
-          label="Name on the account"
+          label={ddNameLabel}
           autocomplete="given-name"
+          fieldValidation={ddNameValidation}
         />
         <Input
           className="wmnds-col-1-2 wmnds-col-md-1-4"
           name="BankAccountSortCode"
-          label="Sort code"
+          label={`${ddSortCodeLabel}<br/>Must be 6 digits long`}
           inputmode="numeric"
+          fieldValidation={ddSortCodeValidation}
         />
         <Input
           className="wmnds-col-1-2 wmnds-col-md-1-4"
           name="BankAccountNumber"
-          label="Account number"
+          label={`${ddAccountLabel}<br/>Must be between 6 and 8 digits long`}
           inputmode="numeric"
+          fieldValidation={ddAccountValidation}
         />
         <p>
           Please pay West Midlands Combined Authority Direct Debits from the
@@ -97,10 +116,12 @@ const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
           to my bank/building society.
         </p>
       </fieldset>
+
+      {/* Continue button */}
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        onClick={handleContinue}
       >
         Continue
       </button>
@@ -109,7 +130,6 @@ const Step10DDBankDetails = ({ setCurrentStep, formRef }) => {
 };
 
 Step10DDBankDetails.propTypes = {
-  setCurrentStep: PropTypes.func.isRequired,
   formRef: PropTypes.oneOfType([
     // Either a function
     PropTypes.func,

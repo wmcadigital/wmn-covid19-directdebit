@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
-
+import { FormDataContext } from 'globalState/FormDataContext';
+// Import components
 import DateInput from './DateInput.js/DateInput';
 
 const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
-  const { errors } = useFormContext();
+  const [formDataState] = useContext(FormDataContext);
+  const { errors, triggerValidation } = useFormContext();
+
+  const [stateYear, stateMonth, stateDay] = formDataState.formData[name]
+    ? formDataState.formData[name].split('-')
+    : [null, null, null];
+
   // State used for capturing date fields onChange below (we use these to validate against below)
-  const [day, setDay] = useState();
-  const [month, setMonth] = useState();
-  const [year, setYear] = useState();
-  const [date, setDate] = useState();
+  const [day, setDay] = useState(stateDay);
+  const [month, setMonth] = useState(stateMonth);
+  const [year, setYear] = useState(stateYear);
+  const [date, setDate] = useState(formDataState.formData[name]);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -40,8 +47,15 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   };
 
   useEffect(() => {
-    if (year && month && day) setDate(`${year}-${month}-${day}`); // Set date state to current yyyy-mm-dd set by user (would do it in handleChange event but it falls out of sync)
-  }, [day, month, year]);
+    if (year && month && day) {
+      setDate(`${year}-${month}-${day}`);
+    } // Set date state to current yyyy-mm-dd set by user (would do it in handleChange event but it falls out of sync)
+  }, [day, month, year, setDate]);
+
+  // Trigger validation every time date has been updated
+  useEffect(() => {
+    if (date) triggerValidation();
+  }, [date, triggerValidation]);
 
   return (
     <>
@@ -59,6 +73,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
           <DateInput
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}day` : null}
             dateType="Day"
+            defaultValue={day}
             name={name}
             label={label}
             onChange={handleChange}
@@ -70,6 +85,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
               autoCompletPrefix ? `${autoCompletPrefix}month` : null
             }
             dateType="Month"
+            defaultValue={month}
             name={name}
             label={label}
             onChange={handleChange}
@@ -79,19 +95,18 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
           <DateInput
             autoComplete={autoCompletPrefix ? `${autoCompletPrefix}year` : null}
             dateType="Year"
+            defaultValue={year}
             name={name}
             label={label}
             onChange={handleChange}
           />
         </div>
       </div>
-      {date}
       <input
         name={name}
         type="hidden"
         ref={fieldValidation}
         value={date || ''}
-        readOnly
       />
     </>
   );
