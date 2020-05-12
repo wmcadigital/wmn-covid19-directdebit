@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
+import Button from 'components/shared/Button/Button';
 import DataRow from './DataRow/DataRow';
 
 const Step11CheckAnswers = () => {
@@ -94,6 +95,15 @@ const Step11CheckAnswers = () => {
           You also consent to West Midlands Combined Authority reinstating your
           Direct Debit instruction.
         </p>
+      </div>
+
+      <div className="wmnds-col-1">
+        <Button
+          btnClass="wmnds-btn--start"
+          iconRight="general-chevron-right"
+          type="submit"
+          text="Accept and send"
+        />
       </div>
     </>
   );

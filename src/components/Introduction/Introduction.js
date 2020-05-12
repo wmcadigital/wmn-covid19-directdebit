@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'components/shared/Icon/Icon';
+// Import components
 import Title from 'components/shared/Title/Title';
+import Button from 'components/shared/Button/Button';
 
 const Introduction = ({ setIsFormStarted }) => {
   const handleClick = () => {
@@ -61,17 +62,13 @@ const Introduction = ({ setIsFormStarted }) => {
         </ul>
         <br />
         <br />
-        <button
-          type="button"
-          className="wmnds-btn wmnds-btn--start"
+        <Button
+          btnClass="wmnds-btn--start"
+          iconRight="general-chevron-right"
           onClick={handleClick}
-        >
-          Start now
-          <Icon
-            className="wmnds-btn__icon wmnds-btn__icon--right"
-            iconName="general-chevron-right"
-          />
-        </button>
+          type="button"
+          text="Start now"
+        />
       </div>
     </>
   );
