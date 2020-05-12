@@ -5,7 +5,7 @@ import Input from 'components/shared/FormElements/Input/Input';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Step8Contact = ({formRef}) => {
+const Step8Contact = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, continueButton } = useStepLogic(formRef);
 

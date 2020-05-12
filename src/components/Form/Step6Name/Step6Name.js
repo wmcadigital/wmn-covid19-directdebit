@@ -5,16 +5,17 @@ import Input from 'components/shared/FormElements/Input/Input';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Step6Name = ({formRef}) => {
-  const {register, showGenericError, continueButton} = useStepLogic(formRef);
+const Step6Name = ({ formRef }) => {
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   // Labels used on inputs and for validation
   const fNameLabel = 'First name';
   const lNameLabel = 'Last name';
 
   // Logic used to validate fields
-  const fieldValidation =
-      (name) => { return register({required : `${name} is required`}); };
+  const fieldValidation = (name) => {
+    return register({ required: `${name} is required` });
+  };
 
   return (
     <>
@@ -31,11 +32,11 @@ const Step6Name = ({formRef}) => {
           <h2>What is your name?</h2>
         </legend>
         <Input
-  className = "wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
-  name = "Firstname"
-  label = {fNameLabel} autocomplete = "given-name"
-          fieldValidation={
-    fieldValidation(fNameLabel)}
+          className="wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
+          name="Firstname"
+          label={fNameLabel}
+          autocomplete="given-name"
+          fieldValidation={fieldValidation(fNameLabel)}
         />
         <Input
           className="wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
@@ -53,15 +54,12 @@ const Step6Name = ({formRef}) => {
 };
 
 Step6Name.propTypes = {
-  formRef :
-      PropTypes
-          .oneOfType([
-            // Either a function
-            PropTypes.func,
-            // Or the instance of a DOM native element (see the note about SSR)
-            PropTypes.shape({current : PropTypes.instanceOf(Element)}),
-          ])
-          .isRequired,
+  formRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
 };
 
 export default Step6Name;
