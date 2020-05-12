@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
+import useWho from 'customHooks/useWho';
 
 const Step2DDRef = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { person } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const ddLabel = 'Direct Debit reference'; // Label used on input and for validation
   // Logic used to validate the field
@@ -26,10 +28,10 @@ const Step2DDRef = ({ formRef }) => {
     <>
       {/* Subsection */}
       <div>
-        Section 1 of 3 <h4>About your ticket</h4>
+        Section 1 of 3 <h4>About {person} ticket</h4>
       </div>
 
-      <h2>What is your Direct Debit reference?</h2>
+      <h2>What is {person} Direct Debit reference?</h2>
 
       {/* Show generic error message */}
       {showGenericError}
@@ -38,13 +40,13 @@ const Step2DDRef = ({ formRef }) => {
         <legend className="wmnds-fe-fieldset__legend">
           <p>
             This can be found in the email we sent you asking you to reinstate
-            your Direct Debit and begins with a <strong>6</strong>.
+            {person} Direct Debit and begins with a <strong>6</strong>.
           </p>
           <p>
             This can be found in the email we sent you asking you to reinstate
-            your Direct Debit and begins with a 6 If you didn’t receive this
-            email, it is shown next to every payment to WMCA for your Direct
-            Debit on your bank statement.
+            {person} Direct Debit and begins with a 6 If you didn’t receive this
+            email, it is shown next to every payment to WMCA for {person} Direct
+            Debit on {person} bank statement.
           </p>
         </legend>
         <Input
