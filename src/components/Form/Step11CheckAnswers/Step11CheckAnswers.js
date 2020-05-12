@@ -1,16 +1,15 @@
 import Button from 'components/shared/Button/Button';
 // Import contexts
-import {FormDataContext} from 'globalState/FormDataContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import PropTypes from 'prop-types';
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 
 import DataRow from './DataRow/DataRow';
 
-const Step11CheckAnswers = ({isFetching}) => {
-  const [formDataState] =
-      useContext(FormDataContext); // Get the state/dispatch of form data from
-                                   // FormDataContext
-  const {formData} = formDataState;
+const Step11CheckAnswers = ({ isFetching }) => {
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from
+  // FormDataContext
+  const { formData } = formDataState;
 
   return (
     <>
@@ -19,27 +18,25 @@ const Step11CheckAnswers = ({isFetching}) => {
       <h3>Ticket details</h3>
       <div className="wmnds-grid">
         <DataRow
-  label = "I am the ticket holder"
-  value = {formData.TicketHolder} goToStep =
-  {
-    1
-  } />
+          label="I am the ticket holder"
+          value={formData.TicketHolder}
+          goToStep={1}
+        />
         <DataRow
           label="Swift card details"
           value={formData.SwiftCardNumber}
           goToStep={3}
-        / >
-      < DataRow
-  label = "Started travelling again"
-  value = {formData.TravelAgain} goToStep =
-  {
-    4
-  } />
+        />
+        <DataRow
+          label="Started travelling again"
+          value={formData.TravelAgain}
+          goToStep={4}
+        />
         <DataRow
           label="Resuming Travel"
           value={formData.TravelResumptionDate}
           goToStep={5}
-        / >
+        />
       </div>
 
       {/*Personal details * /}
@@ -61,39 +58,39 @@ const Step11CheckAnswers = ({isFetching}) => {
   { 8 } />
       </div >
 
-      {/* Direct Debit */}<h3>Direct Debit<
-          /h3>
+      {/* Direct Debit */}
+      <h3>Direct Debit</h3>
       <div className="wmnds-grid">
         <DataRow
           label="Direct Debit reference"
           value={formData.DirectDebitNumber}
           goToStep={2}
-        /><
-      DataRow
-  label = "Account holder"
-  value = {formData.BankAccountName} goToStep =
-  {
-    10
-  } />
+        />
+        <DataRow
+          label="Account holder"
+          value={formData.BankAccountName}
+          goToStep={10}
+        />
         <DataRow
           label="Bank or building society account number"
           value={formData.BankAccountNumber}
           goToStep={10}
-        / >
-      < DataRow
-  label = "Branch sort code"
-  value = {formData.BankAccountSortCode} goToStep =
-  { 10 } />
-      </div >
+        />
+        <DataRow
+          label="Branch sort code"
+          value={formData.BankAccountSortCode}
+          goToStep={10}
+        />
+      </div>
 
-      <h3>Now send your request<
-          /h3>
+      <h3>Now send your request</h3>
       <div className="wmnds-col-md-3-4">
         <p>
           By submitting this request you are confirming that, to the best of
           your knowledge, the details you are providing are correct.
         </p>
-      <p>You consent to West Midlands Combined Authority possibly changing your
+        <p>
+          You consent to West Midlands Combined Authority possibly changing your
           Direct Debit date if it usually would occur in the next 10 days.
         </p>
         <p>
@@ -127,7 +124,7 @@ const Step11CheckAnswers = ({isFetching}) => {
 };
 
 Step11CheckAnswers.propTypes = {
-  isFetching : PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default Step11CheckAnswers;
