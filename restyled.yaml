@@ -38,8 +38,6 @@ labels: []
 ignore_labels:
   - restyled-ignore
 
-restylers_version: '20200428'
-
 restylers:
   - enabled: false
     name: clang-format
