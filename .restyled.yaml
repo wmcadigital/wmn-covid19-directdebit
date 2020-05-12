@@ -39,7 +39,8 @@ ignore_labels:
   - restyled-ignore
 
 restylers:
-  - enabled: false
-    name: clang-format
-  - enabled: true
-    name: prettier
+  - clang-format:
+      enabled: false
+
+  - prettier:
+      enabled: true
