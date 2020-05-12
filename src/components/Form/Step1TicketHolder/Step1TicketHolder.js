@@ -7,7 +7,7 @@ import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1TicketHolder = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   return (
     <>
@@ -27,13 +27,7 @@ const Step1TicketHolder = ({ formRef }) => {
       />
 
       {/* Continue button */}
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {continueButton}
     </>
   );
 };

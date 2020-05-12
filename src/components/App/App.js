@@ -20,10 +20,7 @@ function App() {
       <FormDataProvider>
         {isFormStarted && formSubmitStatus === null && (
           <FormErrorProvider>
-            <Form
-              formSubmitStatus={formSubmitStatus}
-              setFormSubmitStatus={setFormSubmitStatus}
-            />
+            <Form setFormSubmitStatus={setFormSubmitStatus} />
           </FormErrorProvider>
         )}
 

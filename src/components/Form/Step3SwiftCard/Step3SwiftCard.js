@@ -7,7 +7,7 @@ import Input from 'components/shared/FormElements/Input/Input';
 
 const Step3SwiftCard = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   const swiftLabel = 'Swift card number'; // Label used on input and for validation
   // Logic used to validate the field
@@ -63,13 +63,7 @@ const Step3SwiftCard = ({ formRef }) => {
       </fieldset>
 
       {/* Continue button */}
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {continueButton}
     </>
   );
 };

@@ -1,4 +1,4 @@
-# See https://github.com/restyled-io/restyled.io/wiki/Configuring-Restyled
+# # See https://github.com/restyled-io/restyled.io/wiki/Configuring-Restyled
 
 enabled: true
 
@@ -41,7 +41,7 @@ ignore_labels:
 restylers_version: '20200428'
 
 restylers:
-  - clang-format:
-      enabled: false
-  - prettier:
-      enabled: true
+  - enabled: false
+    name: clang-format
+  - enabled: true
+    name: prettier

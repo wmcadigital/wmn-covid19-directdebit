@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
+import Button from 'components/shared/Button/Button';
 import DataRow from './DataRow/DataRow';
 
-const Step11CheckAnswers = () => {
+const Step11CheckAnswers = ({ isFetching }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { formData } = formDataState;
 
@@ -95,8 +97,33 @@ const Step11CheckAnswers = () => {
           Direct Debit instruction.
         </p>
       </div>
+
+      <div className="wmnds-col-1">
+        {/* If API is fetching */}
+        {isFetching && (
+          <div
+            className="wmnds-loader wmnds-loader--btn wmnds-btn__icon wmnds-btn__icon--right"
+            role="alert"
+            aria-live="assertive"
+          >
+            <p className="wmnds-loader__content">Content is loading...</p>
+          </div>
+        )}
+
+        <Button
+          disabled={isFetching}
+          iconRight="general-chevron-right"
+          isFetching={isFetching}
+          type="submit"
+          text="Accept and send"
+        />
+      </div>
     </>
   );
+};
+
+Step11CheckAnswers.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default Step11CheckAnswers;

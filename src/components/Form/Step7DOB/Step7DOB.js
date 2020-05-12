@@ -7,7 +7,7 @@ import Date from 'components/shared/FormElements/Date/Date';
 
 const Step7DOB = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   const DOBLabel = 'Date of birth'; // Label used on input and for validation
 
@@ -47,13 +47,7 @@ const Step7DOB = ({ formRef }) => {
       </fieldset>
 
       {/* Continue button */}
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {continueButton}
     </>
   );
 };

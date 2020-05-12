@@ -7,7 +7,7 @@ import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step4TravelAgain = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   return (
     <>
@@ -25,13 +25,9 @@ const Step4TravelAgain = ({ formRef }) => {
           required: 'Select have you started to travel again',
         })}
       />
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+
+      {/* Continue button */}
+      {continueButton}
     </>
   );
 };

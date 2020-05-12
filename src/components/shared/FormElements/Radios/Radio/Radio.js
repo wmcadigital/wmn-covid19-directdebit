@@ -8,12 +8,16 @@ import { FormDataContext } from 'globalState/FormDataContext';
 const { sanitize } = dompurify;
 
 const Radio = ({ name, fieldValidation, text, value }) => {
-  const [formDataState] = useContext(FormDataContext);
+  const [formDataState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
 
   return (
     <>
       <label className="wmnds-fe-radios__container">
-        <div dangerouslySetInnerHTML={{ __html: sanitize(text) }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: sanitize(text),
+          }}
+        />
         <input
           className="wmnds-fe-radios__input"
           name={name}
