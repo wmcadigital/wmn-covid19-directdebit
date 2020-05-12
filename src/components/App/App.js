@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 // Import contexts
 import { FormDataProvider } from 'globalState/FormDataContext';
-import { FormErrorProvider } from 'globalState/FormErrorContext';
 // Import components
 import Form from 'components/Form/Form';
 import Introduction from 'components/Introduction/Introduction';
@@ -19,9 +18,7 @@ function App() {
 
       <FormDataProvider>
         {isFormStarted && formSubmitStatus === null && (
-          <FormErrorProvider>
-            <Form setFormSubmitStatus={setFormSubmitStatus} />
-          </FormErrorProvider>
+          <Form setFormSubmitStatus={setFormSubmitStatus} />
         )}
 
         {formSubmitStatus && <SuccessPage />}
