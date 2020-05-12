@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { FormDataContext } from 'globalState/FormDataContext';
 
 const useSubmitForm = (setFormSubmitStatus) => {
-  const [formDataState, formDataDispatch] = useContext(FormDataContext);
+  const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const [isFetching, setIsFetching] = useState(false);
 
   // Destructure values from our formDataState (get all users values)
@@ -95,7 +95,10 @@ const useSubmitForm = (setFormSubmitStatus) => {
   };
 
   // Return handleSubmit and isFetching so it can be used by form
-  return { handleSubmit, isFetching };
+  return {
+    handleSubmit,
+    isFetching,
+  };
 };
 
 export default useSubmitForm;

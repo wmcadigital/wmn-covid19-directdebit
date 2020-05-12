@@ -20,7 +20,7 @@ import s from './Form.module.scss';
 import useSubmitForm from './useSubmitForm';
 
 const Form = ({ setFormSubmitStatus }) => {
-  const [formDataState, formDataDispatch] = useContext(FormDataContext);
+  const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   // Trigger validation onBlur events (config for react hook form lib)
   const methods = useForm({

@@ -17,7 +17,7 @@ const Input = ({
   spellcheck,
   type,
 }) => {
-  const [formDataState] = useContext(FormDataContext);
+  const [formDataState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const { errors } = useFormContext();
   // Set input to render below
   const input = (
@@ -57,7 +57,9 @@ const Input = ({
       {errors[name] && (
         <span
           className="wmnds-fe-error-message"
-          dangerouslySetInnerHTML={{ __html: sanitize(errors[name].message) }}
+          dangerouslySetInnerHTML={{
+            __html: sanitize(errors[name].message),
+          }}
         />
       )}
 
