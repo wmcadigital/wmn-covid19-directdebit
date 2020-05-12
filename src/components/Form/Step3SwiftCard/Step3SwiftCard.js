@@ -1,22 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Step3SwiftCard = ({ formRef }) => {
+const Step3SwiftCard = ({formRef}) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const {register, showGenericError, continueButton} = useStepLogic(formRef);
 
-  const swiftLabel = 'Swift card number'; // Label used on input and for validation
+  const swiftLabel =
+      'Swift card number'; // Label used on input and for validation
   // Logic used to validate the field
   const fieldValidation = register({
-    required: `${swiftLabel} is required`,
-    validate: {
-      notNX: (val) =>
-        val.substr(0, 10) !== '6335970112' ||
-        `${swiftLabel} is managed by National Express West Midlands and there is a <a
+    required : `${swiftLabel} is required`,
+    validate : {
+      notNX : (val) =>
+          val.substr(0, 10) !== '6335970112' ||
+          `${swiftLabel} is managed by National Express West Midlands and there is a <a
               href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
               title="National Express West Midlands ticket refund process"
               target="_blank"
@@ -24,13 +25,13 @@ const Step3SwiftCard = ({ formRef }) => {
             >
               separate refund process
             </a>`,
-      validSwiftNo: (val) =>
-        val.substr(0, 10) === '6335970107' ||
-        val.substr(0, 10) === '6335970319' ||
-        `Your ${swiftLabel} is the long number on the front of the card`,
-      shouldBe18Digits: (val) =>
-        val.length === 18 ||
-        `Your ${swiftLabel} is 18 digits long and begins with 633597`,
+      validSwiftNo : (val) =>
+          val.substr(0, 10) === '6335970107' ||
+          val.substr(0, 10) === '6335970319' ||
+          `Your ${swiftLabel} is the long number on the front of the card`,
+      shouldBe18Digits : (val) =>
+          val.length === 18 ||
+          `Your ${swiftLabel} is 18 digits long and begins with 633597`,
     },
   });
 
@@ -69,12 +70,15 @@ const Step3SwiftCard = ({ formRef }) => {
 };
 
 Step3SwiftCard.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  formRef :
+      PropTypes
+          .oneOfType([
+            // Either a function
+            PropTypes.func,
+            // Or the instance of a DOM native element (see the note about SSR)
+            PropTypes.shape({current : PropTypes.instanceOf(Element)}),
+          ])
+          .isRequired,
 };
 
 export default Step3SwiftCard;
