@@ -111,8 +111,9 @@ const Step11CheckAnswers = ({ isFetching }) => {
         )}
 
         <Button
-          btnClass="wmnds-btn--start"
+          disabled={isFetching}
           iconRight="general-chevron-right"
+          isFetching={isFetching}
           type="submit"
           text="Accept and send"
         />
