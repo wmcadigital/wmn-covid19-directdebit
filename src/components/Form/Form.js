@@ -1,26 +1,32 @@
-import React, { useRef, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { useForm, FormContext } from 'react-hook-form'; // https://react-hook-form.com/
-// Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
-import Step1TicketHolder from 'components/Form/Step1TicketHolder/Step1TicketHolder';
+import Step1TicketHolder from
+    'components/Form/Step1TicketHolder/Step1TicketHolder';
 import Step2DDRef from 'components/Form/Step2DDRef/Step2DDRef';
 import Step3SwiftCard from 'components/Form/Step3SwiftCard/Step3SwiftCard';
-import Step4TravelAgain from 'components/Form/Step4TravelAgain/Step4TravelAgain';
+import Step4TravelAgain from
+    'components/Form/Step4TravelAgain/Step4TravelAgain';
 import Step5TravelDate from 'components/Form/Step5TravelDate/Step5TravelDate';
 import Step6Name from 'components/Form/Step6Name/Step6Name';
+// Import contexts
+import {FormDataContext} from 'globalState/FormDataContext';
+import PropTypes from 'prop-types';
+import React, {useContext, useRef} from 'react';
+import {
+  FormContext,
+  useForm
+} from 'react-hook-form'; // https://react-hook-form.com/
+
+// Import styling
+import s from './Form.module.scss';
+import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
+import Step11CheckAnswers from './Step11CheckAnswers/Step11CheckAnswers';
 import Step7DOB from './Step7DOB/Step7DOB';
 import Step8Contact from './Step8Contact/Step8Contact';
 import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
-import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
-import Step11CheckAnswers from './Step11CheckAnswers/Step11CheckAnswers';
 // Import custom hooks
 import useSubmitForm from './useSubmitForm';
-// Import styling
-import s from './Form.module.scss';
 
-const Form = ({ setFormSubmitStatus }) => {
+const Form = ({setFormSubmitStatus}) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   // Trigger validation onBlur events (config for react hook form lib)
