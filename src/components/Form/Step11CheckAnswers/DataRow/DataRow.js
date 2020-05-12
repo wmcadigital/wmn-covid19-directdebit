@@ -1,12 +1,12 @@
 import dompurify from 'dompurify';
 // Import contexts
-import {FormDataContext} from 'globalState/FormDataContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import PropTypes from 'prop-types';
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 
-const {sanitize} = dompurify;
+const { sanitize } = dompurify;
 
-const DataRow = ({label, value, goToStep}) => {
+const DataRow = ({ label, value, goToStep }) => {
   const [, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const formatValue = value && value.includes('undefined') ? '' : value; // If undefined is passed in ,then not correct value so return '' else return the correct val
 
