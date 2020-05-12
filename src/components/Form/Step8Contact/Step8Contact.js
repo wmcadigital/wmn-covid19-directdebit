@@ -7,7 +7,7 @@ import Input from 'components/shared/FormElements/Input/Input';
 
 const Step8Contact = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   // Labels used on inputs and for validation
   const emailLabel = 'Email address';
@@ -81,13 +81,7 @@ const Step8Contact = ({ formRef }) => {
       </fieldset>
 
       {/* Continue button */}
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {continueButton}
     </>
   );
 };

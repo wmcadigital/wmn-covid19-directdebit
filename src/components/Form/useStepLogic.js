@@ -4,11 +4,13 @@ import { useFormContext } from 'react-hook-form';
 import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import GenericError from 'components/shared/Errors/GenericError';
+import Button from 'components/shared/Button/Button';
 
 const useStepLogic = (formRef) => {
   const { register, errors, triggerValidation, getValues } = useFormContext(); // Get useForm methods
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
+
   // Update the current step to the correct one depending on users selection
   const handleContinue = async () => {
     const result = await triggerValidation();
@@ -27,6 +29,16 @@ const useStepLogic = (formRef) => {
     }
   };
 
+  // Continue button
+  const continueButton = (
+    <Button
+      btnClass="wmnds-btn wmnds-col-1 wmnds-m-t-md"
+      onClick={handleContinue}
+      type="button"
+      text="Continue"
+    />
+  );
+
   // If errors object has any keys and continue button is pressed then we should show generic error component
   const showGenericError = Object.keys(errors).length > 0 &&
     isContinuePressed && <GenericError />;
@@ -34,7 +46,7 @@ const useStepLogic = (formRef) => {
   return {
     register,
     showGenericError,
-    handleContinue,
+    continueButton,
   };
 };
 

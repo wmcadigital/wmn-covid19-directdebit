@@ -6,7 +6,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step6Name = ({ formRef }) => {
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   // Labels used on inputs and for validation
   const fNameLabel = 'First name';
@@ -48,13 +48,7 @@ const Step6Name = ({ formRef }) => {
       </fieldset>
 
       {/* Continue button */}
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {continueButton}
     </>
   );
 };

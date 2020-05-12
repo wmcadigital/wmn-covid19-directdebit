@@ -12,7 +12,7 @@ const Step10DDBankDetails = ({ formRef }) => {
   const { getValues } = useFormContext(); // Get useForm methods
 
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, handleContinue } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   // Labels used on inputs and for validation
   const ddNameLabel = 'Name on the account';
@@ -136,13 +136,7 @@ const Step10DDBankDetails = ({ formRef }) => {
       </fieldset>
 
       {/* Continue button */}
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {continueButton}
     </>
   );
 };
