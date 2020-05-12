@@ -41,7 +41,7 @@ ignore_labels:
 restylers_version: '20200428'
 
 restylers:
-  prettier:
-    enabled: true
-  clang-format:
-    enabled: false
+  - clang-format:
+      enabled: false
+  - prettier:
+      enabled: true
