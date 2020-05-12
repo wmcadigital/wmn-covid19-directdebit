@@ -15,9 +15,10 @@ import Step8Contact from './Step8Contact/Step8Contact';
 import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
 import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
 import Step11CheckAnswers from './Step11CheckAnswers/Step11CheckAnswers';
+// Import custom hooks
+import useSubmitForm from './useSubmitForm';
 // Import styling
 import s from './Form.module.scss';
-import useSubmitForm from './useSubmitForm';
 
 const Form = ({ setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext

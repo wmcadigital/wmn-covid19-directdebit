@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { format } from 'fecha';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
 import Button from 'components/shared/Button/Button';
@@ -32,7 +33,7 @@ const Step11CheckAnswers = ({ isFetching }) => {
         />
         <DataRow
           label="Resuming Travel"
-          value={formData.TravelResumptionDate}
+          value={format(new Date(formData.TravelResumptionDate), 'D MMMM YYYY')}
           goToStep={5}
         />
       </div>
@@ -47,7 +48,7 @@ const Step11CheckAnswers = ({ isFetching }) => {
         />
         <DataRow
           label="Date of birth"
-          value={formData.DateOfBirth}
+          value={format(new Date(formData.DateOfBirth), 'D MMMM YYYY')}
           goToStep={7}
         />
         <DataRow

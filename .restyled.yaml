@@ -38,10 +38,9 @@ labels: []
 ignore_labels:
   - restyled-ignore
 
-restylers_version: '20200428'
-
 restylers:
-  - enabled: false
-    name: clang-format
-  - enabled: true
-    name: prettier
+  - clang-format:
+      enabled: false
+
+  - prettier:
+      enabled: true
