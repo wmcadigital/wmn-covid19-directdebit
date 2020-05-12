@@ -5,10 +5,10 @@ import Input from 'components/shared/FormElements/Input/Input';
 import PropTypes from 'prop-types';
 import React from 'react';
 // Import context
-import {useFormContext} from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import UkModulusChecking from 'uk-modulus-checking';
 
-const Step10DDBankDetails = ({formRef}) => {
+const Step10DDBankDetails = ({ formRef }) => {
   const { getValues } = useFormContext(); // Get useForm methods
 
   // Custom hook for handling continue button (validation, errors etc)
