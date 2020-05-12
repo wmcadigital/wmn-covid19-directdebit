@@ -15,22 +15,22 @@ import Step8Contact from './Step8Contact/Step8Contact';
 import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
 import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
 import Step11CheckAnswers from './Step11CheckAnswers/Step11CheckAnswers';
-
 // Import styling
 import s from './Form.module.scss';
 import useSubmitForm from './useSubmitForm';
 
 const Form = ({ setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext);
+  const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
+  // Trigger validation onBlur events (config for react hook form lib)
   const methods = useForm({
     mode: 'onBlur',
   });
-
-  const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
-  const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-
+  // Get handleSubmit fn and isFetching from custom hook which handles submitting data to API
   const { handleSubmit, isFetching } = useSubmitForm(setFormSubmitStatus);
+
+  // Show debug options for below (this should be deleted on release)
+  const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   return (
     <>
