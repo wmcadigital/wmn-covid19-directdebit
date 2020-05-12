@@ -1,47 +1,55 @@
-# See https://github.com/restyled-io/restyled.io/wiki/Configuring-Restyled
+# # See https://github.com/restyled-io/restyled.io/wiki/Configuring-Restyled
+image: restyled/restyler-prettier:v2.0.2-1
+command:
+  - prettier
+  - '--write'
+arguments: []
+include:
+  - '**/*.js'
+  - '**/*.jsx'
+interpreters: []
+# enabled: true
 
-enabled: true
+# exclude:
+#   - '**/node_modules/**/*'
+#   - '**/vendor/**/*'
+#   - '.github/workflows/**/*' # https://github.com/restyled-io/restyler/issues/73
+#   - '*.key'
+#   - '*.enc'
+#   - '*.min.css'
+#   - '*.css.map'
+#   - '*.min.js'
+#   - '*.js.map'
+#   - '*.mk'
+#   - 'package-lock.json'
+#   - 'yarn.lock'
+#   - 'Gemfile.lock'
+#   - '.typo-ci.yml'
 
-exclude:
-  - '**/node_modules/**/*'
-  - '**/vendor/**/*'
-  - '.github/workflows/**/*' # https://github.com/restyled-io/restyler/issues/73
-  - '*.key'
-  - '*.enc'
-  - '*.min.css'
-  - '*.css.map'
-  - '*.min.js'
-  - '*.js.map'
-  - '*.mk'
-  - 'package-lock.json'
-  - 'yarn.lock'
-  - 'Gemfile.lock'
-  - '.typo-ci.yml'
+# remote_files: []
 
-remote_files: []
+# auto: false
 
-auto: false
+# pull_requests: true
 
-pull_requests: true
+# comments: false
 
-comments: false
+# statuses:
+#   differences: true
+#   no_differences: true
+#   error: true
 
-statuses:
-  differences: true
-  no_differences: true
-  error: true
+# request_review: none
 
-request_review: none
+# labels: []
 
-labels: []
+# ignore_labels:
+#   - restyled-ignore
 
-ignore_labels:
-  - restyled-ignore
+# restylers_version: '20200428'
 
-restylers_version: '20200428'
-
-restylers:
-  - clang-format:
-      enabled: false
-  - prettier:
-      enabled: true
+# restylers:
+#   - clang-format:
+#       enabled: false
+#   - prettier:
+#       enabled: true
