@@ -1,7 +1,7 @@
 // Import packages
-import React from 'react';
-import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const Button = ({
   btnClass,

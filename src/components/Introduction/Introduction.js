@@ -1,13 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import Button from 'components/shared/Button/Button';
 // Import components
 import Title from 'components/shared/Title/Title';
-import Button from 'components/shared/Button/Button';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Introduction = ({ setIsFormStarted }) => {
-  const handleClick = () => {
-    setIsFormStarted(true);
-  };
+const Introduction = ({setIsFormStarted}) => {
+  const handleClick = () => { setIsFormStarted(true); };
 
   return (
     <>
@@ -21,38 +19,37 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
           <li>
             Reinstate your Direct Debit for your Swift card This process takes
-            around 5 to 10 minutes.
-          </li>
-        </ul>
-        <p>This process takes around 5 to 10 minutes.</p>
+  around 5 to 10 minutes
+          .</li>
+        </ul><p>This process takes
+              around 5 to 10 minutes.</p>
 
-        <h2>Before you start</h2>
-        <ul>
-          <li>
-            You may have received your Direct Debit reference number in an email
-            telling you about this process
-          </li>
+        <h2>Before you start</h2><ul>
+      <li>You may have received your Direct Debit reference number in an email
+  telling you about this process<
+      /li>
           <li>
             If you did not receive this email, you can find this reference on
             your bank statement shown next to payments made to WMCA
           </li>
-          <li>
-            You will need your Swift card number which begins with
-            <strong>633597</strong>
-          </li>
-          <li>
-            If your Swift card number begins with <strong>633597 0112</strong>,
+      <li>You will need your Swift card number which begins with<strong>633597 <
+      /strong>
+          </li >
+      <li>If your Swift card number begins with<strong>633597 0112 <
+      /strong>,
             it is managed by National Express West Midlands and there is a
             separate process
-          </li>
-          <li>You will need the bank details to set up a new Direct Debit</li>
+          </li >
+      <li>You will need the bank details to set up a new Direct Debit <
+      /li>
           <li>
             You must have been a customer before lockdown measures began,
             otherwise you will need to{' '}
             <a
-              href="//www.wmnetwork.co.uk/tickets/#/"
-              title="link title"
-              target="_self"
+              href="/ /
+          www.wmnetwork.co.uk / tickets / # / "
+  title = "link title"
+  target = "_self"
               className="wmnds-link"
             >
               apply for a new ticket
@@ -63,10 +60,9 @@ const Introduction = ({ setIsFormStarted }) => {
         <br />
         <br />
         <Button
-          btnClass="wmnds-btn--start"
-          iconRight="general-chevron-right"
-          onClick={handleClick}
-          type="button"
+              btnClass = "wmnds-btn--start"
+              iconRight = "general-chevron-right"
+              onClick = {handleClick} type = "button"
           text="Start now"
         />
       </div>
@@ -75,7 +71,7 @@ const Introduction = ({ setIsFormStarted }) => {
 };
 
 Introduction.propTypes = {
-  setIsFormStarted: PropTypes.func.isRequired,
+  setIsFormStarted : PropTypes.func.isRequired,
 };
 
 export default Introduction;
