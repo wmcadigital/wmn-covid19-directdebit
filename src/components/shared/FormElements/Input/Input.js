@@ -1,11 +1,11 @@
 import dompurify from 'dompurify';
-import {FormDataContext} from 'globalState/FormDataContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import PropTypes from 'prop-types';
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 // Import contexts
-import {useFormContext} from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
-const {sanitize} = dompurify;
+const { sanitize } = dompurify;
 
 const Input = ({
   autocomplete,

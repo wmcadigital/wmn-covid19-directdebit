@@ -5,7 +5,7 @@ import Date from 'components/shared/FormElements/Date/Date';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Step7DOB = ({formRef}) => {
+const Step7DOB = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
