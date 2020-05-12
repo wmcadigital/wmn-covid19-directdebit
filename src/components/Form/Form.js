@@ -18,8 +18,9 @@ import Step11CheckAnswers from './Step11CheckAnswers/Step11CheckAnswers';
 
 // Import styling
 import s from './Form.module.scss';
+import useSubmitForm from './useSubmitForm';
 
-const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
+const Form = ({ setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext);
   const methods = useForm({
     mode: 'onBlur',
@@ -27,9 +28,9 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
   const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-  const onSubmit = (data) => console.log(data);
-
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
+
+  const { handleSubmit, isFetching } = useSubmitForm(setFormSubmitStatus);
 
   return (
     <>
@@ -39,11 +40,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
         <div className="wmnds-col-1 wmnds-col-md-3-4 ">
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
-            <form
-              onSubmit={methods.handleSubmit(onSubmit)}
-              autoComplete="on"
-              ref={formRef}
-            >
+            <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
               {formDataState.currentStep === 1 && (
                 <Step1TicketHolder formRef={formRef} />
               )}
@@ -83,7 +80,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
               {/* Check answers */}
               {formDataState.currentStep === 11 && (
-                <Step11CheckAnswers formRef={formRef} />
+                <Step11CheckAnswers formRef={formRef} isFetching={isFetching} />
               )}
             </form>
           </div>
@@ -132,12 +129,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 };
 
 Form.propTypes = {
-  formSubmitStatus: PropTypes.bool,
   setFormSubmitStatus: PropTypes.func.isRequired,
-};
-
-Form.defaultProps = {
-  formSubmitStatus: null,
 };
 
 export default Form;
