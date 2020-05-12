@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
+// Import styling
+import s from './DataRow.module.scss';
 
 const { sanitize } = dompurify;
 
@@ -19,7 +21,7 @@ const DataRow = ({ label, value, goToStep }) => {
       />
       <button
         type="button"
-        className="wmnds-link wmnds-float-right"
+        className={`wmnds-link wmnds-float-right ${s.changeBtn}`}
         onClick={() =>
           formDataDispatch({
             type: 'UPDATE_STEP',
