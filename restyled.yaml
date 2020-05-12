@@ -42,5 +42,5 @@ restylers_version: '20200428'
 
 restylers:
   - prettier
-  clang-format:
-    enabled: false
+    clang-format:
+      enabled: false
