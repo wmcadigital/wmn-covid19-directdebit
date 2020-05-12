@@ -14,6 +14,7 @@ import Step7DOB from './Step7DOB/Step7DOB';
 import Step8Contact from './Step8Contact/Step8Contact';
 import Step9DDPayMessage from './Step9DDPayMessage/Step9DDPayMessage';
 import Step10DDBankDetails from './Step10DDBankDetails/Step10DDBankDetails';
+import Step11CheckAnswers from './Step11CheckAnswers/Step11CheckAnswers';
 
 // Import styling
 import s from './Form.module.scss';
@@ -24,7 +25,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
     mode: 'onBlur',
   });
 
-  const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const onSubmit = (data) => console.log(data);
 
@@ -78,6 +79,11 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               )}
               {formDataState.currentStep === 10 && (
                 <Step10DDBankDetails formRef={formRef} />
+              )}
+
+              {/* Check answers */}
+              {formDataState.currentStep === 11 && (
+                <Step11CheckAnswers formRef={formRef} />
               )}
             </form>
           </div>

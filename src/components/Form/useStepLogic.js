@@ -7,7 +7,7 @@ import GenericError from 'components/shared/Errors/GenericError';
 
 const useStepLogic = (formRef) => {
   const { register, errors, triggerValidation, getValues } = useFormContext(); // Get useForm methods
-  const [formState, formDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
   // Update the current step to the correct one depending on users selection
   const handleContinue = async () => {
@@ -15,8 +15,11 @@ const useStepLogic = (formRef) => {
     setIsContinuePressed(true);
     // if no errors
     if (result) {
-      formDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
-      formDispatch({ type: 'UPDATE_STEP', payload: formState.currentStep + 1 });
+      formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
+      formDataDispatch({
+        type: 'UPDATE_STEP',
+        payload: formDataState.currentStep + 1,
+      });
     }
     // else, errors are true...
     else {
