@@ -39,8 +39,8 @@ const Step5TravelDate = ({ formRef }) => {
           <h2>
             When will {youThey} start to use {yourTheir} ticket to travel again?
           </h2>
-          <p>For example, 2 5 2020</p>
         </legend>
+        <p>For example, 2 5 2020</p>
         <Date
           name="TravelResumptionDate"
           label={travelLabel}

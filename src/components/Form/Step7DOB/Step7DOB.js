@@ -36,9 +36,9 @@ const Step7DOB = ({ formRef }) => {
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2>What is {yourTheir} date of birth?</h2>
-          <p>We&apos;ll use this information to confirm {yourTheir} identity</p>
-          <p>For example, 31 03 1980</p>
         </legend>
+        <p>We&apos;ll use this information to confirm {yourTheir} identity</p>
+        <p>For example, 31 03 1980</p>
         <Date
           name="DateOfBirth"
           label={DOBLabel}
