@@ -138,6 +138,15 @@ const Step10DDBankDetails = ({ formRef }) => {
           remain with West Midlands Combined Authority and, if so, details will
           be passed electronically to {myTheir} bank/building society.
         </p>
+
+        {/* Hidden consent field (true when continue pressed) */}
+        <input
+          type="hidden"
+          value
+          name="DDReinsatementConsent"
+          ref={register}
+          readOnly
+        />
       </fieldset>
 
       {/* Continue button */}

@@ -5,14 +5,16 @@ import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 
 const Step9DDPayMessage = ({ formRef }) => {
-  const { handleContinue } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { register, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   return (
     <>
+      {/* Subsection */}
       <div>
         Section 3 of 3 <h4>Direct Debit</h4>
       </div>
+
       <div className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-lg-2-3">
         <h2>
           Paying for travel until {yourTheir} next usual Direct Debit payment
@@ -30,15 +32,19 @@ const Step9DDPayMessage = ({ formRef }) => {
           If {yourTheir} next payment date is before 14 May, {yourTheir} one-off
           payment will be taken less than 10 days after {yourTheir} usual date.
         </p>
+
+        {/* Hidden consent field (true when continue pressed) */}
+        <input
+          type="hidden"
+          value
+          name="OneOffPaymentConsent"
+          ref={register}
+          readOnly
+        />
       </div>
 
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={handleContinue}
-      >
-        Continue
-      </button>
+      {/* Continue button */}
+      {continueButton}
     </>
   );
 };
