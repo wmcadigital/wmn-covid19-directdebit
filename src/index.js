@@ -14,7 +14,7 @@ import * as serviceWorker from './serviceWorker';
 if (process.env.NODE_ENV === 'production') {
   // LOG ROCKET
   // Used to log/track console errors with LogRocket
-  LogRocket.init('brya8q/wmn-refunds', {
+  LogRocket.init('brya8q/wmn-covid19-directdebbit', {
     // Sanitizer to stop the tracking of user input/text fields
     dom: {
       inputSanitizer: true,
@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
   // Used to log/track console errors
   Sentry.init({
     dsn:
-      'https://50233258c9794d6bbe3b694d19405e29@o378798.ingest.sentry.io/5202758',
+      'https://db6b95e2f02e4d948fd49fd200bac01d@o378798.ingest.sentry.io/5237839',
   });
 
   // Link Log Rocket and Sentry together

@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step3SwiftCard = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const swiftLabel = 'Swift card number'; // Label used on input and for validation
   // Logic used to validate the field
@@ -38,7 +40,7 @@ const Step3SwiftCard = ({ formRef }) => {
     <>
       {/* Subsection */}
       <div>
-        Section 1 of 3 <h4>About your ticket</h4>
+        Section 1 of 3 <h4>About {yourTheir} ticket</h4>
       </div>
 
       {/* Show generic error message */}
@@ -46,7 +48,7 @@ const Step3SwiftCard = ({ formRef }) => {
 
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h2>What is your Swift card number?</h2>
+          <h2>What is {yourTheir} Swift card number?</h2>
           <p>
             This is the long number on the front of the card and begins with{' '}
             <strong>633597</strong>

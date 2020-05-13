@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 import { format } from 'fecha';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
+// Import custom hooks
+import useWho from 'customHooks/useWho';
+// Import components
 import Button from 'components/shared/Button/Button';
 import DataRow from './DataRow/DataRow';
 
 const Step11CheckAnswers = ({ isFetching }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { formData } = formDataState;
+  const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   return (
     <>
-      <h2>Check your answers before reinstating their Direct Debit</h2>
+      <h2>Check your answers before reinstating {yourTheir} Direct Debit</h2>
       {/* Ticket details */}
       <h3>Ticket details</h3>
       <div className="wmnds-grid">
@@ -83,18 +87,20 @@ const Step11CheckAnswers = ({ isFetching }) => {
         />
       </div>
 
-      <h3>Now send your request</h3>
+      <h3>Now send {yourTheir} request</h3>
       <div className="wmnds-col-md-3-4">
         <p>
           By submitting this request you are confirming that, to the best of
           your knowledge, the details you are providing are correct.
         </p>
         <p>
-          You consent to West Midlands Combined Authority possibly changing your
+          You consent to West Midlands Combined Authority possibly changing{' '}
+          {yourTheir}
           Direct Debit date if it usually would occur in the next 10 days.
         </p>
         <p>
-          You also consent to West Midlands Combined Authority reinstating your
+          You also consent to West Midlands Combined Authority reinstating{' '}
+          {yourTheir}
           Direct Debit instruction.
         </p>
       </div>
