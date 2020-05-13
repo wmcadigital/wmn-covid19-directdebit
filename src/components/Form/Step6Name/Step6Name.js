@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step6Name = ({ formRef }) => {
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { yourTheir, youThem } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   // Labels used on inputs and for validation
   const fNameLabel = 'First name';
@@ -21,7 +23,7 @@ const Step6Name = ({ formRef }) => {
     <>
       {/* Subsection */}
       <div>
-        Section 2 of 3 <h4>About you</h4>
+        Section 2 of 3 <h4>About {youThem}</h4>
       </div>
 
       {/* Show generic error message */}
@@ -29,8 +31,12 @@ const Step6Name = ({ formRef }) => {
 
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h2>What is your name?</h2>
+          <h2>What is {yourTheir} name?</h2>
         </legend>
+
+        <p>We’ll use this information to confirm {yourTheir} identity.</p>
+        <p>If you are completing this for somebody else, enter their name</p>
+
         <Input
           className="wmnds-col-1 wmnds-col-sm-2-3 wmnds-col-lg-1-2"
           name="Firstname"

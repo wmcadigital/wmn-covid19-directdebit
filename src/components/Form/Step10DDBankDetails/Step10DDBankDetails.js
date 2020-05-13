@@ -5,14 +5,14 @@ import UkModulusChecking from 'uk-modulus-checking';
 import { useFormContext } from 'react-hook-form';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step10DDBankDetails = ({ formRef }) => {
   const { getValues } = useFormContext(); // Get useForm methods
-
-  // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { yourTheir, youThem, youThey, iThey, myTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   // Labels used on inputs and for validation
   const ddNameLabel = 'Name on the account';
@@ -63,7 +63,8 @@ const Step10DDBankDetails = ({ formRef }) => {
       {showGenericError}
 
       <h2>
-        Instruction to your bank or building society to pay by Direct Debit
+        Instruction to {yourTheir} bank or building society to pay by Direct
+        Debit
       </h2>
       <h3>The Direct Debit Guarantee</h3>
       <ul>
@@ -72,25 +73,29 @@ const Step10DDBankDetails = ({ formRef }) => {
           accept instructions to pay Direct Debits.
         </li>
         <li>
-          If there are any changes to the amount, date or interval of your
-          Direct Debit West Midlands Combined Authority will notify you 20
-          working days in advance of your account being debited or as otherwise
-          agreed. If you request West Midlands Combined Authority to collect a
-          payment, confirmation of amount and date will be given to you at the
-          time of the request.
+          If there are any changes to the amount, date or interval of{' '}
+          {yourTheir}
+          Direct Debit West Midlands Combined Authority will notify {youThem} 20
+          working days in advance of {yourTheir} account being debited or as
+          otherwise agreed. If {youThem} request West Midlands Combined
+          Authority to collect a payment, confirmation of amount and date will
+          be given to
+          {youThem} at the time of the request.
         </li>
         <li>
-          If an error is made in the payment of your Direct Debit, by West
-          Midlands Combined Authority or your bank or building society, you are
-          entitled to a full and immediate refund of the amount paid from you
-          bank or building society
+          If an error is made in the payment of {yourTheir} Direct Debit, by
+          West Midlands Combined Authority or {yourTheir} bank or building
+          society, you are entitled to a full and immediate refund of the amount
+          paid from you bank or building society
         </li>
         <li>
-          If you receive a refund you are not entitled to, you must pay it back
-          when West Midlands Combined Authority asks you to.
+          If {youThey} receive a refund {youThey} are not entitled to, {youThey}{' '}
+          must pay it back when West Midlands Combined Authority asks {youThem}{' '}
+          to.
         </li>
         <li>
-          You can cancel a Direct Debit at any time by simply contacting your
+          {youThey.charAt(0).toUpperCase()} can cancel a Direct Debit at any
+          time by simply contacting {yourTheir}
           bank or building society. Written confirmation may be required. Please
           also notify us.
         </li>
@@ -129,9 +134,9 @@ const Step10DDBankDetails = ({ formRef }) => {
           assured by the Direct Debit Guarantee.
         </p>
         <p>
-          I understand that this Instruction may remain with West Midlands
-          Combined Authority and, if so, details will be passed electronically
-          to my bank/building society.
+          {iThey.charAt(0).toUpperCase()} understand that this Instruction may
+          remain with West Midlands Combined Authority and, if so, details will
+          be passed electronically to {myTheir} bank/building society.
         </p>
       </fieldset>
 

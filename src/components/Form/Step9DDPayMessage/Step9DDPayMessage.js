@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 
 const Step9DDPayMessage = ({ formRef }) => {
-  const { handleContinue } = useStepLogic(formRef);
+  const { handleContinue } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   return (
     <>
@@ -13,19 +15,20 @@ const Step9DDPayMessage = ({ formRef }) => {
       </div>
       <div className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-lg-2-3">
         <h2>
-          Paying for travel until your next usual Direct Debit payment date
+          Paying for travel until {yourTheir} next usual Direct Debit payment
+          date
         </h2>
         <p>
-          We will work out how much you owe from 11 May 2020 until your next
-          Direct Debit date.
+          We will work out how much {youThey} owe from 11 May 2020 until{' '}
+          {yourTheir} next Direct Debit date.
         </p>
         <p>
-          This will be taken from your account at the same time as your next
-          Direct Debit payment.
+          This will be taken from {yourTheir} account at the same time as{' '}
+          {yourTheir} next Direct Debit payment.
         </p>
         <p>
-          If your next payment date is before 14 May, your one-off payment will
-          be taken less than 10 days after your usual date.
+          If {yourTheir} next payment date is before 14 May, {yourTheir} one-off
+          payment will be taken less than 10 days after {yourTheir} usual date.
         </p>
       </div>
 
