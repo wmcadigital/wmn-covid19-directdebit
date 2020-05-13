@@ -48,14 +48,15 @@ const useSubmitForm = (setFormSubmitStatus) => {
   //   BankAccountSortCode: '10-00-00',
   //   DirectDebitNumber: '60000001',
   //   SwiftCardNumber: '633597010700000000',
-  //   TravelResumptionDate: '2020-05-10',
+  //   TravelResumptionDate: '2020-05-16',
   //   Firstname: 'Dayle',
   //   Lastname: 'Salmon',
   //   DateOfBirth: '2000-01-01',
-  //   Email: 'test@test.com',
+  //   Email: 'abcde@123.com',
   //   PhoneNumber: '01213334444',
   //   OneOffPaymentConsent: 'true',
   //   DDReinsatementConsent: 'true',
+  //   Postcode: '',
   // };
 
   const handleSubmit = (event) => {
@@ -78,8 +79,7 @@ const useSubmitForm = (setFormSubmitStatus) => {
       })
       // If formsubmission is successful
       .then((payload) => {
-        console.log({ payload });
-        // formDataDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
+        formDataDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
         // Log event to analytics/tag manager
         window.dataLayer.push({
           event: 'formAbandonment',

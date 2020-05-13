@@ -1,13 +1,23 @@
 import React, { useContext } from 'react';
+import { format } from 'fecha';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
 
 // Import components
-import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
 
 const SuccessPage = () => {
-  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const d = new Date().toISOString().slice(0, 10); // Set todays date as yyyy-mm-dd
+
+  // If date is in future, show message that says you can start using from x date
+  const useFromMessage =
+    formDataState.formData.TravelResumptionDate > d
+      ? `You can start using your Swift card from ${format(
+          new Date(formDataState.formData.TravelResumptionDate),
+          'D MMMM YYYY'
+        )}`
+      : 'You can now start using your Swift card';
 
   return (
     <>
@@ -16,73 +26,24 @@ const SuccessPage = () => {
         {/* Success message */}
         <div className="wmnds-msg-summary wmnds-msg-summary--success-fill wmnds-m-b-xl">
           <div className="wmnds-msg-summary__header">
-            <Icon
-              iconName="general-success"
-              className="wmnds-msg-summary__icon"
-            />
-            <h3 className="wmnds-msg-summary__title">Application complete</h3>
+            <h3 className="wmnds-msg-summary__title">Request complete</h3>
+            <h3>{useFromMessage}</h3>
           </div>
 
-          <div className="wmnds-msg-summary__info">
-            Your reference number is <strong>{formState.FormRef}</strong>
-          </div>
+          <p>
+            Your reference number is <strong>{formDataState.formRef}</strong>
+          </p>
         </div>
 
         {/* Success copy */}
         <h3>What happens next</h3>
 
-        {/* If user is scratchcard or classpass show info */}
-        {formState.CustomerType === 'Scratchcard' ||
-        formState.CustomerType === 'ClassPass' ? (
-          <>
-            {/*  <p>We have sent you an email to acknowledge your application.</p>  */}
-            <p>
-              We will send you an email within the next 24 hours to acknowledge
-              your application.
-            </p>
-            <p>
-              Unfortunately, due to logistics, we are unable to process
-              applications for scratchcards and class passes remotely.
-            </p>
-            <p>
-              As soon as the Government advises it is okay to return to the
-              office, we will process your application as a priority.
-            </p>
-          </>
-        ) : (
-          <>
-            {/*  If user is not scratchcard or classpass show info */}
-            {/* <p>
-              We have sent you an email to acknowledge your application. The
-              email also contains more details about how we will process your
-              refund.
-            </p> */}
-
-            <p>
-              We will send you an email within the next 24 hours to acknowledge
-              your application. The email also contains more details about how
-              we will process your refund.
-            </p>
-            <p>
-              If we need any more information to process your refund, we will be
-              in touch.
-            </p>
-            <p>
-              If you have any questions regarding your refund, or you would like
-              to know how we will calculate your refund, there is{' '}
-              <a
-                href="https://wmnetwork.co.uk/coronavirus"
-                title="Guidance about how we will calculate your refund"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="wmnds-link"
-              >
-                guidance
-              </a>{' '}
-              available on our website.
-            </p>
-          </>
-        )}
+        <p>We’ve sent your request to our Ticketing Services team.</p>
+        <p>
+          They will contact you to confirm how much money will be taken on your
+          next Direct Debit payment date, or to ask for more information. What
+          did you think of this service? (takes 30 seconds)
+        </p>
 
         <br />
         <p>
