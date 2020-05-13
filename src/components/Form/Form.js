@@ -29,7 +29,9 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
     mode: 'onBlur',
   });
   // Get handleSubmit fn and isFetching from custom hook which handles submitting data to API
-  const { handleSubmit, isFetching } = useSubmitForm(setFormSubmitStatus);
+  const { handleSubmit, isFetching, errorMessage } = useSubmitForm(
+    setFormSubmitStatus
+  );
 
   useTrackFormAbandonment(formRef, formDataState.currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
@@ -84,7 +86,11 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
               {/* Check answers */}
               {formDataState.currentStep === 11 && (
-                <Step11CheckAnswers formRef={formRef} isFetching={isFetching} />
+                <Step11CheckAnswers
+                  formRef={formRef}
+                  isFetching={isFetching}
+                  errorMessage={errorMessage}
+                />
               )}
             </form>
           </div>

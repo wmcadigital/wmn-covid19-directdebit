@@ -5,6 +5,7 @@ import { FormDataContext } from 'globalState/FormDataContext';
 const useSubmitForm = (setFormSubmitStatus) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const [isFetching, setIsFetching] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   // Destructure values from our formDataState (get all users values)
   const {
@@ -19,21 +20,41 @@ const useSubmitForm = (setFormSubmitStatus) => {
     DateOfBirth,
     Email,
     PhoneNumber,
+    OneOffPaymentConsent,
+    DDReinsatementConsent,
   } = formDataState.formData;
 
   // Map all destructured vals above to an object we will send to API
+  // const dataToSend = {
+  //   BankAccountName,
+  //   BankAccountNumber,
+  //   BankAccountSortCode,
+  //   DirectDebitNumber,
+  //   SwiftCardNumber,
+  //   TravelResumptionDate,
+  //   Firstname,
+  //   Lastname,
+  //   DateOfBirth,
+  //   Email,
+  //   PhoneNumber,
+  //   OneOffPaymentConsent,
+  //   DDReinsatementConsent,
+  // };
+
   const dataToSend = {
-    BankAccountName,
-    BankAccountNumber,
-    BankAccountSortCode,
-    DirectDebitNumber,
-    SwiftCardNumber,
-    TravelResumptionDate,
-    Firstname,
-    Lastname,
-    DateOfBirth,
-    Email,
-    PhoneNumber,
+    BankAccountName: 'Dayle',
+    BankAccountNumber: '00000001',
+    BankAccountSortCode: '00-00-01',
+    DirectDebitNumber: '60000001',
+    SwiftCardNumber: '633597010700000000',
+    TravelResumptionDate: '2020-05-10',
+    Firstname: 'Dayle',
+    Lastname: 'Salmon',
+    DateOfBirth: '2000-01-01',
+    Email: 'test@test.com',
+    PhoneNumber: '01213334444',
+    OneOffPaymentConsent: 'true',
+    DDReinsatementConsent: 'true',
   };
 
   const handleSubmit = (event) => {
@@ -48,9 +69,9 @@ const useSubmitForm = (setFormSubmitStatus) => {
       },
     })
       .then((response) => {
-        // If the response is successful(200: OK)
-        if (response.status === 200) {
-          return response.text(); // Return response (reference number)
+        // If the response is successful(200: OK) or error with validation message(400)
+        if (response.status === 200 || response.status === 400) {
+          return response.json(); // Return response as json
         }
         throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
       })
@@ -65,8 +86,12 @@ const useSubmitForm = (setFormSubmitStatus) => {
         //   eventAction: `CustomerType:${formState.CustomerType}`,
         // });
         setIsFetching(false); // set to false as we are done fetching now
-        setFormSubmitStatus(true); // Set form status to success
-        window.scrollTo(0, 0); // Scroll to top of page
+        if (payload.Message) {
+          setErrorMessage(payload.Message);
+        } else {
+          setFormSubmitStatus(true); // Set form status to success
+          window.scrollTo(0, 0); // Scroll to top of page
+        }
       })
       // If formsubmission errors
       .catch((error) => {
@@ -98,6 +123,7 @@ const useSubmitForm = (setFormSubmitStatus) => {
   return {
     handleSubmit,
     isFetching,
+    errorMessage,
   };
 };
 
