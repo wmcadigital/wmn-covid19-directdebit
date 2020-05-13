@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step8Contact = ({ formRef }) => {
-  // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { yourTheir, youThem } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   // Labels used on inputs and for validation
   const emailLabel = 'Email address';
@@ -37,7 +38,7 @@ const Step8Contact = ({ formRef }) => {
     <>
       {/* Subsection */}
       <div>
-        Section 2 of 3 <h4>About you</h4>
+        Section 2 of 3 <h4>About {youThem}</h4>
       </div>
 
       {/* Show generic error message */}
@@ -45,14 +46,16 @@ const Step8Contact = ({ formRef }) => {
 
       <h2>Contact details</h2>
       <p>
-        We’ll use this information to contact you if we have any questions and
-        send updates about your application
+        We’ll use this information to contact {youThem} if we have any questions
+        and send updates about {yourTheir} application
       </p>
 
       {/* Email */}
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h3 className="wmnds-fe-question">What is your email address?</h3>
+          <h3 className="wmnds-fe-question">
+            What is {yourTheir} email address?
+          </h3>
         </legend>
 
         <Input
@@ -68,7 +71,9 @@ const Step8Contact = ({ formRef }) => {
       {/* Telephone */}
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h3 className="wmnds-fe-question">What is your telephone number?</h3>
+          <h3 className="wmnds-fe-question">
+            What is {yourTheir} telephone number?
+          </h3>
         </legend>
         <Input
           className="wmnds-col-sm-1-2"

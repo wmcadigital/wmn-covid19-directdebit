@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 // Import components
 import Date from 'components/shared/FormElements/Date/Date';
 
 const Step7DOB = ({ formRef }) => {
-  // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { yourTheir, youThem } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const DOBLabel = 'Date of birth'; // Label used on input and for validation
 
@@ -26,7 +27,7 @@ const Step7DOB = ({ formRef }) => {
     <>
       {/* Subsection */}
       <div>
-        Section 2 of 3 <h4>About you</h4>
+        Section 2 of 3 <h4>About {youThem}</h4>
       </div>
 
       {/* Show generic error message */}
@@ -34,8 +35,8 @@ const Step7DOB = ({ formRef }) => {
 
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h2>What is your date of birth?</h2>
-          <p>We&apos;ll use this information to confirm your identity</p>
+          <h2>What is {yourTheir} date of birth?</h2>
+          <p>We&apos;ll use this information to confirm {yourTheir} identity</p>
           <p>For example, 31 03 1980</p>
         </legend>
         <Date

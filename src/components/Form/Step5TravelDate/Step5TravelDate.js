@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useWho from 'customHooks/useWho';
 // Import components
 import Date from 'components/shared/FormElements/Date/Date';
 
 const Step5TravelDate = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
   const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const travelLabel = 'Travel date'; // Label used on input and for validation
 
@@ -26,7 +28,7 @@ const Step5TravelDate = ({ formRef }) => {
     <>
       {/* Subsection */}
       <div>
-        Section 1 of 3 <h4>About your ticket</h4>
+        Section 1 of 3 <h4>About {yourTheir} ticket</h4>
       </div>
 
       {/* Show generic error message */}
@@ -34,7 +36,9 @@ const Step5TravelDate = ({ formRef }) => {
 
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h2>When will you start to use your ticket to travel again?</h2>
+          <h2>
+            When will {youThey} start to use {yourTheir} ticket to travel again?
+          </h2>
           <p>For example, 2 5 2020</p>
         </legend>
         <Date
