@@ -96,6 +96,7 @@ const useSubmitForm = (setFormSubmitStatus) => {
       // If formsubmission errors
       .catch((error) => {
         // eslint-disable-next-line no-console
+        console.error({ error });
         let errMsg;
 
         if (error.text) {
@@ -105,7 +106,6 @@ const useSubmitForm = (setFormSubmitStatus) => {
         } else {
           errMsg = error;
         }
-        console.error({ error });
 
         // Log event to analytics/tag manager
         window.dataLayer.push({
