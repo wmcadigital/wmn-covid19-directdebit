@@ -9,6 +9,7 @@ export const FormDataProvider = (props) => {
   const initialState = {
     currentStep: 1,
     formData: {},
+    formRef: '',
   };
 
   // Set up a reducer so we can change state based on centralised logic here
@@ -28,6 +29,14 @@ export const FormDataProvider = (props) => {
         return {
           ...state,
           currentStep: action.payload,
+        };
+      }
+
+      // Used to add the form submission reference(got from API submit) to state
+      case 'ADD_FORM_REF': {
+        return {
+          ...state,
+          formRef: action.payload,
         };
       }
 
