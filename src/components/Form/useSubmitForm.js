@@ -5,57 +5,58 @@ import { FormDataContext } from 'globalState/FormDataContext';
 const useSubmitForm = (setFormSubmitStatus) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const [isFetching, setIsFetching] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [APIErrorMessage, setAPIErrorMessage] = useState(null);
 
   // Destructure values from our formDataState (get all users values)
   const {
     BankAccountName,
     BankAccountNumber,
     BankAccountSortCode,
+    DateOfBirth,
+    DDReinsatementConsent,
     DirectDebitNumber,
-    SwiftCardNumber,
-    TravelResumptionDate,
+    Email,
     Firstname,
     Lastname,
-    DateOfBirth,
-    Email,
-    PhoneNumber,
     OneOffPaymentConsent,
-    DDReinsatementConsent,
+    PhoneNumber,
+    SwiftCardNumber,
+    TravelResumptionDate,
   } = formDataState.formData;
 
   // Map all destructured vals above to an object we will send to API
-  // const dataToSend = {
-  //   BankAccountName,
-  //   BankAccountNumber,
-  //   BankAccountSortCode,
-  //   DirectDebitNumber,
-  //   SwiftCardNumber,
-  //   TravelResumptionDate,
-  //   Firstname,
-  //   Lastname,
-  //   DateOfBirth,
-  //   Email,
-  //   PhoneNumber,
-  //   OneOffPaymentConsent,
-  //   DDReinsatementConsent,
-  // };
-
   const dataToSend = {
-    BankAccountName: 'Dayle',
-    BankAccountNumber: '00000001',
-    BankAccountSortCode: '00-00-01',
-    DirectDebitNumber: '60000001',
-    SwiftCardNumber: '633597010700000000',
-    TravelResumptionDate: '2020-05-10',
-    Firstname: 'Dayle',
-    Lastname: 'Salmon',
-    DateOfBirth: '2000-01-01',
-    Email: 'test@test.com',
-    PhoneNumber: '01213334444',
-    OneOffPaymentConsent: 'true',
-    DDReinsatementConsent: 'true',
+    BankAccountName,
+    BankAccountNumber,
+    BankAccountSortCode,
+    DateOfBirth,
+    DDReinsatementConsent,
+    DirectDebitNumber,
+    Email,
+    Firstname,
+    Lastname,
+    OneOffPaymentConsent,
+    PhoneNumber,
+    SwiftCardNumber,
+    TravelResumptionDate,
   };
+
+  // Quick send test data
+  // const dataToSend = {
+  //   BankAccountName: 'Bank of England',
+  //   BankAccountNumber: '31510604',
+  //   BankAccountSortCode: '10-00-00',
+  //   DirectDebitNumber: '60000001',
+  //   SwiftCardNumber: '633597010700000000',
+  //   TravelResumptionDate: '2020-05-10',
+  //   Firstname: 'Dayle',
+  //   Lastname: 'Salmon',
+  //   DateOfBirth: '2000-01-01',
+  //   Email: 'test@test.com',
+  //   PhoneNumber: '01213334444',
+  //   OneOffPaymentConsent: 'true',
+  //   DDReinsatementConsent: 'true',
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
@@ -80,14 +81,13 @@ const useSubmitForm = (setFormSubmitStatus) => {
         console.log({ payload });
         // formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
         // Log event to analytics/tag manager
-        // window.dataLayer.push({
-        //   event: 'formAbandonment',
-        //   eventCategory: 'Refund form submission: success',
-        //   eventAction: `CustomerType:${formState.CustomerType}`,
-        // });
+        window.dataLayer.push({
+          event: 'formAbandonment',
+          eventCategory: 'wmn-covid19-directdebit submission: success',
+        });
         setIsFetching(false); // set to false as we are done fetching now
         if (payload.Message) {
-          setErrorMessage(payload.Message);
+          setAPIErrorMessage(payload.Message);
         } else {
           setFormSubmitStatus(true); // Set form status to success
           window.scrollTo(0, 0); // Scroll to top of page
@@ -96,7 +96,6 @@ const useSubmitForm = (setFormSubmitStatus) => {
       // If formsubmission errors
       .catch((error) => {
         // eslint-disable-next-line no-console
-        console.error({ error });
         let errMsg;
 
         if (error.text) {
@@ -106,13 +105,14 @@ const useSubmitForm = (setFormSubmitStatus) => {
         } else {
           errMsg = error;
         }
+        console.error({ error });
 
         // Log event to analytics/tag manager
-        // window.dataLayer.push({
-        //   event: 'formAbandonment',
-        //   eventCategory: 'Refund form submission: error',
-        //   eventAction: errMsg,
-        // });
+        window.dataLayer.push({
+          event: 'formAbandonment',
+          eventCategory: 'wmn-covid19-directdebit submission: error',
+          eventAction: errMsg,
+        });
         setIsFetching(false); // set to false as we are done fetching now
         setFormSubmitStatus(false); // Set form status to error
         window.scrollTo(0, 0); // Scroll to top of page
@@ -123,7 +123,7 @@ const useSubmitForm = (setFormSubmitStatus) => {
   return {
     handleSubmit,
     isFetching,
-    errorMessage,
+    APIErrorMessage,
   };
 };
 

@@ -9,7 +9,7 @@ import useWho from 'customHooks/useWho';
 import Button from 'components/shared/Button/Button';
 import DataRow from './DataRow/DataRow';
 
-const Step11CheckAnswers = ({ isFetching, errorMessage }) => {
+const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { formData } = formDataState;
   const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
@@ -112,8 +112,8 @@ const Step11CheckAnswers = ({ isFetching, errorMessage }) => {
       </div>
 
       {/* If we get any errors back from the server, show here */}
-      {errorMessage && (
-        <span className="wmnds-fe-error-message">{errorMessage}</span>
+      {APIErrorMessage && (
+        <span className="wmnds-fe-error-message">{APIErrorMessage}</span>
       )}
 
       <div className="wmnds-col-1">
@@ -142,11 +142,11 @@ const Step11CheckAnswers = ({ isFetching, errorMessage }) => {
 
 Step11CheckAnswers.propTypes = {
   isFetching: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string,
+  APIErrorMessage: PropTypes.string,
 };
 
 Step11CheckAnswers.defaultProps = {
-  errorMessage: null,
+  APIErrorMessage: null,
 };
 
 export default Step11CheckAnswers;
