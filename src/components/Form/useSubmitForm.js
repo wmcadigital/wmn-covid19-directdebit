@@ -79,7 +79,7 @@ const useSubmitForm = (setFormSubmitStatus) => {
       // If formsubmission is successful
       .then((payload) => {
         console.log({ payload });
-        // formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
+        // formDataDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
         // Log event to analytics/tag manager
         window.dataLayer.push({
           event: 'formAbandonment',
