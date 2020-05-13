@@ -37,6 +37,7 @@ const useSubmitForm = (setFormSubmitStatus) => {
     Lastname,
     OneOffPaymentConsent,
     PhoneNumber,
+    Postcode: '',
     SwiftCardNumber,
     TravelResumptionDate,
   };
