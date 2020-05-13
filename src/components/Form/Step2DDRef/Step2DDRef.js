@@ -8,7 +8,7 @@ import Input from 'components/shared/FormElements/Input/Input';
 
 const Step2DDRef = ({ formRef }) => {
   const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
-  const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
+  const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const ddLabel = 'Direct Debit reference'; // Label used on input and for validation
   // Logic used to validate the field
@@ -30,24 +30,22 @@ const Step2DDRef = ({ formRef }) => {
         Section 1 of 3 <h4>About {yourTheir} ticket</h4>
       </div>
 
-      <h2>What is {yourTheir} Direct Debit reference?</h2>
-
       {/* Show generic error message */}
       {showGenericError}
 
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <p>
-            This can be found in the email we sent you asking you to reinstate
-            {yourTheir} Direct Debit and begins with a <strong>6</strong>.
-          </p>
-          <p>
-            This can be found in the email we sent you asking you to reinstate
-            {yourTheir} Direct Debit and begins with a 6 If you didn’t receive
-            this email, it is shown next to every payment to WMCA for{' '}
-            {yourTheir} Direct Debit on {yourTheir} bank statement.
-          </p>
+          <h2>What is {yourTheir} Direct Debit reference?</h2>
         </legend>
+        <p>
+          This can be found in the email we sent you asking you to reinstate{' '}
+          {yourTheir} Direct Debit and begins with a <strong>6</strong>.
+        </p>
+        <p>
+          If {youThey} didn’t receive this email, it is shown next to every
+          payment to WMCA for {yourTheir} Direct Debit on {yourTheir} bank
+          statement.
+        </p>
         <Input
           className="wmnds-col-1-2 wmnds-col-sm-1-5"
           name="DirectDebitNumber"

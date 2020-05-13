@@ -37,7 +37,7 @@ const Introduction = ({ setIsFormStarted }) => {
             your bank statement shown next to payments made to WMCA
           </li>
           <li>
-            You will need your Swift card number which begins with
+            You will need your Swift card number which begins with{' '}
             <strong>633597</strong>
           </li>
           <li>

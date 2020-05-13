@@ -1,0 +1,14 @@
+.ddLogo {
+  width: 145px;
+}
+
+@media all and (min-width: 35.5em) {
+  .ddTitle:first-child {
+    vertical-align: middle;
+    margin: auto 0;
+  }
+
+  .ddLogo {
+    vertical-align: middle;
+  }
+}

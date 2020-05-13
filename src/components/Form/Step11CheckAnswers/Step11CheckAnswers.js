@@ -9,7 +9,7 @@ import useWho from 'customHooks/useWho';
 import Button from 'components/shared/Button/Button';
 import DataRow from './DataRow/DataRow';
 
-const Step11CheckAnswers = ({ isFetching }) => {
+const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { formData } = formDataState;
   const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
@@ -37,7 +37,10 @@ const Step11CheckAnswers = ({ isFetching }) => {
         />
         <DataRow
           label="Resuming Travel"
-          value={format(new Date(formData.TravelResumptionDate), 'D MMMM YYYY')}
+          value={
+            formData.TravelResumptionDate &&
+            format(new Date(formData.TravelResumptionDate), 'D MMMM YYYY')
+          }
           goToStep={5}
         />
       </div>
@@ -52,7 +55,10 @@ const Step11CheckAnswers = ({ isFetching }) => {
         />
         <DataRow
           label="Date of birth"
-          value={format(new Date(formData.DateOfBirth), 'D MMMM YYYY')}
+          value={
+            formData.DateOfBirth &&
+            format(new Date(formData.DateOfBirth), 'D MMMM YYYY')
+          }
           goToStep={7}
         />
         <DataRow
@@ -105,6 +111,11 @@ const Step11CheckAnswers = ({ isFetching }) => {
         </p>
       </div>
 
+      {/* If we get any errors back from the server, show here */}
+      {APIErrorMessage && (
+        <span className="wmnds-fe-error-message">{APIErrorMessage}</span>
+      )}
+
       <div className="wmnds-col-1">
         {/* If API is fetching */}
         {isFetching && (
@@ -131,6 +142,11 @@ const Step11CheckAnswers = ({ isFetching }) => {
 
 Step11CheckAnswers.propTypes = {
   isFetching: PropTypes.bool.isRequired,
+  APIErrorMessage: PropTypes.string,
+};
+
+Step11CheckAnswers.defaultProps = {
+  APIErrorMessage: null,
 };
 
 export default Step11CheckAnswers;

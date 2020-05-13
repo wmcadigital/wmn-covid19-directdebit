@@ -8,6 +8,10 @@ import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
+// import images
+import ddLogo from 'assets/images/direct-debit.svg';
+// Import styling
+import s from './Step10DDBankDetails.module.scss';
 
 const Step10DDBankDetails = ({ formRef }) => {
   const { getValues } = useFormContext(); // Get useForm methods
@@ -66,7 +70,16 @@ const Step10DDBankDetails = ({ formRef }) => {
         Instruction to {yourTheir} bank or building society to pay by Direct
         Debit
       </h2>
-      <h3>The Direct Debit Guarantee</h3>
+      <div className="wmnds-grid wmnds-grid--justify-between wmnds-m-b-lg">
+        <h3 className={`wmnds-col-1 wmnds-col-sm-auto ${s.ddTitle}`}>
+          The Direct Debit Guarantee
+        </h3>
+        <img
+          src={ddLogo}
+          alt="Direct Debit logo"
+          className={`wmnds-col-1 wmnds-col-sm-auto ${s.ddLogo}`}
+        />
+      </div>
       <ul>
         <li>
           This Guarantee is offered by all banks and building societies that
@@ -138,6 +151,15 @@ const Step10DDBankDetails = ({ formRef }) => {
           remain with West Midlands Combined Authority and, if so, details will
           be passed electronically to {myTheir} bank/building society.
         </p>
+
+        {/* Hidden consent field (true when continue pressed) */}
+        <input
+          type="hidden"
+          value
+          name="DDReinsatementConsent"
+          ref={register}
+          readOnly
+        />
       </fieldset>
 
       {/* Continue button */}

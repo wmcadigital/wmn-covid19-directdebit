@@ -49,12 +49,12 @@ const Step3SwiftCard = ({ formRef }) => {
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2>What is {yourTheir} Swift card number?</h2>
-          <p>
-            This is the long number on the front of the card and begins with{' '}
-            <strong>633597</strong>
-          </p>
-          <p>Enter the number without spaces</p>
         </legend>
+        <p>
+          This is the long number on the front of the card and begins with{' '}
+          <strong>633597</strong>
+        </p>
+        <p>Enter the number without spaces</p>
         <Input
           className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"
           name="SwiftCardNumber"
