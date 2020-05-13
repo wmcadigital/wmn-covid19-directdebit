@@ -19,7 +19,7 @@ const ErrorPage = () => {
         <p>
           Contact the{' '}
           <a
-            href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/"
+            href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/?utm_source=service&utm_medium=errorpage&utm_campaign=covid-dd"
             title="Customer Services Team Contact Details"
             target="_self"
             className="wmnds-link"
