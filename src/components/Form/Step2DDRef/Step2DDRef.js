@@ -17,9 +17,25 @@ const Step2DDRef = ({ formRef }) => {
     validate: {
       shouldStartWith6: (val) =>
         val.charAt(0) === '6' || `${ddLabel} is a number that begins with '6'`,
-      mustBe8Digits: (val) => val.length === 8 || `${ddLabel} must be 8 digits`,
-      shouldBeValidRef: (val) =>
-        (+val > 60000000 && +val < 70000000) || `Enter a valid ${ddLabel}`,
+      mustBe6Or8Digits: (val) =>
+        val.length === 8 ||
+        val.length === 6 ||
+        `${ddLabel} must be 6 or 8 digits`,
+      shouldBeValidRef: (val) => {
+        let validation; // set var placeholder
+        // If the val length is 8 digits, then check to see if it's a valid 8 digit ref
+        if (val.length === 8) {
+          validation =
+            (+val > 60000000 && +val < 70000000) || `Enter a valid ${ddLabel}`;
+        }
+        // Else it must be another length (6 digits), so check if valid 6 digit ref
+        else {
+          validation =
+            (+val > 600000 && +val < 700000) || `Enter a valid ${ddLabel}`;
+        }
+
+        return validation; // Return correct validation based on iffy above
+      },
     },
   });
 
