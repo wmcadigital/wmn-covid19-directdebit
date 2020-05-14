@@ -12,7 +12,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
 
   const [stateYear, stateMonth, stateDay] = formDataState.formData[name]
     ? formDataState.formData[name].split('-')
-    : [null, null, null];
+    : ['', '', ''];
 
   // State used for capturing date fields onChange below (we use these to validate against below)
   const [day, setDay] = useState(stateDay);

@@ -39,7 +39,7 @@ const DateInput = ({
 DateInput.propTypes = {
   autoComplete: PropTypes.string,
   dateType: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string,
   fieldValidation: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
@@ -47,6 +47,7 @@ DateInput.propTypes = {
 
 DateInput.defaultProps = {
   autoComplete: null,
+  defaultValue: '',
   fieldValidation: null,
 };
 
