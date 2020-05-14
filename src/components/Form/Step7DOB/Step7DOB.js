@@ -38,7 +38,7 @@ const Step7DOB = ({ formRef }) => {
           <h2>What is {yourTheir} date of birth?</h2>
         </legend>
         <p>We&apos;ll use this information to confirm {yourTheir} identity</p>
-        <p>For example, 31 03 1980</p>
+        <p>For example, 31 3 1980</p>
         <Date
           name="DateOfBirth"
           label={DOBLabel}
