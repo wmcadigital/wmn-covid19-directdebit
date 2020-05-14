@@ -19,9 +19,7 @@ const Introduction = ({ setIsFormStarted }) => {
             Let us know you are about to start using, or have already started to
             use your Swift card
           </li>
-          <li>
-            Reinstate your Direct Debit for your Swift card
-          </li>
+          <li>Reinstate your Direct Debit for your Swift card</li>
         </ul>
         <p>This process takes around 5 to 10 minutes.</p>
 
@@ -33,7 +31,8 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
           <li>
             If you did not receive this email, you can find this reference on
-            your bank statement shown next to payments made to WMCA and begins with a <strong>6</strong>
+            your bank statement shown next to payments made to WMCA and begins
+            with a <strong>6</strong>
           </li>
           <li>
             You will need your Swift card number which begins with{' '}
@@ -41,15 +40,15 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
           <li>
             If your Swift card number begins with <strong>633597 0112</strong>,
-            it is managed by 
+            it is managed by
             <a
               href="//nxbus.co.uk"
               title="National Express West Midlands"
               target="_self"
               className="wmnds-link"
-             >
-            National Express West Midlands and there is a
-            separate process
+            >
+              National Express West Midlands and there is a separate process
+            </a>
           </li>
           <li>You will need the bank details to set up a new Direct Debit</li>
           <li>
