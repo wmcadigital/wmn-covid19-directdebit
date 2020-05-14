@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// Import contexts
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 
 const Step9DDPayMessage = ({ formRef }) => {
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const { formData } = formDataState;
   const { register, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
