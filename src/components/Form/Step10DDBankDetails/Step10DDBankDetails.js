@@ -113,6 +113,8 @@ const Step10DDBankDetails = ({ formRef }) => {
           also notify us.
         </li>
       </ul>
+      <br />
+      <br />
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h3 className="wmnds-fe-question">
