@@ -88,9 +88,9 @@ const Step10DDBankDetails = ({ formRef }) => {
         <li>
           If there are any changes to the amount, date or interval of{' '}
           {yourTheir}
-          Direct Debit West Midlands Combined Authority will notify {youThem} 10
+          {' '}Direct Debit West Midlands Combined Authority will notify {youThem} 10
           working days in advance of {yourTheir} account being debited or as
-          otherwise agreed. If {youThem} request West Midlands Combined
+          otherwise agreed. If {youThey} request West Midlands Combined
           Authority to collect a payment, confirmation of amount and date will
           be given to {youThem} at the time of the request.
         </li>
@@ -108,7 +108,7 @@ const Step10DDBankDetails = ({ formRef }) => {
         <li>
           {youThey.charAt(0).toUpperCase()} can cancel a Direct Debit at any
           time by simply contacting {yourTheir}
-          bank or building society. Written confirmation may be required. Please
+          {' '}bank or building society. Written confirmation may be required. Please
           also notify us.
         </li>
       </ul>
@@ -150,7 +150,7 @@ const Step10DDBankDetails = ({ formRef }) => {
         <p>
           {iThey.charAt(0).toUpperCase()} understand that this Instruction may
           remain with West Midlands Combined Authority and, if so, details will
-          be passed electronically to {myTheir} bank/building society.
+          be passed electronically to {myTheir}bank/building society.
         </p>
 
         {/* Hidden consent field (true when continue pressed) */}
