@@ -150,7 +150,7 @@ const Step10DDBankDetails = ({ formRef }) => {
         <p>
           {iThey.charAt(0).toUpperCase()} understand that this Instruction may
           remain with West Midlands Combined Authority and, if so, details will
-          be passed electronically to {myTheir}bank/building society.
+          be passed electronically to {myTheir} bank/building society.
         </p>
 
         {/* Hidden consent field (true when continue pressed) */}
