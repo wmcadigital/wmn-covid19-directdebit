@@ -27,11 +27,9 @@ const Step9DDPayMessage = ({ formRef }) => {
         </h2>
         <p>
           We will work out how much {youThey} owe from{' '}
-            {
-              formData.TravelResumptionDate &&
-              format(new Date(formData.TravelResumptionDate), 'D MMMM YYYY')
-            }{' '}until{' '}
-          {yourTheir} next Direct Debit date.
+          {formData.TravelResumptionDate &&
+            format(new Date(formData.TravelResumptionDate), 'D MMMM YYYY')}{' '}
+          until {yourTheir} next Direct Debit date.
         </p>
         <p>
           This will be taken from {yourTheir} account at the same time as{' '}
