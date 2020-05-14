@@ -54,7 +54,7 @@ const Step2DDRef = ({ formRef }) => {
           <h2>What is {yourTheir} Direct Debit reference?</h2>
         </legend>
         <p>
-          This can be found in the email we sent you asking you to reinstate{' '}
+          This can be found in the email we sent you asking {youThem} to reinstate{' '}
           {yourTheir} Direct Debit and begins with a <strong>6</strong>.
         </p>
         <p>
