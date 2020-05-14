@@ -47,7 +47,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   };
 
   useEffect(() => {
-    if (year || month || day) {
+    if (year && month && day) {
       setDate(`${year}-${month}-${day}`);
     } // Set date state to current yyyy-mm-dd set by user (would do it in handleChange event but it falls out of sync)
   }, [day, month, year, setDate]);
