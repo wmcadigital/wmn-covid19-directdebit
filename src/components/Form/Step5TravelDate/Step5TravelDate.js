@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+// Import contexts
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
@@ -7,9 +9,10 @@ import useWho from 'customHooks/useWho';
 import Date from 'components/shared/FormElements/Date/Date';
 
 const Step5TravelDate = ({ formRef }) => {
-  // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
+  const willDid = formDataState.formData.TravelAgain === 'yes' ? 'did' : 'will'; // Set to relevant word based on if the person has started travelling again (set in step 4)
 
   const travelLabel = 'Travel date'; // Label used on input and for validation
 
@@ -37,7 +40,8 @@ const Step5TravelDate = ({ formRef }) => {
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2>
-            When will {youThey} start to use {yourTheir} ticket to travel again?
+            When {willDid} {youThey} start to use {yourTheir} ticket to travel
+            again?
           </h2>
         </legend>
         <p>For example, 2 5 2020</p>
