@@ -21,19 +21,9 @@ const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
       <h3>Ticket details</h3>
       <div className="wmnds-grid">
         <DataRow
-          label="I am the ticket holder"
-          value={formData.TicketHolder}
-          goToStep={1}
-        />
-        <DataRow
           label="Swift card details"
           value={formData.SwiftCardNumber}
           goToStep={3}
-        />
-        <DataRow
-          label="Started travelling again"
-          value={formData.TravelAgain}
-          goToStep={4}
         />
         <DataRow
           label="Resuming Travel"
@@ -41,7 +31,7 @@ const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
             formData.TravelResumptionDate &&
             format(new Date(formData.TravelResumptionDate), 'D MMMM YYYY')
           }
-          goToStep={5}
+          goToStep={4}
         />
       </div>
 
