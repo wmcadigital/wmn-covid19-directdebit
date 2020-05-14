@@ -47,8 +47,7 @@ const Introduction = ({ setIsFormStarted }) => {
               target="_self"
               className="wmnds-link"
             >
-              National Express West Midlands and there is a separate process
-            </a>
+              National Express West Midlands</a> and there is a separate process
           </li>
           <li>You will need the bank details to set up a new Direct Debit</li>
           <li>
