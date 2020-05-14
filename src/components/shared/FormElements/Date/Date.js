@@ -47,7 +47,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   };
 
   useEffect(() => {
-    if (year && month && day) {
+    if (year || month || day) {
       setDate(`${year}-${month}-${day}`);
     } // Set date state to current yyyy-mm-dd set by user (would do it in handleChange event but it falls out of sync)
   }, [day, month, year, setDate]);
@@ -71,7 +71,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
       >
         <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
           <DateInput
-            autoComplete={autoCompletPrefix ? `${autoCompletPrefix}day` : null}
+            autoComplete={autoCompletPrefix ? `${autoCompletPrefix}day` : 'day'}
             dateType="Day"
             defaultValue={day}
             name={name}
@@ -82,7 +82,7 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
         <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
           <DateInput
             autoComplete={
-              autoCompletPrefix ? `${autoCompletPrefix}month` : null
+              autoCompletPrefix ? `${autoCompletPrefix}month` : 'month'
             }
             dateType="Month"
             defaultValue={month}
@@ -93,7 +93,9 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
         </div>
         <div className="wmnds-col-1-2 wmnds-col-sm-1-8">
           <DateInput
-            autoComplete={autoCompletPrefix ? `${autoCompletPrefix}year` : null}
+            autoComplete={
+              autoCompletPrefix ? `${autoCompletPrefix}year` : 'year'
+            }
             dateType="Year"
             defaultValue={year}
             name={name}
@@ -120,7 +122,7 @@ Date.propTypes = {
 };
 
 Date.defaultProps = {
-  autoCompletPrefix: null,
+  autoCompletPrefix: '',
   fieldValidation: null,
 };
 
