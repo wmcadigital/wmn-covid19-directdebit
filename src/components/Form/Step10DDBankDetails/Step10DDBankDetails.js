@@ -88,13 +88,11 @@ const Step10DDBankDetails = ({ formRef }) => {
         <li>
           If there are any changes to the amount, date or interval of{' '}
           {yourTheir}
-          Direct Debit West Midlands Combined Authority will notify{' '}
-          {youThem} 10 working days in advance of {yourTheir} account being debited or as
-          otherwise agreed. If {' '}
-          {youThem} request West Midlands Combined
+          Direct Debit West Midlands Combined Authority will notify {youThem} 10
+          working days in advance of {yourTheir} account being debited or as
+          otherwise agreed. If {youThem} request West Midlands Combined
           Authority to collect a payment, confirmation of amount and date will
-          be given to{' '}
-          {youThem} at the time of the request.
+          be given to {youThem} at the time of the request.
         </li>
         <li>
           If an error is made in the payment of {yourTheir} Direct Debit, by
