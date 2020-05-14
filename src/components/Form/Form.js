@@ -24,6 +24,9 @@ import s from './Form.module.scss';
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
+
+  const { currentStep } = formDataState; // Destructure step from state
+
   // Trigger validation onBlur events (config for react hook form lib)
   const methods = useForm({
     mode: 'onBlur',
@@ -32,8 +35,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const { handleSubmit, isFetching, APIErrorMessage } = useSubmitForm(
     setFormSubmitStatus
   );
-
-  useTrackFormAbandonment(formRef, formDataState.currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
+  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
   // Show debug options for below (this should be deleted on release)
   const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -44,48 +46,45 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <FormContext {...methods}>
         <div className="wmnds-col-1 wmnds-col-md-3-4 ">
+          {/* Show back button if the step is between 1 or 11 */}
+          {currentStep > 1 && currentStep < 11 && (
+            <div className="wmnds-col-1 wmnds-m-b-md">
+              <button
+                type="button"
+                className={`wmnds-link ${s.changeBtn}`}
+                onClick={() =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: currentStep - 1,
+                  })
+                }
+              >
+                &lt; Back
+              </button>
+            </div>
+          )}
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
             <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
-              {formDataState.currentStep === 1 && (
-                <Step1TicketHolder formRef={formRef} />
-              )}
+              {currentStep === 1 && <Step1TicketHolder formRef={formRef} />}
 
               {/* Section 1 - About your ticket */}
-              {formDataState.currentStep === 2 && (
-                <Step2DDRef formRef={formRef} />
-              )}
-              {formDataState.currentStep === 3 && (
-                <Step3SwiftCard formRef={formRef} />
-              )}
-              {formDataState.currentStep === 4 && (
-                <Step4TravelAgain formRef={formRef} />
-              )}
-              {formDataState.currentStep === 5 && (
-                <Step5TravelDate formRef={formRef} />
-              )}
+              {currentStep === 2 && <Step2DDRef formRef={formRef} />}
+              {currentStep === 3 && <Step3SwiftCard formRef={formRef} />}
+              {currentStep === 4 && <Step4TravelAgain formRef={formRef} />}
+              {currentStep === 5 && <Step5TravelDate formRef={formRef} />}
 
               {/* Section 2 - About you */}
-              {formDataState.currentStep === 6 && (
-                <Step6Name formRef={formRef} />
-              )}
-              {formDataState.currentStep === 7 && (
-                <Step7DOB formRef={formRef} />
-              )}
-              {formDataState.currentStep === 8 && (
-                <Step8Contact formRef={formRef} />
-              )}
+              {currentStep === 6 && <Step6Name formRef={formRef} />}
+              {currentStep === 7 && <Step7DOB formRef={formRef} />}
+              {currentStep === 8 && <Step8Contact formRef={formRef} />}
 
               {/* Section 3 - Direct Debit */}
-              {formDataState.currentStep === 9 && (
-                <Step9DDPayMessage formRef={formRef} />
-              )}
-              {formDataState.currentStep === 10 && (
-                <Step10DDBankDetails formRef={formRef} />
-              )}
+              {currentStep === 9 && <Step9DDPayMessage formRef={formRef} />}
+              {currentStep === 10 && <Step10DDBankDetails formRef={formRef} />}
 
               {/* Check answers */}
-              {formDataState.currentStep === 11 && (
+              {currentStep === 11 && (
                 <Step11CheckAnswers
                   isFetching={isFetching}
                   APIErrorMessage={APIErrorMessage}
@@ -121,7 +120,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                   payload: +e.target.value,
                 })
               }
-              value={formDataState.currentStep}
+              value={currentStep}
             >
               {debugStepOptions.map((option) => (
                 <option key={option} value={option}>
