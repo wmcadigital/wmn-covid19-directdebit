@@ -19,7 +19,7 @@ const Step7DOB = ({ formRef }) => {
     required: `${DOBLabel} is required`,
     pattern: {
       value: dateRegex,
-      message: `Enter ${DOBLabel.toLowerCase()} in the correct format, for example 18 03 2020`,
+      message: `Enter ${DOBLabel.toLowerCase()} in the correct format, for example 18 3 1998`,
     },
   });
 
