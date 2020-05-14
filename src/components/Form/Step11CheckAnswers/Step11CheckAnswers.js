@@ -91,13 +91,13 @@ const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
         </p>
         <p>
           You consent to West Midlands Combined Authority possibly changing{' '}
-          {yourTheir}
+          {yourTheir}{' '}
           Direct Debit date if it usually would occur in the next 10 days.
         </p>
         <p>
-          You also consent to West Midlands Combined Authority reinstating{' '}
-          {yourTheir}
-          Direct Debit instruction.
+          You also consent to West Midlands Combined Authority reinstating
+          {' '}
+          {yourTheir}{' '}Direct Debit instruction.
         </p>
       </div>
 
