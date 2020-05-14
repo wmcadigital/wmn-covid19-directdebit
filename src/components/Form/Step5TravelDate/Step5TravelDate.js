@@ -50,7 +50,7 @@ const Step5TravelDate = ({ formRef }) => {
     validate: {
       dateFuturePastValidation,
       correctFormat: (val) =>
-        dateRegex.text(val) ||
+        dateRegex.test(val) ||
         `Enter ${travelLabel.toLowerCase()} in the correct format, for example 18 03 2020`,
     },
   });

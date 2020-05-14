@@ -24,6 +24,9 @@ import s from './Form.module.scss';
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
+
+  const { currentStep } = formDataState; // Destructure step from state
+
   // Trigger validation onBlur events (config for react hook form lib)
   const methods = useForm({
     mode: 'onBlur',
@@ -33,8 +36,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
     setFormSubmitStatus
   );
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
-
-  const { currentStep } = formDataState; // Destructure step from state
 
   // Show debug options for below (this should be deleted on release)
   const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
