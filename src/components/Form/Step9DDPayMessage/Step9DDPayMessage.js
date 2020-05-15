@@ -19,7 +19,7 @@ const Step9DDPayMessage = () => {
   todayPlus10.setDate(today.getDate() + 10); // Set placeholder date to 10days in future
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 3 of 3 <h4>Direct Debit</h4>

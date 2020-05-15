@@ -30,7 +30,7 @@ const Step7DOB = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 2 of 3 <h4>About {youThem}</h4>

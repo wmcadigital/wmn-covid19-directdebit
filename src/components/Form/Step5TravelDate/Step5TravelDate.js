@@ -61,7 +61,7 @@ const Step5TravelDate = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 1 of 3 <h4>About {yourTheir} ticket</h4>

@@ -14,7 +14,7 @@ const Step1TicketHolder = () => {
   } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Show generic error message */}
       {showGenericError}
 

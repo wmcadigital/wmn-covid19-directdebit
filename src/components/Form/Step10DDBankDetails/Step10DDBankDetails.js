@@ -62,7 +62,7 @@ const Step10DDBankDetails = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 3 of 3 <h4>Direct Debit</h4>

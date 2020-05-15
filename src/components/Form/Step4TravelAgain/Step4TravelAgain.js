@@ -16,7 +16,7 @@ const Step4TravelAgain = () => {
   const { youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Show generic error message */}
       {showGenericError}
 

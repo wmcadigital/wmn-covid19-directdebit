@@ -64,7 +64,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           )}
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
-            {/* <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}> */}
             {currentStep === 1 && <Step1TicketHolder />}
 
             {/* Section 1 - About your ticket */}
@@ -90,7 +89,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 handleSubmit={handleSubmit}
               />
             )}
-            {/* </form> */}
           </div>
         </div>
         {/* If in development based on envs then show form debugging */}
