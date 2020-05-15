@@ -2,10 +2,8 @@ import React, { useContext } from 'react';
 import { format } from 'fecha';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
-
 // Import components
 import Title from 'components/shared/Title/Title';
-
 // Import styles
 import './SuccessPage.scss';
 
@@ -48,7 +46,7 @@ const SuccessPage = () => {
         </p>
 
         <br />
-        <p className="print-hide">
+        <p className="wmnds-print-hide">
           <a
             href="https://surveys.hotjar.com/s?siteId=264586&surveyId=156448"
             title="Service feedback survey"
