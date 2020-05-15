@@ -40,7 +40,7 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
           <li>
             If your Swift card number begins with <strong>633597 0112</strong>,
-            it is managed by
+            it is managed by{' '}
             <a
               href="//nxbus.co.uk"
               title="National Express West Midlands"
