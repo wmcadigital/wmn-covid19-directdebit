@@ -65,32 +65,32 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           )}
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
-            <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
-              {currentStep === 1 && <Step1TicketHolder formRef={formRef} />}
+            {/* <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}> */}
+            {currentStep === 1 && <Step1TicketHolder formRef={formRef} />}
 
-              {/* Section 1 - About your ticket */}
-              {currentStep === 2 && <Step2DDRef formRef={formRef} />}
-              {currentStep === 3 && <Step3SwiftCard formRef={formRef} />}
-              {currentStep === 4 && <Step4TravelAgain formRef={formRef} />}
-              {currentStep === 5 && <Step5TravelDate formRef={formRef} />}
+            {/* Section 1 - About your ticket */}
+            {currentStep === 2 && <Step2DDRef formRef={formRef} />}
+            {currentStep === 3 && <Step3SwiftCard formRef={formRef} />}
+            {currentStep === 4 && <Step4TravelAgain formRef={formRef} />}
+            {currentStep === 5 && <Step5TravelDate formRef={formRef} />}
 
-              {/* Section 2 - About you */}
-              {currentStep === 6 && <Step6Name formRef={formRef} />}
-              {currentStep === 7 && <Step7DOB formRef={formRef} />}
-              {currentStep === 8 && <Step8Contact formRef={formRef} />}
+            {/* Section 2 - About you */}
+            {currentStep === 6 && <Step6Name formRef={formRef} />}
+            {currentStep === 7 && <Step7DOB formRef={formRef} />}
+            {currentStep === 8 && <Step8Contact formRef={formRef} />}
 
-              {/* Section 3 - Direct Debit */}
-              {currentStep === 9 && <Step9DDPayMessage formRef={formRef} />}
-              {currentStep === 10 && <Step10DDBankDetails formRef={formRef} />}
+            {/* Section 3 - Direct Debit */}
+            {currentStep === 9 && <Step9DDPayMessage formRef={formRef} />}
+            {currentStep === 10 && <Step10DDBankDetails formRef={formRef} />}
 
-              {/* Check answers */}
-              {currentStep === 11 && (
-                <Step11CheckAnswers
-                  isFetching={isFetching}
-                  APIErrorMessage={APIErrorMessage}
-                />
-              )}
-            </form>
+            {/* Check answers */}
+            {currentStep === 11 && (
+              <Step11CheckAnswers
+                isFetching={isFetching}
+                APIErrorMessage={APIErrorMessage}
+              />
+            )}
+            {/* </form> */}
           </div>
         </div>
         {/* If in development based on envs then show form debugging */}

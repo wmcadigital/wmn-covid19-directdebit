@@ -10,7 +10,7 @@ const Step1TicketHolder = ({ formRef }) => {
   const { register, showGenericError, continueButton } = useStepLogic(formRef);
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       {/* Show generic error message */}
       {showGenericError}
 
@@ -28,7 +28,7 @@ const Step1TicketHolder = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
 };
 
