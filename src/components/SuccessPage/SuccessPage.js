@@ -6,6 +6,9 @@ import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Title from 'components/shared/Title/Title';
 
+// Import styles
+import './SuccessPage.scss';
+
 const SuccessPage = () => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const d = new Date().toISOString().slice(0, 10); // Set todays date as yyyy-mm-dd
