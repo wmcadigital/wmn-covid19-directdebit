@@ -44,8 +44,7 @@ const SuccessPage = () => {
         <p>We’ve sent your request to our Ticketing Services team.</p>
         <p>
           They will contact you to confirm how much money will be taken on your
-          next Direct Debit payment date, or to ask for more information. What
-          did you think of this service? (takes 30 seconds)
+          next Direct Debit payment date, or to ask for more information.
         </p>
 
         <br />
