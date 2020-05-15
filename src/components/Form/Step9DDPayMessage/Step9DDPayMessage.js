@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useRef } from 'react';
 import { format } from 'fecha';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
@@ -7,10 +6,11 @@ import { FormDataContext } from 'globalState/FormDataContext';
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 
-const Step9DDPayMessage = ({ formRef }) => {
+const Step9DDPayMessage = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const { register, handleSubmit, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { formData } = formDataState; // Destrucutre formData from state
-  const { register, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   // Set a date 10 days in future, used to display future payment date in text below
@@ -19,7 +19,7 @@ const Step9DDPayMessage = ({ formRef }) => {
   todayPlus10.setDate(today.getDate() + 10); // Set placeholder date to 10days in future
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef}>
       {/* Subsection */}
       <div>
         Section 3 of 3 <h4>Direct Debit</h4>
@@ -58,17 +58,8 @@ const Step9DDPayMessage = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
-};
-
-Step9DDPayMessage.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step9DDPayMessage;
