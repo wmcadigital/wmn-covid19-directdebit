@@ -9,9 +9,14 @@ import useWho from 'customHooks/useWho';
 
 const Step9DDPayMessage = ({ formRef }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-  const { formData } = formDataState;
+  const { formData } = formDataState; // Destrucutre formData from state
   const { register, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
+
+  // Set a date 10 days in future, used to display future payment date in text below
+  const today = new Date(); // Get todays date
+  const todayPlus10 = new Date(); // create placeholder date
+  todayPlus10.setDate(today.getDate() + 10); // Set placeholder date to 10days in future
 
   return (
     <>
@@ -36,8 +41,9 @@ const Step9DDPayMessage = ({ formRef }) => {
           {yourTheir} next Direct Debit payment.
         </p>
         <p>
-          If {yourTheir} next payment date is before 14 May, {yourTheir} one-off
-          payment will be taken less than 10 days after {yourTheir} usual date.
+          If {yourTheir} next payment date is before{' '}
+          {format(todayPlus10, 'D MMMM YYYY')}, {yourTheir} one-off payment will
+          be taken less than 10 days after {yourTheir} usual date.
         </p>
 
         {/* Hidden consent field (true when continue pressed) */}
