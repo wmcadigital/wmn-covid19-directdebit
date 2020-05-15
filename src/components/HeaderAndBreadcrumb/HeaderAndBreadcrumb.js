@@ -57,7 +57,7 @@ const HeaderAndBreadcrumb = ({ isFormStarted, formSubmitStatus }) => {
           </div>
           <div className="wmnds-col-auto">
             <p className="wmnds-banner-container__text">
-              This is a new service - your
+              This is a new service - your{' '}
               <a
                 href="https://surveys.hotjar.com/s?siteId=264586&surveyId=156448"
                 title="Service feedback survey"
@@ -66,7 +66,7 @@ const HeaderAndBreadcrumb = ({ isFormStarted, formSubmitStatus }) => {
                 className="wmnds-link"
               >
                 feedback
-              </a>
+              </a>{' '}
               will help us to improve it.
             </p>
           </div>
