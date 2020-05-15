@@ -7,12 +7,19 @@ import GenericError from 'components/shared/Errors/GenericError';
 import Button from 'components/shared/Button/Button';
 
 const useStepLogic = (formRef) => {
-  const { register, errors, triggerValidation, getValues } = useFormContext(); // Get useForm methods
+  const {
+    register,
+    errors,
+    triggerValidation,
+    getValues,
+    handleSubmit,
+  } = useFormContext(); // Get useForm methods
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
 
   // Update the current step to the correct one depending on users selection
-  const handleContinue = async () => {
+  const onSubmit = async (data) => {
+    console.log({ data });
     const result = await triggerValidation();
     setIsContinuePressed(true);
     // if no errors
@@ -29,12 +36,13 @@ const useStepLogic = (formRef) => {
     }
   };
 
+  const willSubmit = handleSubmit(onSubmit);
+
   // Continue button
   const continueButton = (
     <Button
       btnClass="wmnds-btn wmnds-col-1 wmnds-m-t-md"
-      onClick={handleContinue}
-      type="button"
+      type="submit"
       text="Continue"
     />
   );
@@ -45,6 +53,7 @@ const useStepLogic = (formRef) => {
 
   return {
     register,
+    willSubmit,
     showGenericError,
     continueButton,
   };

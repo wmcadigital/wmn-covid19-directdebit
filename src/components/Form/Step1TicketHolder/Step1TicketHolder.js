@@ -7,10 +7,15 @@ import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1TicketHolder = ({ formRef }) => {
   // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+  const {
+    register,
+    willSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={willSubmit}>
       {/* Show generic error message */}
       {showGenericError}
 
