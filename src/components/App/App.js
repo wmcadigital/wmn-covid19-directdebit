@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 // Import contexts
 import { FormDataProvider } from 'globalState/FormDataContext';
 // Import components
-import Form from 'components/Form/Form';
+import HeaderAndBreadcrumb from 'components/HeaderAndBreadcrumb/HeaderAndBreadcrumb';
 import Introduction from 'components/Introduction/Introduction';
+import Form from 'components/Form/Form';
 import SuccessPage from 'components/SuccessPage/SuccessPage';
 import ErrorPage from 'components/ErrorPage/ErrorPage';
-import HeaderAndBreadcrumb from 'components/HeaderAndBreadcrumb/HeaderAndBreadcrumb';
 
 function App() {
   const [isFormStarted, setIsFormStarted] = useState(false);
@@ -14,7 +14,10 @@ function App() {
 
   return (
     <>
-      <HeaderAndBreadcrumb />
+      <HeaderAndBreadcrumb
+        isFormStarted={isFormStarted}
+        formSubmitStatus={formSubmitStatus}
+      />
       <div className="wmnds-container wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
         {/* If form isn't started, show intro...else show form */}
         {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}

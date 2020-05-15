@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const HeaderAndFooter = () => {
+const HeaderAndBreadcrumb = ({ isFormStarted, formSubmitStatus }) => {
   return (
     <>
       {/* <!-- Header --> */}
@@ -30,10 +31,13 @@ const HeaderAndFooter = () => {
             </a>
           </div>
 
-          <h1 className="wmnds-header__title wmnds-col-1 wmnds-col-sm-auto">
-            Reinstate your Direct Debit <br />
-            (COVID-19)
-          </h1>
+          {/* Only show the title in the header if the form is started and we are not on success/error page (formSubmitStatus) */}
+          {isFormStarted && formSubmitStatus === null && (
+            <h1 className="wmnds-header__title wmnds-col-1 wmnds-col-sm-auto">
+              Reinstate your Direct Debit <br />
+              (COVID-19)
+            </h1>
+          )}
         </div>
       </header>
       {/* <!-- End header --> */}
@@ -112,4 +116,13 @@ const HeaderAndFooter = () => {
   );
 };
 
-export default HeaderAndFooter;
+HeaderAndBreadcrumb.propTypes = {
+  isFormStarted: PropTypes.bool.isRequired,
+  formSubmitStatus: PropTypes.bool,
+};
+
+HeaderAndBreadcrumb.defaultProps = {
+  formSubmitStatus: null,
+};
+
+export default HeaderAndBreadcrumb;
