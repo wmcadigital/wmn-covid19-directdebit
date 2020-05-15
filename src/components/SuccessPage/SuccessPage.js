@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { format } from 'fecha';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
-
 // Import components
 import Title from 'components/shared/Title/Title';
+// Import styles
+import './SuccessPage.scss';
 
 const SuccessPage = () => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
@@ -27,7 +28,7 @@ const SuccessPage = () => {
         <div className="wmnds-msg-summary wmnds-msg-summary--success-fill wmnds-m-b-xl">
           <div className="wmnds-msg-summary__header">
             <h3 className="wmnds-msg-summary__title">Request complete</h3>
-            <h3>{useFromMessage}</h3>
+            <h3 className="print-text">{useFromMessage}</h3>
           </div>
 
           <p>
@@ -41,12 +42,11 @@ const SuccessPage = () => {
         <p>We’ve sent your request to our Ticketing Services team.</p>
         <p>
           They will contact you to confirm how much money will be taken on your
-          next Direct Debit payment date, or to ask for more information. What
-          did you think of this service? (takes 30 seconds)
+          next Direct Debit payment date, or to ask for more information.
         </p>
 
         <br />
-        <p>
+        <p className="wmnds-print-hide">
           <a
             href="https://surveys.hotjar.com/s?siteId=264586&surveyId=156448"
             title="Service feedback survey"

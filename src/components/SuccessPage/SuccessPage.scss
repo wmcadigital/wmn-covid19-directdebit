@@ -1,0 +1,56 @@
+/* Print CSS for success page */
+
+@media print {
+  .wmnds-html {
+    background: none;
+
+    h1,
+    h2,
+    h3,
+    p {
+      color: black;
+    }
+    // Header
+    .wmnds-header {
+      background: none;
+
+      &__logo {
+        height: 60px;
+        /* Safari and Chrome */
+        -webkit-filter: invert(1);
+        filter: invert(1);
+      }
+
+      &__logo-link {
+        width: auto;
+      }
+    }
+
+    .wmnds-phase-indicator {
+      display: none;
+    }
+
+    .wmnds-breadcrumb {
+      display: none;
+    }
+
+    .wmnds-msg-summary {
+      background: none;
+      border: 5px solid black;
+    }
+
+    .wmnds-print-hide {
+      display: none;
+    }
+
+    .wmnds-footer {
+      padding: 0;
+      background: none;
+      color: black;
+
+      a {
+        color: black;
+      }
+    }
+  }
+}
