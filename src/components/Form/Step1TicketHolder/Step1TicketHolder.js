@@ -5,14 +5,13 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1TicketHolder = () => {
-  const formRef = useRef();
-  // Custom hook for handling continue button (validation, errors etc)
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
     handleSubmit,
     showGenericError,
     continueButton,
-  } = useStepLogic(formRef);
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
   return (
     <form onSubmit={handleSubmit} ref={formRef}>

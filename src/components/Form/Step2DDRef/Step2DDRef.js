@@ -7,7 +7,7 @@ import useWho from 'customHooks/useWho';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Step2DDRef = () => {
-  const formRef = useRef();
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
     handleSubmit,
