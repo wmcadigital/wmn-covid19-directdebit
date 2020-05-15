@@ -12,7 +12,8 @@ const useStepLogic = (formRef) => {
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
 
   // Update the current step to the correct one depending on users selection
-  const handleContinue = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const result = await triggerValidation();
     setIsContinuePressed(true);
     // if no errors
@@ -33,8 +34,7 @@ const useStepLogic = (formRef) => {
   const continueButton = (
     <Button
       btnClass="wmnds-btn wmnds-col-1 wmnds-m-t-md"
-      onClick={handleContinue}
-      type="button"
+      type="submit"
       text="Continue"
     />
   );
@@ -45,6 +45,7 @@ const useStepLogic = (formRef) => {
 
   return {
     register,
+    handleSubmit,
     showGenericError,
     continueButton,
   };

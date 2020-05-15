@@ -1,14 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step3SwiftCard = ({ formRef }) => {
-  // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+const Step3SwiftCard = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    register,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const swiftLabel = 'Swift card number'; // Label used on input and for validation
@@ -37,7 +41,7 @@ const Step3SwiftCard = ({ formRef }) => {
   });
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 1 of 3 <h4>About {yourTheir} ticket</h4>
@@ -66,17 +70,8 @@ const Step3SwiftCard = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
-};
-
-Step3SwiftCard.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step3SwiftCard;

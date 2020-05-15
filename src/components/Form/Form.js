@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, FormContext } from 'react-hook-form'; // https://react-hook-form.com/
 // Import contexts
@@ -23,19 +23,18 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-  const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-
   const { currentStep } = formDataState; // Destructure step from state
 
-  // Trigger validation onBlur events (config for react hook form lib)
   const methods = useForm({
     mode: 'onBlur',
-  });
-  // Get handleSubmit fn and isFetching from custom hook which handles submitting data to API
+  }); // Trigger validation onBlur events (config for react hook form lib)
+
+  // Get handleSubmit fn and isFetching from custom hook which handles submitting data to API (this is used in the last step[11])
   const { handleSubmit, isFetching, APIErrorMessage } = useSubmitForm(
     setFormSubmitStatus
   );
-  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
+
+  useTrackFormAbandonment(currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
   // Show debug options for below (this should be deleted on release)
   const debugStepOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -65,72 +64,71 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           )}
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
-            <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
-              {currentStep === 1 && <Step1TicketHolder formRef={formRef} />}
+            {currentStep === 1 && <Step1TicketHolder />}
 
-              {/* Section 1 - About your ticket */}
-              {currentStep === 2 && <Step2DDRef formRef={formRef} />}
-              {currentStep === 3 && <Step3SwiftCard formRef={formRef} />}
-              {currentStep === 4 && <Step4TravelAgain formRef={formRef} />}
-              {currentStep === 5 && <Step5TravelDate formRef={formRef} />}
+            {/* Section 1 - About your ticket */}
+            {currentStep === 2 && <Step2DDRef />}
+            {currentStep === 3 && <Step3SwiftCard />}
+            {currentStep === 4 && <Step4TravelAgain />}
+            {currentStep === 5 && <Step5TravelDate />}
 
-              {/* Section 2 - About you */}
-              {currentStep === 6 && <Step6Name formRef={formRef} />}
-              {currentStep === 7 && <Step7DOB formRef={formRef} />}
-              {currentStep === 8 && <Step8Contact formRef={formRef} />}
+            {/* Section 2 - About you */}
+            {currentStep === 6 && <Step6Name />}
+            {currentStep === 7 && <Step7DOB />}
+            {currentStep === 8 && <Step8Contact />}
 
-              {/* Section 3 - Direct Debit */}
-              {currentStep === 9 && <Step9DDPayMessage formRef={formRef} />}
-              {currentStep === 10 && <Step10DDBankDetails formRef={formRef} />}
+            {/* Section 3 - Direct Debit */}
+            {currentStep === 9 && <Step9DDPayMessage />}
+            {currentStep === 10 && <Step10DDBankDetails />}
 
-              {/* Check answers */}
-              {currentStep === 11 && (
-                <Step11CheckAnswers
-                  isFetching={isFetching}
-                  APIErrorMessage={APIErrorMessage}
-                />
-              )}
-            </form>
+            {/* Check answers */}
+            {currentStep === 11 && (
+              <Step11CheckAnswers
+                isFetching={isFetching}
+                APIErrorMessage={APIErrorMessage}
+                handleSubmit={handleSubmit}
+              />
+            )}
           </div>
         </div>
         {/* If in development based on envs then show form debugging */}
-        {/* {process.env.NODE_ENV !== 'production' && ( */}
-        <div
-          className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
-          style={{
-            overflowX: 'auto',
-            position: 'fixed',
-            right: 0,
-          }}
-        >
-          <pre>{JSON.stringify(formDataState, null, 2)}</pre>
-          <br />
-          <div className="wmnds-col-1">
-            Select step: {}
-            <select
-              onChange={(e) =>
-                formDataDispatch({
-                  type: 'UPDATE_STEP',
-                  payload: +e.target.value,
-                })
-              }
-              onBlur={(e) =>
-                formDataDispatch({
-                  type: 'UPDATE_STEP',
-                  payload: +e.target.value,
-                })
-              }
-              value={currentStep}
-            >
-              {debugStepOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+        {process.env.NODE_ENV !== 'production' && (
+          <div
+            className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+            style={{
+              overflowX: 'auto',
+              position: 'fixed',
+              right: 0,
+            }}
+          >
+            <pre>{JSON.stringify(formDataState, null, 2)}</pre>
+            <br />
+            <div className="wmnds-col-1">
+              Select step: {}
+              <select
+                onChange={(e) =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: +e.target.value,
+                  })
+                }
+                onBlur={(e) =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: +e.target.value,
+                  })
+                }
+                value={currentStep}
+              >
+                {debugStepOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {/* )} */}
+        )}
       </FormContext>
     </>
   );

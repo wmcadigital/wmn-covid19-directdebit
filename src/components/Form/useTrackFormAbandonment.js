@@ -2,14 +2,14 @@
 import { useEffect, useState } from 'react';
 // Import contexts
 
-const useTrackFormAbandonment = (formRef, currentStep, formSubmitStatus) => {
+const useTrackFormAbandonment = (currentStep, formSubmitStatus) => {
   const [fieldsChanged, setFieldsChanged] = useState([]); // Track fields the user has touched/changed
 
   window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 
   // This useEffect is used to track form changes and update the fieldsChanged state as the user progresses
   useEffect(() => {
-    const refundForm = formRef.current; // Get DOM node of form
+    const refundForm = document.querySelector('form'); // Get DOM node of form
     // Function to work out last changed element in form
     const lastChangedEle = (e) => {
       // Update fields changed array with step number and last changed field name i.e. Step1: CustomerType > Step3: CardNumber
@@ -24,7 +24,7 @@ const useTrackFormAbandonment = (formRef, currentStep, formSubmitStatus) => {
     return () => {
       refundForm.removeEventListener('change', lastChangedEle);
     };
-  }, [currentStep, fieldsChanged, formRef]);
+  }, [currentStep, fieldsChanged]);
 
   // Used to update Google Tag Manager
   useEffect(() => {

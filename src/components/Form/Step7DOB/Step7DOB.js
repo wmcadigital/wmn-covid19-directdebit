@@ -1,13 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
+
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 // Import components
 import Date from 'components/shared/FormElements/Date/Date';
 
-const Step7DOB = ({ formRef }) => {
-  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+const Step7DOB = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    register,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThem } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   const DOBLabel = 'Date of birth'; // Label used on input and for validation
@@ -24,7 +30,7 @@ const Step7DOB = ({ formRef }) => {
   });
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 2 of 3 <h4>About {youThem}</h4>
@@ -49,17 +55,8 @@ const Step7DOB = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
-};
-
-Step7DOB.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step7DOB;

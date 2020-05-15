@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useRef } from 'react';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
 // Import custom hooks
@@ -8,10 +7,16 @@ import useWho from 'customHooks/useWho';
 // Import components
 import DateEle from 'components/shared/FormElements/Date/Date';
 
-const Step5TravelDate = ({ formRef }) => {
+const Step5TravelDate = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    register,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { TravelAgain } = formDataState.formData; // Destructure TravelAgain val from formData
-  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
   const willDid = TravelAgain === 'yes' ? 'did' : 'will'; // Set to relevant word based on if the person has started travelling again (set in step 4)
 
@@ -56,7 +61,7 @@ const Step5TravelDate = ({ formRef }) => {
   });
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Subsection */}
       <div>
         Section 1 of 3 <h4>About {yourTheir} ticket</h4>
@@ -82,17 +87,8 @@ const Step5TravelDate = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
-};
-
-Step5TravelDate.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step5TravelDate;

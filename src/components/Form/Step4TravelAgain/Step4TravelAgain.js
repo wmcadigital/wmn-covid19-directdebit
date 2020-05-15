@@ -1,18 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const Step4TravelAgain = ({ formRef }) => {
-  // Custom hook for handling continue button (validation, errors etc)
-  const { register, showGenericError, continueButton } = useStepLogic(formRef);
+const Step4TravelAgain = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    register,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       {/* Show generic error message */}
       {showGenericError}
 
@@ -30,17 +34,8 @@ const Step4TravelAgain = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
-};
-
-Step4TravelAgain.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step4TravelAgain;
