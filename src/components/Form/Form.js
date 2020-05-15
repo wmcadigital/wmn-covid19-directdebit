@@ -23,17 +23,17 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-
   const { currentStep } = formDataState; // Destructure step from state
 
-  // Trigger validation onBlur events (config for react hook form lib)
   const methods = useForm({
     mode: 'onBlur',
-  });
-  // Get handleSubmit fn and isFetching from custom hook which handles submitting data to API
+  }); // Trigger validation onBlur events (config for react hook form lib)
+
+  // Get handleSubmit fn and isFetching from custom hook which handles submitting data to API (this is used in the last step[11])
   const { handleSubmit, isFetching, APIErrorMessage } = useSubmitForm(
     setFormSubmitStatus
   );
+
   useTrackFormAbandonment(currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
   // Show debug options for below (this should be deleted on release)
@@ -87,6 +87,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               <Step11CheckAnswers
                 isFetching={isFetching}
                 APIErrorMessage={APIErrorMessage}
+                handleSubmit={handleSubmit}
               />
             )}
             {/* </form> */}
