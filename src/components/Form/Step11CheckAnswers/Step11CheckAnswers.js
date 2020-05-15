@@ -15,7 +15,7 @@ const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
   const { yourTheir } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <h2>Check your answers before reinstating {yourTheir} Direct Debit</h2>
       {/* Ticket details */}
       <h3>Ticket details</h3>
@@ -125,7 +125,7 @@ const Step11CheckAnswers = ({ isFetching, APIErrorMessage }) => {
           text="Accept and send"
         />
       </div>
-    </>
+    </form>
   );
 };
 
