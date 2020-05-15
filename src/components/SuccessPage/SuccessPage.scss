@@ -1,35 +1,56 @@
 /* Print CSS for success page */
 
 @media print {
-    h1, h2, h3, p {
-        color: black;
-    }
+  .wmnds-html {
+    background: none;
 
-    .wmnds-breadcrumb {
-        display: none;
+    h1,
+    h2,
+    h3,
+    p {
+      color: black;
     }
+    // Header
+    .wmnds-header {
+      background: none;
 
-    .wmnds-msg-summary {
-        border: 5px solid black;
-    }
-
-    .print-hide {
-        display: none;
-    }
-
-    .wmnds-phase-indicator {
-        display: none;
-    }
-
-    .wmnds-header__logo {
+      &__logo {
         height: 60px;
         /* Safari and Chrome */
         -webkit-filter: invert(1);
         filter: invert(1);
-    }
+      }
 
-    .wmnds-header__logo-link {
+      &__logo-link {
         width: auto;
+      }
     }
 
+    .wmnds-phase-indicator {
+      display: none;
+    }
+
+    .wmnds-breadcrumb {
+      display: none;
+    }
+
+    .wmnds-msg-summary {
+      background: none;
+      border: 5px solid black;
+    }
+
+    .print-hide {
+      display: none;
+    }
+
+    .wmnds-footer {
+      padding: 0;
+      background: none;
+      color: black;
+
+      a {
+        color: black;
+      }
+    }
+  }
 }
