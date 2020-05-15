@@ -92,43 +92,43 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           </div>
         </div>
         {/* If in development based on envs then show form debugging */}
-        {/* {process.env.NODE_ENV !== 'production' && ( */}
-        <div
-          className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
-          style={{
-            overflowX: 'auto',
-            position: 'fixed',
-            right: 0,
-          }}
-        >
-          <pre>{JSON.stringify(formDataState, null, 2)}</pre>
-          <br />
-          <div className="wmnds-col-1">
-            Select step: {}
-            <select
-              onChange={(e) =>
-                formDataDispatch({
-                  type: 'UPDATE_STEP',
-                  payload: +e.target.value,
-                })
-              }
-              onBlur={(e) =>
-                formDataDispatch({
-                  type: 'UPDATE_STEP',
-                  payload: +e.target.value,
-                })
-              }
-              value={currentStep}
-            >
-              {debugStepOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+        {process.env.NODE_ENV !== 'production' && (
+          <div
+            className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+            style={{
+              overflowX: 'auto',
+              position: 'fixed',
+              right: 0,
+            }}
+          >
+            <pre>{JSON.stringify(formDataState, null, 2)}</pre>
+            <br />
+            <div className="wmnds-col-1">
+              Select step: {}
+              <select
+                onChange={(e) =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: +e.target.value,
+                  })
+                }
+                onBlur={(e) =>
+                  formDataDispatch({
+                    type: 'UPDATE_STEP',
+                    payload: +e.target.value,
+                  })
+                }
+                value={currentStep}
+              >
+                {debugStepOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {/* )} */}
+        )}
       </FormContext>
     </>
   );
