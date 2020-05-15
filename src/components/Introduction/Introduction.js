@@ -19,7 +19,7 @@ const Introduction = ({ setIsFormStarted }) => {
             Let us know you are about to start using, or have already started to
             use your Swift card
           </li>
-          <li>Reinstate your Direct Debit for your Swift card</li>
+          <li>Test Reinstate your Direct Debit for your Swift card</li>
         </ul>
         <p>This process takes around 5 to 10 minutes.</p>
 
