@@ -1,13 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const Step8Contact = ({ formRef }) => {
-  const { register, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+const Step8Contact = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    register,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const { yourTheir, youThem } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   // Labels used on inputs and for validation
@@ -35,7 +40,7 @@ const Step8Contact = ({ formRef }) => {
   });
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef}>
       {/* Subsection */}
       <div>
         Section 2 of 3 <h4>About {youThem}</h4>
@@ -87,17 +92,8 @@ const Step8Contact = ({ formRef }) => {
 
       {/* Continue button */}
       {continueButton}
-    </>
+    </form>
   );
-};
-
-Step8Contact.propTypes = {
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step8Contact;
