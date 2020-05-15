@@ -1,2 +1,35 @@
 /* Print CSS for success page */
 
+@media print {
+    h1, h2, h3, p {
+        color: black;
+    }
+
+    .wmnds-breadcrumb {
+        display: none;
+    }
+
+    .wmnds-msg-summary {
+        border: 5px solid black;
+    }
+
+    .print-hide {
+        display: none;
+    }
+
+    .wmnds-phase-indicator {
+        display: none;
+    }
+
+    .wmnds-header__logo {
+        height: 60px;
+        /* Safari and Chrome */
+        -webkit-filter: invert(1);
+        filter: invert(1);
+    }
+
+    .wmnds-header__logo-link {
+        width: auto;
+    }
+
+}

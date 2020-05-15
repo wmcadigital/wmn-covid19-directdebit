@@ -30,7 +30,7 @@ const SuccessPage = () => {
         <div className="wmnds-msg-summary wmnds-msg-summary--success-fill wmnds-m-b-xl">
           <div className="wmnds-msg-summary__header">
             <h3 className="wmnds-msg-summary__title">Request complete</h3>
-            <h3>{useFromMessage}</h3>
+            <h3 className="print-text">{useFromMessage}</h3>
           </div>
 
           <p>
@@ -48,7 +48,7 @@ const SuccessPage = () => {
         </p>
 
         <br />
-        <p>
+        <p className="print-hide">
           <a
             href="https://surveys.hotjar.com/s?siteId=264586&surveyId=156448"
             title="Service feedback survey"

@@ -43,7 +43,7 @@ const HeaderAndBreadcrumb = ({ isFormStarted, formSubmitStatus }) => {
       {/* <!-- End header --> */}
 
       {/* <!-- BETA INFO--> */}
-      <div className="wmnds-container">
+      <div className="wmnds-container print-hide">
         <div className="wmnds-grid wmnds-banner-container">
           <div className="wmnds-col-auto wmnds-float-left wmnds-m-r-xsm">
             <a
