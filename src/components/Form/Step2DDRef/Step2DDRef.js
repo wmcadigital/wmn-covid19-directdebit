@@ -10,7 +10,7 @@ const Step2DDRef = () => {
   const formRef = useRef();
   const {
     register,
-    willSubmit,
+    handleSubmit,
     showGenericError,
     continueButton,
   } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
@@ -46,7 +46,7 @@ const Step2DDRef = () => {
   });
 
   return (
-    <form onSubmit={willSubmit} ref={formRef}>
+    <form onSubmit={handleSubmit} ref={formRef}>
       {/* Subsection */}
       <div>
         Section 1 of 3 <h4>About {yourTheir} ticket</h4>
