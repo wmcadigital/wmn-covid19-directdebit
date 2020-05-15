@@ -105,9 +105,10 @@ const Step10DDBankDetails = ({ formRef }) => {
           to.
         </li>
         <li>
-          {youThey.charAt(0).toUpperCase()} can cancel a Direct Debit at any
-          time by simply contacting {yourTheir} bank or building society.
-          Written confirmation may be required. Please also notify us.
+          {youThey.charAt(0).toUpperCase() + youThey.slice(1)} can cancel a
+          Direct Debit at any time by simply contacting {yourTheir} bank or
+          building society. Written confirmation may be required. Please also
+          notify us.
         </li>
       </ul>
       <br />
@@ -146,9 +147,10 @@ const Step10DDBankDetails = ({ formRef }) => {
           assured by the Direct Debit Guarantee.
         </p>
         <p>
-          {iThey.charAt(0).toUpperCase()} understand that this Instruction may
-          remain with West Midlands Combined Authority and, if so, details will
-          be passed electronically to {myTheir} bank/building society.
+          {iThey.charAt(0).toUpperCase() + iThey.slice(1)} understand that this
+          Instruction may remain with West Midlands Combined Authority and, if
+          so, details will be passed electronically to {myTheir} bank/building
+          society.
         </p>
 
         {/* Hidden consent field (true when continue pressed) */}
