@@ -42,24 +42,6 @@ const useSubmitForm = (setFormSubmitStatus) => {
     TravelResumptionDate,
   };
 
-  // Quick send test data
-  // const dataToSend = {
-  //   BankAccountName: 'Bank of England',
-  //   BankAccountNumber: '31510604',
-  //   BankAccountSortCode: '10-00-00',
-  //   DirectDebitNumber: '60000001',
-  //   SwiftCardNumber: '633597010700000000',
-  //   TravelResumptionDate: '2020-05-16',
-  //   Firstname: 'Dayle',
-  //   Lastname: 'Salmon',
-  //   DateOfBirth: '2000-01-01',
-  //   Email: 'abcde@123.com',
-  //   PhoneNumber: '01213334444',
-  //   OneOffPaymentConsent: 'true',
-  //   DDReinsatementConsent: 'true',
-  //   Postcode: '',
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
     setIsFetching(true); // Set this so we can put loading state on button
