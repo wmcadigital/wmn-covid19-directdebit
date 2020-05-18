@@ -14,7 +14,8 @@ import * as serviceWorker from './serviceWorker';
 if (process.env.NODE_ENV === 'production') {
   // LOG ROCKET
   // Used to log/track console errors with LogRocket
-  LogRocket.init('brya8q/wmn-covid19-directdebbit', {
+  // Log rocket secret set in Netlify secrets
+  LogRocket.init(process.env.REAC_APP_LOGROCKET, {
     // Sanitizer to stop the tracking of user input/text fields
     dom: {
       inputSanitizer: true,
@@ -40,9 +41,9 @@ if (process.env.NODE_ENV === 'production') {
   setupLogRocketReact(LogRocket); // Set-up Log Rocket React integration
 
   // Used to log/track console errors
+  // Sentry secret set in Netlify secrets
   Sentry.init({
-    dsn:
-      'https://db6b95e2f02e4d948fd49fd200bac01d@o378798.ingest.sentry.io/5237839',
+    dsn: process.env.REAC_APP_LOGROCKET.SENTRY,
   });
 
   // Link Log Rocket and Sentry together
