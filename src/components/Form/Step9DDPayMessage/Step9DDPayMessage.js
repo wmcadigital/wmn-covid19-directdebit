@@ -5,13 +5,14 @@ import { FormDataContext } from 'globalState/FormDataContext';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
+import TooltipMessage from 'components/shared/TooltipMessage/TooltipMessage';
 
 const Step9DDPayMessage = () => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const { register, handleSubmit, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { formData } = formDataState; // Destrucutre formData from state
-  const { yourTheir, youThey } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
+  const { yourTheir, youThey, youThem } = useWho(); // Use custom hook which changes your/their based on what user selected in step 1
 
   // Set a date 10 days in future, used to display future payment date in text below
   const today = new Date(); // Get todays date
@@ -45,6 +46,10 @@ const Step9DDPayMessage = () => {
           {format(todayPlus10, 'D MMMM YYYY')}, {yourTheir} one-off payment will
           be taken less than 10 days after {yourTheir} usual date.
         </p>
+
+        <TooltipMessage
+          text={`We will email ${youThem} to confirm how much will be taken from ${yourTheir} bank account and whether we have had to change ${yourTheir} payment date`}
+        />
 
         {/* Hidden consent field (true when continue pressed) */}
         <input
