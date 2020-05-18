@@ -6,6 +6,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import useWho from 'customHooks/useWho';
 // Import components
 import DateEle from 'components/shared/FormElements/Date/Date';
+import TooltipMessage from 'components/shared/TooltipMessage/TooltipMessage';
 
 const Step5TravelDate = () => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
@@ -83,6 +84,16 @@ const Step5TravelDate = () => {
           label={travelLabel}
           fieldValidation={fieldValidation}
         />
+
+        {/* Only show tootlip if user hasn't started travelling again */}
+        {TravelAgain === 'no' && (
+          <TooltipMessage
+            text={`${
+              youThey.charAt(0).toUpperCase() + youThey.slice(1)
+            } can start to
+            use ${yourTheir} Swift card again from this date`}
+          />
+        )}
       </fieldset>
 
       {/* Continue button */}
