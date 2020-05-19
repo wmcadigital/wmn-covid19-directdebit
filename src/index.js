@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   // LOG ROCKET
   // Used to log/track console errors with LogRocket
   // Log rocket secret set in Netlify secrets
-  LogRocket.init(process.env.REAC_APP_LOGROCKET, {
+  LogRocket.init(process.env.REACT_APP_LOGROCKET, {
     // Sanitizer to stop the tracking of user input/text fields
     dom: {
       inputSanitizer: true,
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
   // Used to log/track console errors
   // Sentry secret set in Netlify secrets
   Sentry.init({
-    dsn: process.env.REAC_APP_LOGROCKET.SENTRY,
+    dsn: process.env.REACT_APP_LOGROCKET.SENTRY,
   });
 
   // Link Log Rocket and Sentry together
