@@ -18,7 +18,7 @@
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^5.6.1",
+    "react-hook-form": "^5.7.2",
     "react-scripts": "3.4.1",
     "typescript": "^3.8.3",
     "uk-modulus-checking": "^0.1.2"
