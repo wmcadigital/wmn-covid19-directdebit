@@ -9,6 +9,8 @@ import ReactDOM from 'react-dom';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
+// Test
+
 // If not production build (based on envs) then don't log using Sentry and Log Rocket
 if (process.env.NODE_ENV === 'production') {
   // LOG ROCKET
