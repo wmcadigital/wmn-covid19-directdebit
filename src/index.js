@@ -1,9 +1,8 @@
 // Helpers
-import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 // React
 import React from 'react';
 import ReactDOM from 'react-dom';
