@@ -56,7 +56,7 @@ const Introduction = ({ setIsFormStarted }) => {
         </ul>
         <br />
         <TooltipMessage
-          text={`You will need to reinstate your Swift card by` <strong>`14 August 2020`</strong>`, otherwise it will no longer work and you will need to` 
+          text={You will need to reinstate your Swift card by <strong>14 August 2020</strong>, otherwise it will no longer work and you will need to` 
             <a
               href="//www.wmnetwork.co.uk/tickets/#/"
               title="Apply for a new ticket"
@@ -64,7 +64,7 @@ const Introduction = ({ setIsFormStarted }) => {
               className="wmnds-link"
             >
               apply for a new ticket
-            </a>`.`}
+            </a>}
         />
         <br />
         <br />
