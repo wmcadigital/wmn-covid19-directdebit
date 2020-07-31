@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // Import components
 import Title from 'components/shared/Title/Title';
 import Button from 'components/shared/Button/Button';
+import TooltipMessage from 'components/shared/TooltipMessage/TooltipMessage';
 
 const Introduction = ({ setIsFormStarted }) => {
   const handleClick = () => {
@@ -52,9 +53,10 @@ const Introduction = ({ setIsFormStarted }) => {
             and there is a separate process
           </li>
           <li>You will need the bank details to set up a new Direct Debit</li>
-          <li>
-            You must have been a customer before lockdown measures began,
-            otherwise you will need to{' '}
+        </ul>
+        <br />
+        <TooltipMessage
+          text={`You will need to reinstate your Swift card by <strong>14 August 2020</strong>, otherwise it will no longer work and you will need to
             <a
               href="//www.wmnetwork.co.uk/tickets/#/"
               title="Apply for a new ticket"
@@ -62,10 +64,8 @@ const Introduction = ({ setIsFormStarted }) => {
               className="wmnds-link"
             >
               apply for a new ticket
-            </a>
-            .
-          </li>
-        </ul>
+            </a>`}
+        />
         <br />
         <br />
         <Button
