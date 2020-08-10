@@ -52,6 +52,18 @@ const Introduction = ({ setIsFormStarted }) => {
             </a>{' '}
             and there is a separate process
           </li>
+          <li>
+            If the ticket holder turns 18 before 1 September 2020, you will need
+            to{' '}
+            <a
+              href="//wmnetwork.co.uk/tickets/#?utm_source=dd_reinstate&utm_medium=start_page&utm_campaign=1618_card_redirect"
+              title="Apply for a new ticket"
+              target="_self"
+              className="wmnds-link"
+            >
+              apply for a new ticket
+            </a>
+          </li>
           <li>You will need the bank details to set up a new Direct Debit</li>
         </ul>
         <br />
