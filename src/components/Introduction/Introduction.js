@@ -18,7 +18,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <ul>
           <li>
             Let us know you are about to start using, or have already started to
-            use your Swift card
+            use your child, 16-18 or student Swift card
           </li>
           <li>Reinstate your Direct Debit for your Swift card</li>
         </ul>
@@ -26,6 +26,29 @@ const Introduction = ({ setIsFormStarted }) => {
 
         <h2>Before you start</h2>
         <ul>
+          <li>
+            If you are 18 or over, you can no longer reinstate your Swift card
+            and you will need to{' '}
+            <a
+              href="//wmnetwork.co.uk/tickets/#?utm_source=dd_reinstate&utm_medium=start_page&utm_campaign=adult_closure_redirect"
+              title="Apply for a new ticket"
+              target="_self"
+              className="wmnds-link"
+            >
+              apply for a new ticket
+            </a>
+          </li>
+          <li>
+            If you turn 18 before 1 September 2020, you will need to to{' '}
+            <a
+              href="//wmnetwork.co.uk/tickets/#?utm_source=dd_reinstate&utm_medium=start_page&utm_campaign=1618_card_redirect"
+              title="Apply for a new ticket"
+              target="_self"
+              className="wmnds-link"
+            >
+              apply for a new ticket
+            </a>
+          </li>
           <li>
             You may have received your Direct Debit reference number in an email
             telling you about this process
@@ -56,7 +79,7 @@ const Introduction = ({ setIsFormStarted }) => {
         </ul>
         <br />
         <TooltipMessage
-          text={`You will need to reinstate your Swift card by <strong>14 August 2020</strong>, otherwise it will no longer work and you will need to
+          text={`You will need to reinstate your child, 16-18 or student Swift card by <strong>18 September 2020</strong>, otherwise it will no longer work and you will need to
             <a
               href="//www.wmnetwork.co.uk/tickets/#/"
               title="Apply for a new ticket"
