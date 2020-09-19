@@ -1,104 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Import components
-import Title from 'components/shared/Title/Title';
-import Button from 'components/shared/Button/Button';
-import TooltipMessage from 'components/shared/TooltipMessage/TooltipMessage';
+// import Title from 'components/shared/Title/Title';
+// import Button from 'components/shared/Button/Button';
+// import TooltipMessage from 'components/shared/TooltipMessage/TooltipMessage';
 
 const Introduction = ({ setIsFormStarted }) => {
-  const handleClick = () => {
-    setIsFormStarted(true);
-  };
+  //  const handleClick = () => {
+  //    setIsFormStarted(true);
+  //  };
 
   return (
     <>
-      <Title />
       <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
-        <h2>Use this service to:</h2>
-        <ul>
-          <li>
-            Let us know you are about to start using, or have already started to
-            use your child, 16-18 or student Swift card
-          </li>
-          <li>Reinstate your Direct Debit for your Swift card</li>
-        </ul>
-        <p>This process takes around 5 to 10 minutes.</p>
-
-        <h2>Before you start</h2>
-        <ul>
-          <li>
-            If you are 18 or over, you can no longer reinstate your Swift card
-            and you will need to{' '}
-            <a
-              href="//wmnetwork.co.uk/tickets/#?utm_source=dd_reinstate&utm_medium=start_page&utm_campaign=adult_closure_redirect"
-              title="Apply for a new ticket"
-              target="_self"
-              className="wmnds-link"
-            >
-              apply for a new ticket
-            </a>
-          </li>
-          <li>
-            If you turn 18 before 1 September 2020, you will need to to{' '}
-            <a
-              href="//wmnetwork.co.uk/tickets/#?utm_source=dd_reinstate&utm_medium=start_page&utm_campaign=1618_card_redirect"
-              title="Apply for a new ticket"
-              target="_self"
-              className="wmnds-link"
-            >
-              apply for a new ticket
-            </a>
-          </li>
-          <li>
-            You may have received your Direct Debit reference number in an email
-            telling you about this process
-          </li>
-          <li>
-            If you did not receive this email, you can find this reference on
-            your bank statement shown next to payments made to WMCA and begins
-            with a <strong>6</strong>
-          </li>
-          <li>
-            You will need your Swift card number which begins with{' '}
-            <strong>633597</strong>
-          </li>
-          <li>
-            If your Swift card number begins with <strong>633597 0112</strong>,
-            it is managed by{' '}
-            <a
-              href="//nxbus.co.uk"
-              title="National Express West Midlands"
-              target="_self"
-              className="wmnds-link"
-            >
-              National Express West Midlands
-            </a>{' '}
-            and there is a separate process
-          </li>
-          <li>You will need the bank details to set up a new Direct Debit</li>
-        </ul>
-        <br />
-        <TooltipMessage
-          text={`You will need to reinstate your child, 16-18 or student Swift card by <strong>18 September 2020</strong>, otherwise it will no longer work and you will need to
-            <a
-              href="//www.wmnetwork.co.uk/tickets/#/"
-              title="Apply for a new ticket"
-              target="_self"
-              className="wmnds-link"
-            >
-              apply for a new ticket
-            </a>`}
-        />
-        <br />
-        <br />
-        <Button
-          btnClass="wmnds-btn--start"
-          iconRight="general-chevron-right"
-          onClick={handleClick}
-          type="button"
-          text="Start now"
-        />
+        <h2>Sorry, this service is unavailable</h2>
+        <p>The reinstate your Direct Debit (COVID-19) service has closed.</p>
+        <p>
+          If you did not reinstate your Direct Debit, you will need to{' '}
+          <a
+            href="//wmnetwork.co.uk/tickets/#?utm_source=dd_reinstate&utm_medium=start_page&utm_campaign=adult_closure_redirect"
+            title="Apply for a new ticket"
+            target="_self"
+            className="wmnds-link"
+          >
+            apply for a new ticket
+          </a>
+          .
+        </p>
       </div>
+      <br />
+      <br />
+      <br />
     </>
   );
 };

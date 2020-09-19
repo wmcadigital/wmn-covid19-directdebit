@@ -30,50 +30,13 @@ const HeaderAndBreadcrumb = ({ isFormStarted, formSubmitStatus }) => {
               Beta
             </a>
           </div>
-
-          {/* Only show the title in the header if the form is started and we are not on success/error page (formSubmitStatus) */}
-          {isFormStarted && formSubmitStatus === null && (
-            <h1 className="wmnds-header__title wmnds-col-1 wmnds-col-sm-auto">
-              Reinstate your Direct Debit <br />
-              (COVID-19)
-            </h1>
-          )}
+          <h1 className="wmnds-header__title wmnds-col-1 wmnds-col-sm-auto">
+            Reinstate your Direct Debit <br />
+            (COVID-19)
+          </h1>
         </div>
       </header>
       {/* <!-- End header --> */}
-
-      {/* <!-- BETA INFO--> */}
-      <div className="wmnds-container wmnds-print-hide">
-        <div className="wmnds-grid wmnds-banner-container">
-          <div className="wmnds-col-auto wmnds-float-left wmnds-m-r-xsm">
-            <a
-              href="/"
-              target="_self"
-              className="wmnds-phase-indicator"
-              title="Beta homepage of West Midlands Network Design System"
-            >
-              Beta
-            </a>
-          </div>
-          <div className="wmnds-col-auto">
-            <p className="wmnds-banner-container__text">
-              This is a new service - your{' '}
-              <a
-                href="https://surveys.hotjar.com/s?siteId=264586&surveyId=156448"
-                title="Service feedback survey"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="wmnds-link"
-              >
-                feedback
-              </a>{' '}
-              will help us to improve it.
-            </p>
-          </div>
-        </div>
-      </div>
-      {/* <!-- END BETA INFO--> */}
-
       <div className="wmnds-container">
         {/* <!-- Breadcrumb --> */}
         <nav aria-label="Breadcrumb" className="wmnds-breadcrumb">
